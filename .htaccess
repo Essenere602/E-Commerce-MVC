@@ -1,0 +1,44 @@
+RewriteEngine On
+# Ligne pour éviter la réécriture si un fichier ou un dossier existe avec ce nom
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Redirection pour l'accès à 'categorie'
+RewriteRule ^categorie$ index.php?action=categorie [L,QSA]
+# Redirection pour l'accès à 'categorie/xxx'
+RewriteRule ^categorie/([^/]+)$ index.php?action=categorie&catSlug=$1 [L,QSA]
+
+# Redirection pour l'accès à 'produits'
+RewriteRule ^categorie/produits$ index.php?action=produits [L,QSA]
+# Redirection pour l'accès à 'produit/xxx'
+RewriteRule ^produit/([^/]+)$ index.php?action=produit&prodSlug=$1 [L,QSA]
+
+# Redirection pour l'accès à 'panier'
+RewriteRule ^panier$ index.php?action=panier [L,QSA]
+
+# Redirection pour l'accès à 'commande'
+RewriteRule ^commande$ index.php?action=commande [L,QSA]
+# Redirection pour l'accès à 'commande/adresse'
+RewriteRule ^commande/adresse$ index.php?action=commande&step=adresse [L,QSA]
+# Redirection pour l'accès à 'commande/livraison'
+RewriteRule ^commande/livraison$ index.php?action=commande&step=livraison [L,QSA]
+# Redirection pour l'accès à 'commande/paiement'
+RewriteRule ^commande/paiement$ index.php?action=commande&step=paiement [L,QSA]
+# Redirection pour l'accès à 'commande/validation'
+RewriteRule ^commande/paiement$ index.php?action=commande&step=validation [L,QSA]
+
+# Redirection pour l'accès à 'login'
+RewriteRule ^login$ index.php?action=login [L,QSA]
+
+# Redirection pour l'accès à 'inscription'
+RewriteRule ^inscription$ index.php?action=inscription [L,QSA]
+
+# Redirection pour l'accès à 'compte'
+RewriteRule ^compte$ index.php?action=compte [L,QSA]
+# Redirection pour l'accès à 'commande/adresse'
+RewriteRule ^compte/adresses$ index.php?action=commande&page=adresses [L,QSA]
+# Redirection pour l'accès à 'commande/livraison'
+RewriteRule ^compte/commandes$ index.php?action=commande&page=commandes [L,QSA]
+# Redirection pour l'accès à 'commande/paiement'
+RewriteRule ^compte/profile$ index.php?action=commande&page=profile [L,QSA]
+ruby
