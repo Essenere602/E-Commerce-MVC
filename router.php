@@ -1,4 +1,8 @@
 <?php
+require_once('App/Database.php');
+use App\Controllers\UserController; // Déplacer l'instruction use en dehors du switch
+use App\Database;
+$pdo = new Database;
 $action = $_REQUEST['action'] ?? null;
 switch($action) {
     default:
@@ -46,10 +50,14 @@ switch($action) {
         }
     break;
     case 'inscription':
-        if($_POST) {
-            echo 'Je suis inscrit';
+        require_once(CONT . '/UserController.php'); // Chemin vers le contrôleur UserController
+    
+        $userController = new UserController(); // Instanciation du contrôleur
+    
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $userController->UserSave(); // Méthode pour traiter l'inscription
         } else {
-            echo 'Je vais créer mon compte';
+            $userController->RegisterForm(); // Méthode pour afficher le formulaire d'inscription
         }
     break;
     case 'compte':
@@ -67,3 +75,4 @@ switch($action) {
         }
     break;
 }
+?>
