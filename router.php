@@ -1,69 +1,73 @@
 <?php
+require_once('App/DataBase');
 $action = $_REQUEST['action'] ?? null;
-switch($action) {
+switch ($action) {
     default:
         echo 'Homepage';
-    break;
+        break;
     case 'categorie':
-        if(isset($_REQUEST['catSlug'])) {
+        if (isset($_REQUEST['catSlug'])) {
             echo 'Catégorie : ' . $_REQUEST['catSlug'];
         } else {
             echo 'les catégories';
         }
-    break;
+        break;
     case 'produit':
-        if(isset($_REQUEST['prodSlug'])) {
+        if (isset($_REQUEST['prodSlug'])) {
             echo 'Produit : ' . $_REQUEST['prodSlug'];
         } else {
             echo 'les produits de la catégorie ' . $_REQUEST['catSlug'];
         }
-    break;
+        break;
     case 'panier':
         echo 'Mon panier';
-    break;
+        break;
     case 'commande':
         $step = $_REQUEST['step'] ?? null;
         switch ($step) {
             case 'adresse':
                 echo 'choix de mon adresse';
-            break;
+                break;
             case 'livraison':
                 echo 'choix du livreur';
-            break;
+                break;
             case 'paiement':
                 echo 'choix du paiement';
-            break;
+                break;
             case 'validation':
                 echo 'Validation de la commande';
-            break;
+                break;
         }
-    break;
+        break;
     case 'login':
-        if($_SESSION) {
+        if ($_SESSION) {
             echo 'Je suis connecté';
         } else {
             echo 'Je vais me connecter';
         }
-    break;
+        break;
     case 'inscription':
+        require_once(CONT . 'UserController.php');
+        $user = new UserController;
         if($_POST) {
-            echo 'Je suis inscrit';
+            $user->UserSave();
         } else {
-            echo 'Je vais créer mon compte';
+            $user->RegisterForm();
         }
-    break;
+        break;
     case 'compte':
         $page = $_REQUEST['page'] ?? null;
         switch ($page) {
             case 'adresses':
                 echo 'Mes adresses';
-            break;
+                break;
             case 'commandes':
                 echo 'Mes commandes';
-            break;
+                break;
             case 'profile':
                 echo 'Mon profile';
-            break;
+                break;
         }
-    break;
+        break;
 }
+?>
