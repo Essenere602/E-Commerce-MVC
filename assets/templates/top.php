@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <base href="http://localhost:8888/PHP/E-commerce/">
+    <base href="http://localhost:8888/MVC-CCS/E-commerce-mvc/">
     <link rel="stylesheet" href="<?= CSS;?>style.css">
     <title><?= $_SERVER['REQUEST_URI'];?> - E-commerce</title>
 </head>

@@ -1,5 +1,8 @@
 <?php
-require_once('App/DataBase');
+require_once('vendor/autoload.php');
+use controllers\UserController; // Déplacer l'instruction use en dehors du switch
+use App\Database;
+$pdo = new Database;
 $action = $_REQUEST['action'] ?? null;
 switch ($action) {
     default:
@@ -39,20 +42,17 @@ switch ($action) {
                 break;
         }
         break;
-    case 'login':
-        if ($_SESSION) {
-            echo 'Je suis connecté';
-        } else {
-            echo 'Je vais me connecter';
-        }
-        break;
+        
+        
     case 'inscription':
-        require_once(CONT . 'UserController.php');
-        $user = new UserController;
-        if($_POST) {
-            $user->UserSave();
+       
+
+        $userController = new UserController(); // Instanciation du contrôleur
+    
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $userController->UserSave(); // Méthode pour traiter l'inscription
         } else {
-            $user->RegisterForm();
+            $userController->RegisterForm(); // Méthode pour afficher le formulaire d'inscription
         }
         break;
     case 'compte':
@@ -68,6 +68,6 @@ switch ($action) {
                 echo 'Mon profile';
                 break;
         }
-        break;
+    break;
 }
 ?>

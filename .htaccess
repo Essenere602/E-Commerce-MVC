@@ -40,4 +40,4 @@ RewriteRule ^compte/adresses$ index.php?action=commande&page=adresses [L,QSA]
 # Redirection pour l'accès à 'commande/livraison'
 RewriteRule ^compte/commandes$ index.php?action=commande&page=commandes [L,QSA]
 # Redirection pour l'accès à 'commande/paiement'
-RewriteRule ^compte/profile$ index.php?action=commande&page=profile [L,QSA]
+RewriteRule ^compte/profile$ index.php?action=commande&page=profile [L,QSA] 

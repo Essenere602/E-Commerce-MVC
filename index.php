@@ -1,7 +1,7 @@
 <?php
-const CONT = 'App/Controllers/';
-const MOD = 'App/Models/';
-const VIEW = 'App/Views/';
+const CONT = 'App/controllers/';
+const MOD = 'App/models/';
+const VIEW = 'App/views/';
 const JS  = 'assets/js/';
 const CSS = 'assets/css/';
 const IMG = 'assets/images/';
