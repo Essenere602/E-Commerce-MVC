@@ -2,7 +2,7 @@
 require_once('vendor/autoload.php');
 use Controllers\UserController; // Déplacer l'instruction use en dehors du switch
 use Controllers\AdminProduct; // Déplacer l'instruction use en dehors du switch
-use lib\sluger;
+use Controllers\ProductShow;
 use App\Database;
 $pdo = new Database;
 $action = $_REQUEST['action'] ?? null;
@@ -18,8 +18,9 @@ switch ($action) {
         }
         break;
     case 'produit':
-        if (isset($_REQUEST['prodSlug'])) {
-            echo 'Produit : ' . $_REQUEST['prodSlug'];
+        if(isset($_REQUEST['prodSlug'])) {
+            $showItem = new ProductShow;
+            $showItem->show($_REQUEST['prodSlug']);
         } else {
             echo 'les produits de la catégorie ' . $_REQUEST['catSlug'];
         }
