@@ -1,0 +1,18 @@
+@import 'data';
+
+form {
+    max-width:300px;
+    margin:auto;
+    label {
+        margin-top:1rem;
+    }
+    input {
+        width:100%;
+    }
+    button {
+        margin-top: 1rem;
+    }
+    &.vertical {
+       @include flexbox(flex-start, flex-start, wrap, column); 
+    }
+}

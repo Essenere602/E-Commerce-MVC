@@ -1,6 +1,6 @@
 <?php
 require_once('vendor/autoload.php');
-use controllers\UserController; // Déplacer l'instruction use en dehors du switch
+use Controllers\UserController; // Déplacer l'instruction use en dehors du switch
 use App\Database;
 $pdo = new Database;
 $action = $_REQUEST['action'] ?? null;
@@ -45,8 +45,7 @@ switch ($action) {
         
         
     case 'inscription':
-       
-
+    
         $userController = new UserController(); // Instanciation du contrôleur
     
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
