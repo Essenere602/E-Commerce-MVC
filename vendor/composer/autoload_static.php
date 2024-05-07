@@ -15,6 +15,10 @@ class ComposerStaticInit2fee4fcfed530b9aa2e289e619713b14
         array (
             'Models\\' => 7,
         ),
+        'L' => 
+        array (
+            'Lib\\' => 4,
+        ),
         'C' => 
         array (
             'Controllers\\' => 12,
@@ -33,6 +37,10 @@ class ComposerStaticInit2fee4fcfed530b9aa2e289e619713b14
         'Models\\' => 
         array (
             0 => __DIR__ . '/../..' . '/App/models',
+        ),
+        'Lib\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/lib',
         ),
         'Controllers\\' => 
         array (

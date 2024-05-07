@@ -7,7 +7,8 @@
             "App\\": "App/",
             "Controllers\\": "App/controllers/",
             "Models\\": "App/models/",
-            "Views\\": "App/views/"
+            "Views\\": "App/views/",
+            "Lib\\": "lib/"
         }
     },
     "authors": [
