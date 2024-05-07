@@ -1,6 +1,7 @@
 <?php
 require_once('vendor/autoload.php');
 use Controllers\UserController; // Déplacer l'instruction use en dehors du switch
+use Controllers\AdminProduct; // Déplacer l'instruction use en dehors du switch
 use App\Database;
 $pdo = new Database;
 $action = $_REQUEST['action'] ?? null;
@@ -70,6 +71,20 @@ switch($action) {
             break;
             case 'profile':
                 echo 'Mon profile';
+            break;
+        }
+    break;
+    case 'admin':
+        $page = $_REQUEST['page'] ?? null;
+        switch ($page) {
+            case 'produits':
+                $adminProduct = new AdminProduct(); // Instanciation du contrôleur
+    
+                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                    $adminProduct->ProductSave(); 
+                } else {
+                    $adminProduct->RegisterForm();
+                }
             break;
         }
     break;

@@ -41,3 +41,8 @@ RewriteRule ^compte/adresses$ index.php?action=commande&page=adresses [L,QSA]
 RewriteRule ^compte/commandes$ index.php?action=commande&page=commandes [L,QSA]
 # Redirection pour l'accès à 'commande/paiement'
 RewriteRule ^compte/profile$ index.php?action=commande&page=profile [L,QSA] 
+
+# Redirection pour l'accès administration
+RewriteRule ^admin$ index.php?action=admin [L,QSA]
+# Redirection pour l'accès produit dans l'administration
+RewriteRule ^admin/produits$ index.php?action=admin&page=produits [L,QSA]
