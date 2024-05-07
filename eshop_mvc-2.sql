@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:8889
--- Généré le : lun. 06 mai 2024 à 12:11
+-- Généré le : mar. 07 mai 2024 à 10:01
 -- Version du serveur : 5.7.39
 -- Version de PHP : 8.2.0
 
@@ -26,8 +26,7 @@ SET time_zone = "+00:00";
 --
 -- Structure de la table `delivery`
 --
-CREATE DATABASE eshop_mvc;
-USE eshop_mvc;
+
 CREATE TABLE `delivery` (
   `id` int(11) NOT NULL,
   `delivery_option` varchar(100) NOT NULL,
@@ -55,13 +54,21 @@ CREATE TABLE `product` (
   `id` int(11) NOT NULL,
   `product_name` varchar(100) NOT NULL,
   `product_description` text NOT NULL,
-  `category_id` int(11) NOT NULL,
-  `ean` varchar(50) NOT NULL,
-  `manufacturer_id` int(11) NOT NULL,
-  `slug` text NOT NULL,
+  `category_id` int(11) DEFAULT NULL,
+  `price` decimal(10,2) NOT NULL,
+  `ean` varchar(50) DEFAULT NULL,
+  `manufacturer_id` int(11) DEFAULT NULL,
+  `slug` text,
   `stock` int(11) NOT NULL,
-  `online` tinyint(1) NOT NULL
+  `online` tinyint(1) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `product`
+--
+
+INSERT INTO `product` (`id`, `product_name`, `product_description`, `category_id`, `price`, `ean`, `manufacturer_id`, `slug`, `stock`, `online`) VALUES
+(1, 'Harden 8', 'Chaussure du looser des Clippers', NULL, '160.00', NULL, NULL, NULL, 3, NULL);
 
 -- --------------------------------------------------------
 
@@ -72,9 +79,38 @@ CREATE TABLE `product` (
 CREATE TABLE `product_category` (
   `id` int(11) NOT NULL,
   `cat_name` varchar(100) NOT NULL,
-  `slug` text NOT NULL,
+  `slug` varchar(100) NOT NULL,
   `cat_parent` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `product_category`
+--
+
+INSERT INTO `product_category` (`id`, `cat_name`, `slug`, `cat_parent`) VALUES
+(1, 'Vêtements', 'vetements', NULL),
+(2, 'chaussures', 'chaussures', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `product_manufacturer`
+--
+
+CREATE TABLE `product_manufacturer` (
+  `id` int(11) NOT NULL,
+  `company` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `phone` varchar(15) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `product_manufacturer`
+--
+
+INSERT INTO `product_manufacturer` (`id`, `company`, `email`, `phone`) VALUES
+(1, 'Adidas', 'contact@adidas.fr', '098765432'),
+(2, 'New Balance', 'contact@new-balance.fr', '098765432');
 
 -- --------------------------------------------------------
 
@@ -111,6 +147,19 @@ CREATE TABLE `user` (
   `last_connection` datetime NOT NULL,
   `active` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `user`
+--
+
+INSERT INTO `user` (`id`, `lastname`, `firstname`, `company_name`, `company_number`, `company_vat_number`, `email`, `phone`, `password`, `birthdate`, `last_connection`, `active`) VALUES
+(1, 'Allegret', 'Olivier', NULL, NULL, NULL, '', '09876543', 'obiwan', '2024-05-07', '2024-05-06 14:00:22', 1),
+(2, 'Allegret', 'Olivier', NULL, NULL, NULL, 'oallegret@gmail.com', '0123456789', 'obiwan', '2024-05-14', '2024-05-06 19:51:24', 1),
+(3, 'Charles', 'Trois', NULL, NULL, NULL, 'charges@gmail.co.uk', '0123456789', 'oirithr', '2024-05-15', '2024-05-06 19:55:31', 1),
+(4, 'Brossard', 'Papi', NULL, NULL, NULL, 'piaodf@gmail.com', '0123456789', 'obiwan', '2024-05-09', '2024-05-06 20:14:23', 1),
+(5, 'Spielberg', 'Maurice', NULL, NULL, NULL, 'maurice@et.com', '0123456789', 'indiana', '1946-10-05', '2024-05-06 20:34:44', 1),
+(7, 'Tirlipinpon', 'Surle chi hua hua', NULL, NULL, NULL, 'carlos@gmail.com', '0123456789', 'obiwan', '1968-04-18', '2024-05-06 21:24:01', 1),
+(8, 'Kent', 'Clark', NULL, NULL, NULL, 'superman@jla.com', '098765432', 'bartman', '1980-02-17', '2024-05-07 07:43:42', 1);
 
 -- --------------------------------------------------------
 
@@ -211,12 +260,20 @@ ALTER TABLE `payment`
 -- Index pour la table `product`
 --
 ALTER TABLE `product`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `manufacturer_id` (`manufacturer_id`),
+  ADD KEY `category_id` (`category_id`);
 
 --
 -- Index pour la table `product_category`
 --
 ALTER TABLE `product_category`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `product_manufacturer`
+--
+ALTER TABLE `product_manufacturer`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -286,13 +343,19 @@ ALTER TABLE `payment`
 -- AUTO_INCREMENT pour la table `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT pour la table `product_category`
 --
 ALTER TABLE `product_category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT pour la table `product_manufacturer`
+--
+ALTER TABLE `product_manufacturer`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pour la table `product_option`
@@ -304,7 +367,7 @@ ALTER TABLE `product_option`
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT pour la table `user_address`
@@ -339,6 +402,13 @@ ALTER TABLE `user_order_detail`
 --
 -- Contraintes pour les tables déchargées
 --
+
+--
+-- Contraintes pour la table `product`
+--
+ALTER TABLE `product`
+  ADD CONSTRAINT `category_id` FOREIGN KEY (`category_id`) REFERENCES `product_category` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `manufacturer_id` FOREIGN KEY (`manufacturer_id`) REFERENCES `product_manufacturer` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `product_option`
