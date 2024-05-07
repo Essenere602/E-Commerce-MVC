@@ -8,7 +8,7 @@
             "Controllers\\": "App/controllers/",
             "Models\\": "App/models/",
             "Views\\": "App/views/",
-            "lib\\": "lib"
+            "Lib\\": "lib/"
         }
     },
     "authors": [

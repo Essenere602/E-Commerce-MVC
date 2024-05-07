@@ -7,10 +7,6 @@ namespace Composer\Autoload;
 class ComposerStaticInit2fee4fcfed530b9aa2e289e619713b14
 {
     public static $prefixLengthsPsr4 = array (
-        'l' => 
-        array (
-            'lib\\' => 4,
-        ),
         'V' => 
         array (
             'Views\\' => 6,
@@ -18,6 +14,10 @@ class ComposerStaticInit2fee4fcfed530b9aa2e289e619713b14
         'M' => 
         array (
             'Models\\' => 7,
+        ),
+        'L' => 
+        array (
+            'Lib\\' => 4,
         ),
         'C' => 
         array (
@@ -30,10 +30,6 @@ class ComposerStaticInit2fee4fcfed530b9aa2e289e619713b14
     );
 
     public static $prefixDirsPsr4 = array (
-        'lib\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/lib',
-        ),
         'Views\\' => 
         array (
             0 => __DIR__ . '/../..' . '/App/views',
@@ -41,6 +37,10 @@ class ComposerStaticInit2fee4fcfed530b9aa2e289e619713b14
         'Models\\' => 
         array (
             0 => __DIR__ . '/../..' . '/App/models',
+        ),
+        'Lib\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/lib',
         ),
         'Controllers\\' => 
         array (

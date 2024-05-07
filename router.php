@@ -84,5 +84,17 @@ switch ($action) {
             break;
         }
     break;
+
+    $action = $_REQUEST['action'] ?? null;
+
+switch ($action) {
+    case 'products':
+        // Si l'action est 'products', affichez les détails du produit
+        $slug = $_REQUEST['slug'] ?? null;
+        $productController->showProduct($slug);
+        break;
+    // Autres cas et actions
+}
+
 }
 ?>
