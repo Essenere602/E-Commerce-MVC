@@ -1,25 +1,29 @@
 <?php
-namespace App\Controllers;
-// Inclure le fichier contenant la classe UserModel
-require_once(MOD . 'UserModel.php');
+namespace Controllers; // On définie la zon qui doit être identique à celle déclarée dans le composer.json
 
-use App\Models\UserModel; // Importez la classe UserModel
+// On importe les vues et modèles
+use Models\UserModel; 
+use Views\RegisterForm;
 
 class UserController {
-    protected $userModel; // Déclarez une propriété pour le modèle
-
+    // On déclare les attributs pour nos instances
+    protected $userModel; 
+    protected $tralala;
+    
+    // On instancie les classes modèles et vues
     public function __construct() {
-        $this->userModel = new UserModel(); // Instanciez le modèle dans le constructeur
+        $this->userModel = new UserModel(); 
+        $this->tralala = new RegisterForm(); 
     }
 
-    // Vue
+    // Méthode pour la vue
     public function RegisterForm () {
-        require_once(VIEW . 'RegisterForm.php');
+        $this->tralala->initForm();
     }
 
-    // Modèle
-    public function UserSave() {
-        $this->userModel->createUser(); // Appel de la méthode createUser du modèle
+    // Méthode pour le modèle
+    public function UserSave() {// Appel de la méthode createUser du modèle
+        $this->userModel->createUser();
     }
 }
 ?>

@@ -1,6 +1,6 @@
 <?php
-require_once('App/Database.php');
-use App\Controllers\UserController; // Déplacer l'instruction use en dehors du switch
+require_once('vendor/autoload.php');
+use Controllers\UserController; // Déplacer l'instruction use en dehors du switch
 use App\Database;
 $pdo = new Database;
 $action = $_REQUEST['action'] ?? null;
@@ -50,7 +50,6 @@ switch($action) {
         }
     break;
     case 'inscription':
-        require_once(CONT . '/UserController.php'); // Chemin vers le contrôleur UserController
     
         $userController = new UserController(); // Instanciation du contrôleur
     

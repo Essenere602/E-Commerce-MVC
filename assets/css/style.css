@@ -1,0 +1,68 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+h1 {
+  font-weight: 100;
+  font-size: 1.75rem;
+  color: rgb(23, 25, 23);
+  text-align: center;
+  text-transform: uppercase;
+  border: 1px solid white;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
+  margin: auto;
+  padding: 0.25rem 1rem;
+  border-radius: 4px;
+  margin-top: 1rem;
+  box-shadow: 0 0 0.5rem #ddd inset, 0 0 2px rgb(74, 78, 105);
+}
+
+body {
+  font-family: "Roboto Condensed", sans-serif;
+  font-weight: 200;
+  font-size: 1.1rem;
+  color: rgb(23, 25, 23);
+}
+
+button, .button {
+  background: rgb(74, 78, 105);
+  border-radius: 3px;
+  padding: 0.35rem 1rem;
+  color: rgb(242, 233, 228);
+  border: none;
+  font-size: 1.1rem;
+  font-weight: 200;
+  cursor: pointer;
+}
+
+input[type=text], input[type=password], input[type=datetime-local] {
+  font-size: 1.1rem;
+  font-weight: 200;
+  border-radius: 3px;
+  padding: 0.35rem 1rem;
+  border: 1px solid rgb(201, 173, 167);
+}
+form {
+  max-width: 300px;
+  margin: auto;
+}
+form label {
+  margin-top: 1rem;
+}
+form input {
+  width: 100%;
+}
+form button, form .button {
+  margin-top: 1rem;
+}
+form.vertical {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  flex-direction: column;
+}/*# sourceMappingURL=style.css.map */
