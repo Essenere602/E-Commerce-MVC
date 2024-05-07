@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
+
+$font: "Roboto Condensed", sans-serif;
+$black: rgb(23, 25, 23);
+$dark-gray: rgb(34, 34, 59);
+$med-gray: rgb(74, 78, 105);
+$rose-quartz: rgb(154, 140, 152);
+$pale: rgb(201, 173, 167);
+$light: rgb(242, 233, 228);
+
+@mixin flexbox($jc, $ai, $w: false, $d: false) {
+    display: flex;
+    justify-content: $jc;
+    align-items: $ai;
+    @if $w {
+        flex-wrap: $w;
+    }
+    @if $d {
+        flex-direction: $d;
+    }
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+h1 {
+    font-weight:100;
+    font-size:1.75rem;
+    color: $black;
+    text-align: center;
+    text-transform: uppercase;
+    border: 1px solid white;
+    max-width:fit-content;
+    margin:auto;
+    padding: .25rem 1rem;
+    border-radius:4px;
+    margin-top:1rem;
+    box-shadow: 0 0 .5rem #ddd inset, 0 0 2px $med-gray ;
+}
+body {
+    font-family: $font;
+    font-weight: 200;
+    font-size: 1.1rem;
+    color: $black;
+}
+button {
+    background: $med-gray;
+    border-radius: 3px;
+    padding:.35rem 1rem;
+    color: $light;
+    border:none;
+    font-size:1.1rem;
+    font-weight: 200;
+    cursor: pointer;
+}
+.button {
+    @extend button;
+}
+
+input {
+    &[type="text"] {
+        font-size:1.1rem;
+        font-weight: 200;
+        border-radius: 3px;
+        padding:.35rem 1rem;
+        border: 1px solid $pale;
+    }
+    &[type="datetime-local"] {
+        @extend [type="text"];
+    }
+    &[type="password"] {
+        @extend [type="text"];
+    }
+}
