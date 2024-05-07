@@ -20,7 +20,7 @@ class AdminProductModel {
         $productSlug = $this->slug->sluguer($_POST['productName']);
         $price = $_POST['price'];
         $stock = $_POST['stock'];
-        $online = $_POST['online'];
+        $online = $_POST['online'] ?? 0;
         try {
             $pdo = $this->db->getConnection()->prepare("INSERT INTO product (product_name, product_description, price, stock, slug, online) VALUES (?, ?, ?, ?, ?, ?)");
             $pdo->execute([$productName, $productDesc, $price, $stock, $productSlug, $online]);
