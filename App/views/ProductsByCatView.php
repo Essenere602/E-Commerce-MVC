@@ -3,20 +3,19 @@ namespace Views;
 
 class ProductsByCatView {
     public function showItems($items) {
+        $session_id = 2;
+
         foreach($items as $item) {
-            echo '<hr>';
-            echo '<p>' . $item['product_name'] . '</p> ';
-            echo '<p>' . $item['product_description'] . '</p> ';
-            echo '<p>' . $item['category_id'] . '</p> ';
-            echo '<p>' . $item['price'] . '</p> ';
-            echo '<p>' . $item['stock'] . ' <form method="post">
-                        <input type="hidden" name="product_id" value="' . $item['id'] . '">
-                        <input type="hidden" name="product_name" value="' . $item['product_name'] . '">
-                        <input type="hidden" name="product_price" value="' . $item['price'] . '">
-                        <button type="submit">+</button>
-                    </form></p>';
+            echo '<form class="product-form">';
+            echo '<label>' . $item['product_name'] . '</label>';
+            echo '<input type="hidden" name="product_id" class="product_id" value="' . $item['id'] . '">';
+            echo '<input type="hidden" name="session_id" class="session_id" value="' . $session_id . '">';
+            echo '<input type="hidden" name="price" class="price" value="' . $item['price'] . '">';
+            echo '<input type="number" name="qte" class="qte">';
+            echo '<button type="button" class="add-to-cart">Ajouter</button>';
+            echo '</form>';
         }
+        echo '<script src="assets/js/addToCart.js"></script>';
     }
 }
-
-
+?>
