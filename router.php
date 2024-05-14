@@ -1,5 +1,6 @@
 <?php
 require_once('vendor/autoload.php');
+require_once('assets/templates/menu.php');
 use Controllers\UserController; // Déplacer l'instruction use en dehors du switch
 use Controllers\AdminProduct; // Déplacer l'instruction use en dehors du switch
 use Controllers\ProductShow;
@@ -7,15 +8,13 @@ use App\Database;
 $pdo = new Database;
 $action = $_REQUEST['action'] ?? null;
 switch($action) {
-    default:
-        echo 'Homepage';
+    case 'Accueil':
+        
     break;
     case 'categorie':
         if(isset($_REQUEST['catSlug'])) {
             echo 'Catégorie : ' . $_REQUEST['catSlug'];
-        } else {
-            echo 'les catégories';
-        }
+        } 
     break;
     case 'produit':
         if(isset($_REQUEST['prodSlug'])) {
@@ -26,7 +25,7 @@ switch($action) {
         }
     break;
     case 'panier':
-        echo 'Mon panier';
+
     break;
     case 'commande':
         $step = $_REQUEST['step'] ?? null;
@@ -46,11 +45,7 @@ switch($action) {
         }
     break;
     case 'login':
-        if($_SESSION) {
-            echo 'Je suis connecté';
-        } else {
-            echo 'Je vais me connecter';
-        }
+        
     break;
     case 'inscription':
     

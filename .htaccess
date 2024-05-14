@@ -46,3 +46,6 @@ RewriteRule ^compte/profile$ index.php?action=commande&page=profile [L,QSA]
 RewriteRule ^admin$ index.php?action=admin [L,QSA]
 # Redirection pour l'accès produit dans l'administration
 RewriteRule ^admin/produits$ index.php?action=admin&page=produits [L,QSA]
+
+# Redirection pour l'accès accueil
+RewriteRule ^accueil$ index.php?action=accueil [L,QSA]
