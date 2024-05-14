@@ -3,21 +3,22 @@ require_once('vendor/autoload.php');
 use Controllers\UserController; // Déplacer l'instruction use en dehors du switch
 use Controllers\AdminProduct; // Déplacer l'instruction use en dehors du switch
 use Controllers\ProductShow;
-use Controllers\LoginController;
-use Controllers\ProductController;
-
+use Controllers\ProductsListByCat;
 use App\Database;
 $pdo = new Database;
-$action = $_REQUEST['action'] ?? null;
-switch ($action) {
+switch($_REQUEST['action'] ?? null) {
     default:
         echo 'Homepage';
         break;
     case 'categorie':
         if (isset($_REQUEST['catSlug'])) {
             echo 'Catégorie : ' . $_REQUEST['catSlug'];
+            $showItem = new ProductsListByCat;
+            $showItem->show($_REQUEST['catSlug']);
         } else {
             echo 'les catégories';
+            //Controlleur pour lister les catégories
+
         }
         break;
         case 'produit':

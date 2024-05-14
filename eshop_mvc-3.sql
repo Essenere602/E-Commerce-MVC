@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:8889
--- Généré le : mar. 07 mai 2024 à 10:01
+-- Généré le : mar. 14 mai 2024 à 09:35
 -- Version du serveur : 5.7.39
 -- Version de PHP : 8.2.0
 
@@ -68,7 +68,10 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`id`, `product_name`, `product_description`, `category_id`, `price`, `ean`, `manufacturer_id`, `slug`, `stock`, `online`) VALUES
-(1, 'Harden 8', 'Chaussure du looser des Clippers', NULL, '160.00', NULL, NULL, NULL, 3, NULL);
+(1, 'Harden 8', 'Chaussure du looser des Clippers', 2, '160.00', NULL, NULL, 'chaussure-du-looser-des-clippers', 3, NULL),
+(2, 'Harden 8', 'La chaussure ', NULL, '160.00', NULL, NULL, '', 6, NULL),
+(3, 'Harden 8', 'La chaussure ', 2, '160.00', NULL, NULL, 'harden-8', 6, NULL),
+(4, 'La tête à toto', 'Est moins drôle que la tête à charles', NULL, '10.00', NULL, NULL, 'la-t-ete-a-toto', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -343,7 +346,7 @@ ALTER TABLE `payment`
 -- AUTO_INCREMENT pour la table `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT pour la table `product_category`
