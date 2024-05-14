@@ -6,11 +6,12 @@ RewriteCond %{REQUEST_FILENAME} !-d
 # Redirection pour l'accès à 'categorie'
 RewriteRule ^categorie$ index.php?action=categorie [L,QSA]
 # Redirection pour l'accès à 'categorie/xxx'
-RewriteRule ^categorie/([^/]+)$ index.php?action=categorie&catSlug=$1 [L,QSA]
+# RewriteRule ^categorie/([^/]+)$ index.php?action=categorie&catSlug=$1 [L,QSA]
 
 # Redirection pour l'accès à 'produits'
-RewriteRule ^categorie/produits$ index.php?action=produits [L,QSA]
+RewriteRule ^categorie/produit$ index.php?action=produit [L,QSA]
 # Redirection pour l'accès à 'produit/xxx'
+
 RewriteRule ^produit/([^/]+)$ index.php?action=produit&prodSlug=$1 [L,QSA]
 
 # Redirection pour l'accès à 'panier'
@@ -29,6 +30,7 @@ RewriteRule ^commande/paiement$ index.php?action=commande&step=validation [L,QSA
 
 # Redirection pour l'accès à 'login'
 RewriteRule ^login$ index.php?action=login [L,QSA]
+
 
 # Redirection pour l'accès à 'inscription'
 RewriteRule ^inscription$ index.php?action=inscription [L,QSA]

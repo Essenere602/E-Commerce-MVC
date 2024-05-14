@@ -3,6 +3,9 @@ require_once('vendor/autoload.php');
 use Controllers\UserController; // Déplacer l'instruction use en dehors du switch
 use Controllers\AdminProduct; // Déplacer l'instruction use en dehors du switch
 use Controllers\ProductShow;
+use Controllers\LoginController;
+use Controllers\ProductController;
+
 use App\Database;
 $pdo = new Database;
 $action = $_REQUEST['action'] ?? null;
@@ -17,14 +20,15 @@ switch ($action) {
             echo 'les catégories';
         }
         break;
-    case 'produit':
-        if(isset($_REQUEST['prodSlug'])) {
-            $showItem = new ProductShow;
-            $showItem->show($_REQUEST['prodSlug']);
-        } else {
-            echo 'les produits de la catégorie ' . $_REQUEST['catSlug'];
-        }
-        break;
+        case 'produit':
+            if (isset($_REQUEST['prodSlug'])) {
+                $showItem = new ProductShow;
+                $showItem->show($_REQUEST['prodSlug']);
+            } else {
+                $productController = new ProductController;
+                $productController->listProducts();
+            }
+            break;
     case 'panier':
         echo 'Mon panier';
         break;
@@ -74,6 +78,7 @@ switch ($action) {
     case 'admin':
         $page = $_REQUEST['page'] ?? null;
         switch ($page) {
+            
             case 'produits':
                 $adminProduct = new AdminProduct(); // Instanciation du contrôleur
     
@@ -85,17 +90,19 @@ switch ($action) {
             break;
         }
     break;
-
-    $action = $_REQUEST['action'] ?? null;
-
-switch ($action) {
-    case 'products':
-        // Si l'action est 'products', affichez les détails du produit
-        $slug = $_REQUEST['slug'] ?? null;
-        $productController->showProduct($slug);
+    case 'login':
+        $LoginController = new LoginController(); // Instanciation du contrôleur
+    
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $LoginController->UserSave(); // Méthode pour traiter l'inscription
+        } else {
+            $LoginController->LoginForm(); // Méthode pour afficher le formulaire d'inscription
+        }
         break;
-    // Autres cas et actions
-}
+    
+    
+
+
 
 }
 ?>
