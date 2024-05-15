@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
         button.addEventListener('click', async (event) => {
             const form = event.target.closest('.product-form');
             const product_id = form.querySelector('.product_id').value;
+            const price = form.querySelector('.price').value;
             const quantity = form.querySelector('.qte').value;
 
             try {
@@ -16,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     body: JSON.stringify({
                         product_id: product_id,
                         quantity: quantity,
+                        price: price,
                     }),
                 });
 

@@ -14,11 +14,12 @@ class CartController {
         // Vérifier si les données sont correctement récupérées
         if (isset($data['product_id']) && isset($data['quantity'])) {
             $product_id = $data['product_id'];
+            $price = $data['price'];
             $quantity = $data['quantity'];
 
             // Appeler la méthode du modèle pour ajouter l'élément au panier
             $cartModel = new \Models\CartModel();
-            $result = $cartModel->addItemToCart($product_id, $quantity);
+            $result = $cartModel->addItemToCart($price, $product_id, $quantity);
 
             if ($result) {
                 echo json_encode(['success' => true, 'message' => 'Item added to cart']);
