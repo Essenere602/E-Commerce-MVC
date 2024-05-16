@@ -11,6 +11,8 @@ class CartModel {
     public $prix;
     public $id;
     public $qte;
+    public $quantity;
+    public $productId;
 
     public function __construct() {
         $this->db = new Database(); // Initialiser la connexion à la base de données
@@ -57,6 +59,17 @@ class CartModel {
 
         return true;
     }
+    public function updateProductQuantity($cartId, $productId, $quantity, $productOptionId = null) {
+        $stmt = $this->db->getConnection()->prepare('UPDATE user_cart_detail SET quantity = :quantity WHERE cart_id = :cart_id AND product_id = :product_id AND (product_option_id = :product_option_id OR product_option_id IS NULL)');
+        $stmt->execute([':quantity' => $quantity, ':cart_id' => $cartId, ':product_id' => $productId, ':product_option_id' => $productOptionId]);
+    }
+    
+    public function removeProductFromCart($cartId, $productId, $productOptionId = null) {
+        $stmt = $this->db->getConnection()->prepare('DELETE FROM user_cart_detail WHERE cart_id = :cart_id AND product_id = :product_id AND (product_option_id = :product_option_id OR product_option_id IS NULL)');
+        $stmt->execute([':cart_id' => $cartId, ':product_id' => $productId, ':product_option_id' => $productOptionId]);
+    }
+    
+    
 }
 
 

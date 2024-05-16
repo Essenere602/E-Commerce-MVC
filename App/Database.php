@@ -18,8 +18,17 @@ class DataBase {
         }
     }
 
+<<<<<<< HEAD
   
 
 
 
 ?>
+=======
+    // Méthode publique pour récupérer la connexion à la base de données
+    public function getConnection() {
+        return $this->cnx;
+    }
+}
+?>
+>>>>>>> a59c04b961c4ca10cf451b33879ae21ef794d411
