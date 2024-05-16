@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:8889
--- Généré le : mer. 15 mai 2024 à 13:00
+-- Généré le : jeu. 16 mai 2024 à 07:28
 -- Version du serveur : 5.7.39
 -- Version de PHP : 8.2.0
 
@@ -70,8 +70,8 @@ CREATE TABLE `product` (
 INSERT INTO `product` (`id`, `product_name`, `product_description`, `category_id`, `price`, `ean`, `manufacturer_id`, `slug`, `stock`, `online`) VALUES
 (1, 'Harden 8', 'Chaussure du looser des Clippers', 2, '160.00', NULL, NULL, 'chaussure-du-looser-des-clippers', 3, NULL),
 (2, 'Charles 7', 'La chaussure qui pue des pieds', 2, '99.00', NULL, NULL, '', 6, NULL),
-(3, 'A.E 1', 'La chaussure ', 2, '120.00', NULL, NULL, 'harden-8', 6, NULL),
-(4, 'La tête à toto', 'Est moins drôle que la tête à charles', NULL, '10.00', NULL, NULL, 'la-t-ete-a-toto', 2, 1);
+(4, 'La tête à toto', 'Est moins drôle que la tête à charles', NULL, '10.00', NULL, NULL, 'la-t-ete-a-toto', 2, 1),
+(5, 'A.E 1', 'La chaussure ', 2, '120.00', NULL, NULL, 'harden-8', 6, NULL);
 
 -- --------------------------------------------------------
 
@@ -188,7 +188,7 @@ CREATE TABLE `user_address` (
 
 CREATE TABLE `user_cart` (
   `id` int(11) NOT NULL,
-  `user_id` text NOT NULL,
+  `user_id` int(11) NOT NULL,
   `cart_date` datetime NOT NULL,
   `amount_exc_vat` decimal(9,2) DEFAULT NULL,
   `order_status` tinyint(1) NOT NULL
@@ -199,7 +199,7 @@ CREATE TABLE `user_cart` (
 --
 
 INSERT INTO `user_cart` (`id`, `user_id`, `cart_date`, `amount_exc_vat`, `order_status`) VALUES
-(10, '2', '2024-05-15 12:53:20', NULL, 0);
+(14, 2, '2024-05-15 14:43:07', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -214,6 +214,7 @@ CREATE TABLE `user_cart_detail` (
   `product_option_id` int(11) DEFAULT NULL,
   `product_option_value` int(11) DEFAULT NULL,
   `price_exc_vat` decimal(9,2) NOT NULL,
+  `quantity` int(11) NOT NULL,
   `vat` decimal(3,2) NOT NULL,
   `vat_amount` decimal(9,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -222,9 +223,10 @@ CREATE TABLE `user_cart_detail` (
 -- Déchargement des données de la table `user_cart_detail`
 --
 
-INSERT INTO `user_cart_detail` (`id`, `cart_id`, `product_id`, `product_option_id`, `product_option_value`, `price_exc_vat`, `vat`, `vat_amount`) VALUES
-(2, 10, 2, NULL, NULL, '120.00', '0.20', '24.00'),
-(3, 10, 2, NULL, NULL, '99.00', '0.20', '19.80');
+INSERT INTO `user_cart_detail` (`id`, `cart_id`, `product_id`, `product_option_id`, `product_option_value`, `price_exc_vat`, `quantity`, `vat`, `vat_amount`) VALUES
+(9, 14, 1, NULL, NULL, '160.00', 2, '0.20', '32.00'),
+(10, 14, 2, NULL, NULL, '99.00', 1, '0.20', '19.80'),
+(11, 14, 5, NULL, NULL, '120.00', 2, '0.20', '24.00');
 
 -- --------------------------------------------------------
 
@@ -318,7 +320,8 @@ ALTER TABLE `user_address`
 -- Index pour la table `user_cart`
 --
 ALTER TABLE `user_cart`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `unique_user_id` (`user_id`);
 
 --
 -- Index pour la table `user_cart_detail`
@@ -397,13 +400,13 @@ ALTER TABLE `user_address`
 -- AUTO_INCREMENT pour la table `user_cart`
 --
 ALTER TABLE `user_cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT pour la table `user_cart_detail`
 --
 ALTER TABLE `user_cart_detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT pour la table `user_order`
