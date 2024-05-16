@@ -1,7 +1,7 @@
 <?php
 namespace App;
 
-class DataBase {
+class Database {
     protected $cnx;
     protected $host = 'localhost';
     protected $db = 'eshop_mvc';
