@@ -27,15 +27,3 @@ class CartShowModel {
 }
 
 
-
-
-
-// public function updateProductQuantity($cardId, $productId, $quantity) {
-//     $stmt = $this->db->prepare('UPDATE cart_user_detail SET quantity = :quantity WHERE user_id = :user_id AND product_id = :product_id');
-//     $stmt->execute(['quantity' => $quantity, 'user_id' => $cardId, 'product_id' => $productId]);
-// }
-
-// public function removeProductFromCart($cardId, $productId) {
-//     $stmt = $this->db->prepare('DELETE FROM cart_user_detail WHERE user_id = :user_id AND product_id = :product_id');
-//     $stmt->execute(['user_id' => $cardId, 'product_id' => $productId]);
-// }

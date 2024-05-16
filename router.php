@@ -41,6 +41,14 @@ switch($_REQUEST['action'] ?? null) {
         $cartController = new CartController();
         $cartController->addToCart();
     break;
+    case 'adjustQuantity': // Nouveau cas pour ajouter au panier
+        $cartController = new CartController();
+        $cartController->adjustQuantity();
+    break;
+    case 'removeFromCart': // Nouveau cas pour ajouter au panier
+        $cartController = new CartController();
+        $cartController->removeFromCart();
+    break;
 
     case 'commande':
         $step = $_REQUEST['step'] ?? null;
