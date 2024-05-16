@@ -5,6 +5,7 @@ use Controllers\AdminProduct; // Déplacer l'instruction use en dehors du switch
 use Controllers\ProductShow;
 use Controllers\ProductsListByCat;
 use Controllers\CartController;
+use Controllers\CartShowController;
 use App\Database;
 $pdo = new Database;
 switch($_REQUEST['action'] ?? null) {
@@ -32,7 +33,9 @@ switch($_REQUEST['action'] ?? null) {
             }
             break;
     case 'panier':
-        echo 'Mon panier';
+        $cart_id = 14;
+        $showCart = new CartShowController();
+        $showCart->show($cart_id);
     break;
     case 'addToCart': // Nouveau cas pour ajouter au panier
         $cartController = new CartController();
