@@ -10,10 +10,7 @@ class ProductsByCatModel {
     }
    
     public function productsByCat () {
-        $url = "SELECT product.*
-        FROM product
-        INNER JOIN product_category ON product.category_id = product_category.id
-        WHERE product_category.slug = ?";
+        $url = "SELECT product.id, product.product_name, product.price FROM product, product_category WHERE product_category.slug = ? AND product.category_id = product_category.id";
             try {
                 $pdo = $this->db->getConnection()->prepare($url);
                 $pdo->execute([$_REQUEST['catSlug']]);
