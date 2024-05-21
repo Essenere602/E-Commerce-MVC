@@ -9,6 +9,9 @@ class LoginController {
     protected $tralala;
 
     public function __construct() {
+        if(session_status() == PHP_SESSION_NONE){
+            session_start();
+        }
         $this->loginModel = new LoginModel(); // Correction: Utilisez la même casse pour l'instanciation
         $this->tralala = new LoginForm();
     }

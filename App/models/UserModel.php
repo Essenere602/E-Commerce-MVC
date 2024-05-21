@@ -19,13 +19,18 @@ class UserModel {
         $birthdate = $_POST['birthdate'];
         $last = date("Y-m-d H:i:s"); // Correction: Utilisez H:i:s pour l'heure au format 24 heures
         $active = 1;
+
+        // Hash le mot de passe avant de le stocker
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
         try {
-            $pdo = $this->db->getConnection()->prepare("INSERT INTO user (lastname, firstname, email, phone, password, birthdate, last_connection, active) VALUES (?, ?, ?, ?, ?, ?, ?, ? )");
-            $pdo->execute([$lastname, $firstname, $email, $phone, $password, $birthdate, $last, $active]);
+            $pdo = $this->db->getConnection()->prepare("INSERT INTO user (lastname, firstname, email, phone, password, birthdate, last_connection, active) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+            $pdo->execute([$lastname, $firstname, $email, $phone, $hashedPassword, $birthdate, $last, $active]);
             echo "<h1>Utilisateur créé avec succès</h1>";
         } catch (\PDOException $e) {
             echo "Erreur lors de la création de l'utilisateur : " . $e->getMessage();
         }
     }
 }
+
 ?>

@@ -19,7 +19,7 @@ class LoginModel {
                 $pdo->execute([$email]);
                 $user = $pdo->fetch();
                 
-                if($user && password_verify($password, $user['password'])) {
+                if(password_verify($password, $user['password'])) {
                     // Les informations d'identification sont correctes, connectez l'utilisateur
                     $_SESSION['user_id'] = $user['id'];
                     echo "<h1>Connecté</h1>";

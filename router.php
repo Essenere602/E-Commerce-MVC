@@ -6,8 +6,12 @@ use Controllers\ProductShow;
 use Controllers\ProductsListByCat;
 use Controllers\CartController;
 use Controllers\CartShowController;
+use Controllers\LoginController;
 use App\Database;
 $pdo = new Database;
+if(session_status() == PHP_SESSION_NONE){
+    session_start();
+}
 switch($_REQUEST['action'] ?? null) {
     default:
         echo 'Homepage';
