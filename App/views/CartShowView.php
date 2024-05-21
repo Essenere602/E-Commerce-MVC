@@ -15,6 +15,9 @@ class CartShowView {
             echo '<button type="button" class="remove-from-cart">Remove from Cart</button>';
             echo '</form>';
         }
+        echo '<form action="commande/adresse">';
+        echo '<button type="submit" class="order-now">Commander</button>';
+        echo '</form>';
         echo '<script src="./assets/js/updateCart.js"></script>';
     }
 }
