@@ -1,18 +1,8 @@
 <?php
 require_once('vendor/autoload.php');
-require_once('assets/templates/menu.php');
 use Controllers\UserController; // Déplacer l'instruction use en dehors du switch
 use Controllers\AdminProduct; // Déplacer l'instruction use en dehors du switch
 use Controllers\ProductShow;
-<<<<<<< Updated upstream
-use App\Database;
-$pdo = new Database;
-$action = $_REQUEST['action'] ?? null;
-switch($action) {
-    case 'Accueil':
-        
-    break;
-=======
 use Controllers\ProductsListByCat;
 use Controllers\CartController;
 use Controllers\CartShowController;
@@ -26,23 +16,9 @@ switch($_REQUEST['action'] ?? null) {
     default:
         echo 'Homepage';
         break;
->>>>>>> Stashed changes
     case 'categorie':
         if (isset($_REQUEST['catSlug'])) {
             echo 'Catégorie : ' . $_REQUEST['catSlug'];
-<<<<<<< Updated upstream
-        } 
-    break;
-    case 'produit':
-        if(isset($_REQUEST['prodSlug'])) {
-            $showItem = new ProductShow;
-            $showItem->show($_REQUEST['prodSlug']);
-        } else {
-            echo 'les produits de la catégorie ' . $_REQUEST['catSlug'];
-        }
-    break;
-    case 'panier':
-=======
             $showItem = new ProductsListByCat;
             $showItem->show($_REQUEST['catSlug']);
         } else {
@@ -77,9 +53,7 @@ switch($_REQUEST['action'] ?? null) {
         $cartController = new CartController();
         $cartController->removeFromCart();
     break;
->>>>>>> Stashed changes
 
-    break;
     case 'commande':
         $step = $_REQUEST['step'] ?? null;
         switch ($step) {
@@ -96,16 +70,9 @@ switch($_REQUEST['action'] ?? null) {
                 echo 'Validation de la commande';
                 break;
         }
-<<<<<<< Updated upstream
-    break;
-    case 'login':
-        
-    break;
-=======
         break;
         
         
->>>>>>> Stashed changes
     case 'inscription':
     
         $userController = new UserController(); // Instanciation du contrôleur
@@ -159,6 +126,7 @@ switch($_REQUEST['action'] ?? null) {
         $loginController = new LoginController();
         $loginController->logout();
         break;    
+    
 
 
 
