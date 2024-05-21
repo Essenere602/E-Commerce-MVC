@@ -2,17 +2,29 @@
 require_once('vendor/autoload.php');
 use Controllers\UserController; // Déplacer l'instruction use en dehors du switch
 use Controllers\AdminProduct; // Déplacer l'instruction use en dehors du switch
-use Controllers\ProductShow;
 use Controllers\ProductsListByCat;
 use Controllers\CartController;
 use Controllers\CartShowController;
 use Controllers\LoginController;
+use Controllers\AddressController;
 use App\Database;
 $pdo = new Database;
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
-switch($_REQUEST['action'] ?? null) {
+
+// Récupération de l'ID de l'utilisateur depuis la session
+$session_status = session_status();
+echo "Statut de la session : $session_status <br>";
+
+// Vérifier si $_SESSION['user_id'] est défini
+$user_id = $_SESSION['user_id'] ?? null;
+echo "ID de l'utilisateur : $user_id <br>";
+
+// Analyse de l'URL
+$action = $_GET['action'] ?? null;
+
+switch($action) {
     default:
         echo 'Homepage';
         break;
@@ -28,18 +40,19 @@ switch($_REQUEST['action'] ?? null) {
         }
         break;
         case 'produit':
-            if (isset($_REQUEST['prodSlug'])) {
-                $showItem = new ProductShow;
-                $showItem->show($_REQUEST['prodSlug']);
-            } else {
-                $productController = new ProductController;
-                $productController->listProducts();
-            }
-            break;
+            // if (isset($_REQUEST['prodSlug'])) {
+            //     $showItem = new ProductShow;
+            //     $showItem->show($_REQUEST['prodSlug']);
+            // } else {
+            //     $productController = new ProductController;
+            //     $productController->listProducts();
+            // }
+            // break;
     case 'panier': 
         $cart_id = 14;
         $showCart = new CartShowController();
         $showCart->show($cart_id);
+      
     break;
     case 'addToCart': // Nouveau cas pour ajouter au panier
         $cartController = new CartController();
@@ -58,10 +71,20 @@ switch($_REQUEST['action'] ?? null) {
         $step = $_REQUEST['step'] ?? null;
         switch ($step) {
             case 'adresse':
-                echo 'choix de mon adresse';
+                if ($user_id !== null) {
+                    $addressController = new AddressController();
+                    $addressController->show($user_id);
+                } else {
+                    echo "Veuillez vous connecter pour accéder à cette page";
+                }
+                break;
+
+                
+
+                
                 break;
             case 'livraison':
-                echo 'choix du livreur';
+                
                 break;
             case 'paiement':
                 echo 'choix du paiement';

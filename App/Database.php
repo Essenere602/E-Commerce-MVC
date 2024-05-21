@@ -4,7 +4,7 @@ namespace App;
 class Database {
     protected $cnx;
     protected $host = 'localhost';
-    protected $db = 'eshop_mvc';
+    protected $db = 'commerce';
     protected $login = 'root';
     protected $pw = 'root';
     

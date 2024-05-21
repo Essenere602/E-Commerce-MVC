@@ -10,17 +10,17 @@ class LoginModel {
         $database = new Database();
         $this->db = $database->getConnection();
     }
- 
+
     public function authenticate($email, $password) {
-        $stmt = $this->db->prepare("SELECT * FROM user WHERE email = :email");
+        $stmt = $this->db->prepare("SELECT id, password FROM user WHERE email = :email");
         $stmt->bindParam(':email', $email);
         $stmt->execute();
         $user = $stmt->fetch(\PDO::FETCH_ASSOC);
 
         if ($user && password_verify($password, $user['password'])) {
-            return true;
+            return $user['id']; // Retourne l'ID de l'utilisateur
         } else {
-            return false;
+            return null; // Retourne null si l'authentification échoue
         }
     }
 }

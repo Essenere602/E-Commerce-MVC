@@ -14,7 +14,12 @@ class CartShowView {
             echo '<button type="button" class="change-qte">Ajuster la quantité</button>';
             echo '<button type="button" class="remove-from-cart">Remove from Cart</button>';
             echo '</form>';
+            
+
         }
+        echo '<form action="http://localhost:8888/mon_projet/commande/adresse" method="post" class="checkout-form">';
+            echo '<button type="submit" class="checkout">Passer commande</button>';
+            echo '</form>';
         echo '<script src="./assets/js/updateCart.js"></script>';
     }
 }
