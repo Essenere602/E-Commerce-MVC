@@ -7,7 +7,7 @@ use Controllers\ProductsListByCat;
 use Controllers\CartController;
 use Controllers\CartShowController;
 use Controllers\LoginController;
-use Controllers\AdressCartController;
+use Controllers\AddressCart;
 use App\Database;
 $pdo = new Database;
 if (session_status() == PHP_SESSION_NONE) {
@@ -59,8 +59,13 @@ switch($_REQUEST['action'] ?? null) {
         $step = $_REQUEST['step'] ?? null;
         switch ($step) {
             case 'adresse':
-                $adressCartController = new AdressCartController();
-                $adressCartController->AdressForm();
+                $addressCartController = new AddressCart();
+                    
+                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                    $addressCartController->AddressSave(); 
+                } else {
+                    $addressCartController->AddressForm();
+                }
                 break;
             case 'livraison':
                 echo 'choix du livreur';
