@@ -23,7 +23,7 @@ class AddressCartModel {
         try {
             $pdo = $this->db->getConnection()->prepare("INSERT INTO user_address (user_id, address_1, address_2, zip, city, country) VALUES (?, ?, ?, ?, ?, ?)");
             $pdo->execute([$userId, $addressOne, $addressTwo, $zip, $city, $country]);
-            echo "<h1>Adresse choisie valide</h1>";
+            header("location: livraison");
         } catch (\PDOException $e) {
             echo "Erreur lors de la recuperation de l'adresse : " . $e->getMessage();
         }

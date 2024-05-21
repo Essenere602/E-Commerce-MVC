@@ -8,6 +8,7 @@ use Controllers\CartController;
 use Controllers\CartShowController;
 use Controllers\LoginController;
 use Controllers\AddressCart;
+use Controllers\DeliveryCart;
 use App\Database;
 $pdo = new Database;
 if (session_status() == PHP_SESSION_NONE) {
@@ -68,7 +69,13 @@ switch($_REQUEST['action'] ?? null) {
                 }
                 break;
             case 'livraison':
-                echo 'choix du livreur';
+                $deliveryCartController = new DeliveryCart();
+                    
+                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                    $deliveryCartController->DeliverySave(); 
+                } else {
+                    $deliveryCartController->DeliveryChoice();
+                }
                 break;
             case 'paiement':
                 echo 'choix du paiement';
