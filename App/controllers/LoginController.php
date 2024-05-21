@@ -5,23 +5,46 @@ use Models\LoginModel;
 use Views\LoginForm;
 
 class LoginController {
-    protected $loginModel; // Correction: Utilisez la même casse pour la déclaration de l'attribut
-    protected $tralala;
-
     public function __construct() {
-        if(session_status() == PHP_SESSION_NONE){
+        if (session_status() == PHP_SESSION_NONE) {
             session_start();
         }
-        $this->loginModel = new LoginModel(); // Correction: Utilisez la même casse pour l'instanciation
-        $this->tralala = new LoginForm();
     }
 
     public function LoginForm() {
-        $this->tralala->CnxForm();
+        $view = new LoginForm();
+        $view->render();
     }
 
     public function UserSave() {
-        $this->loginModel->loginUser();
+        if (isset($_POST['email']) && isset($_POST['password'])) {
+            $email = $_POST['email'];
+            $password = $_POST['password'];
+
+            $model = new LoginModel();
+            $result = $model->authenticate($email, $password);
+
+            if ($result) {
+                // Connexion réussie
+                $_SESSION['user'] = $email;
+                echo "Login successful!";
+                // Rediriger vers une page protégée ou le tableau de bord
+                header("Location: ?action=dashboard");
+                exit();
+            } else {
+                // Connexion échouée
+                echo "Invalid email or password.";
+            }
+        } else {
+            echo "Email and Password are required.";
+        }
+    }
+
+    public function logout() {
+        session_unset();
+        session_destroy();
+        header("Location: login");
+        exit();
     }
 }
 ?>

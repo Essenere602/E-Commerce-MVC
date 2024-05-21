@@ -113,14 +113,19 @@ switch($_REQUEST['action'] ?? null) {
         }
     break;
     case 'login':
-        $LoginController = new LoginController(); // Instanciation du contrôleur
-    
+        $loginController = new LoginController();
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $LoginController->UserSave(); // Méthode pour traiter l'inscription
+            $loginController->UserSave();
         } else {
-            $LoginController->LoginForm(); // Méthode pour afficher le formulaire d'inscription
+            $loginController->LoginForm();
         }
         break;
+
+    case 'logout':
+        $loginController = new LoginController();
+        $loginController->logout();
+        break;  
     
     
 

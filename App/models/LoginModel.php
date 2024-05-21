@@ -7,29 +7,22 @@ class LoginModel {
     protected $db;
 
     public function __construct() {
-        $this->db = new Database();
+        $database = new Database();
+        $this->db = $database->getConnection();
     }
 
-    public function loginUser() {
-        if(isset($_POST['email'], $_POST['password'])) {
-            $email = $_POST['email'];
-            $password = $_POST['password'];
-            try {
-                $pdo = $this->db->getConnection()->prepare("SELECT * FROM user WHERE email = ?");
-                $pdo->execute([$email]);
-                $user = $pdo->fetch();
-                
-                if(password_verify($password, $user['password'])) {
-                    // Les informations d'identification sont correctes, connectez l'utilisateur
-                    $_SESSION['user_id'] = $user['id'];
-                    echo "<h1>Connecté</h1>";
-                } else {
-                    echo "<h1>Identifiants incorrects</h1>";
-                }
-            } catch (\PDOException $e) {
-                echo "Erreur de connexion: " . $e->getMessage();
-            }
+    public function authenticate($email, $password) {
+        $stmt = $this->db->prepare("SELECT * FROM user WHERE email = :email");
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
+        $user = $stmt->fetch(\PDO::FETCH_ASSOC);
+
+        if ($user && password_verify($password, $user['password'])) {
+            return true;
+        } else {
+            return false;
         }
     }
-}
+}  
+
 ?>
