@@ -12,15 +12,15 @@ class UserModel {
 
     public function createUser() {
         $lastname = $_POST['lastname'];
-        $firstname = $_POST['firstname']; // Correction: Utilisez $_POST['firstname'] pour le prénom
+        $firstname = $_POST['firstname'];
         $email = $_POST['email'];
         $phone = $_POST['phone'];
-        $password = $_POST['password'];
+        $password = password_hash($_POST['password'], PASSWORD_BCRYPT); // Hachage du mot de passe
         $birthdate = $_POST['birthdate'];
-        $last = date("Y-m-d H:i:s"); // Correction: Utilisez H:i:s pour l'heure au format 24 heures
+        $last = date("Y-m-d H:i:s");
         $active = 1;
         try {
-            $pdo = $this->db->getConnection()->prepare("INSERT INTO user (lastname, firstname, email, phone, password, birthdate, last_connection, active) VALUES (?, ?, ?, ?, ?, ?, ?, ? )");
+            $pdo = $this->db->getConnection()->prepare("INSERT INTO user (lastname, firstname, email, phone, password, birthdate, last_connection, active) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
             $pdo->execute([$lastname, $firstname, $email, $phone, $password, $birthdate, $last, $active]);
             echo "<h1>Utilisateur créé avec succès</h1>";
         } catch (\PDOException $e) {
