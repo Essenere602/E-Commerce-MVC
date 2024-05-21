@@ -1,5 +1,5 @@
 <?php
-namespace Views;
+namespace Views; 
 class AdminProductForm {
     public function initForm () {
         echo '<h1>Créer un produit</h1>

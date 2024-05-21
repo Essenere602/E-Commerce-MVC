@@ -2,7 +2,7 @@
 namespace Controllers;
 
 use Models\CartModel;
-
+ 
 class CartController {
     public function addToCart() {
         header('Content-Type: application/json');

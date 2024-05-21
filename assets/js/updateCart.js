@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const removeFromCartButtons = document.querySelectorAll('.remove-from-cart');
 
     // Fonction pour envoyer une demande au serveur pour ajuster la quantité
-    const adjustQuantity = async (event) => {
+    const adjustQuantity = async (event) => { 
         const form = event.target.closest('.product-form');
         const product_id = form.querySelector('.product_id').value;
         const cart_id = form.querySelector('.cart_id').value;

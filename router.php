@@ -36,7 +36,7 @@ switch($_REQUEST['action'] ?? null) {
                 $productController->listProducts();
             }
             break;
-    case 'panier':
+    case 'panier': 
         $cart_id = 14;
         $showCart = new CartShowController();
         $showCart->show($cart_id);

@@ -2,7 +2,7 @@
 namespace Models;
 
 use App\Database;
-use Lib\Slug;
+use Lib\Slug; 
 
 class AdminProductModel {
     protected $db;

@@ -1,7 +1,7 @@
 <?php
 namespace Views;
 
-class RegisterForm {
+class RegisterForm { 
     public function initForm () {
         echo '<h1>Créer un compte</h1>
         <form class="vertical" action="inscription" method="post">

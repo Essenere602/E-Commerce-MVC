@@ -1,5 +1,5 @@
 <?php
-namespace Views;
+namespace Views; 
 
 class LoginForm {
     public function render() {

@@ -1,5 +1,5 @@
 <?php
-namespace Views;
+namespace Views; 
 
 class CartShowView {
     public function showItems($items) {

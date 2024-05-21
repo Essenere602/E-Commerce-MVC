@@ -2,7 +2,7 @@
 namespace Controllers;
 use Models\ProductShowModel; 
 use Views\ProductShowView;
-
+ 
 class ProductShow {
     public $slug;
     protected $itemModel; 

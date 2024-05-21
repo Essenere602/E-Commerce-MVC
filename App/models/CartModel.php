@@ -3,7 +3,7 @@ namespace Models;
 use App\Database;
 
 class CartModel {
-    protected $db;
+    protected $db; 
     public $user = 2;
     public $amount;
     public $order = 0;

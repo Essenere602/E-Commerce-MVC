@@ -4,7 +4,7 @@ namespace Controllers; // On définie la zon qui doit être identique à celle d
 // On importe les vues et modèles
 use Models\UserModel; 
 use Views\RegisterForm;
-
+ 
 class UserController {
     // On déclare les attributs pour nos instances
     protected $userModel; 
