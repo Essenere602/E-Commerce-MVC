@@ -13,5 +13,11 @@ class AdressCart {
         $this->adressView = new AdressView();
     }
 
-    
+    public function AdressForm () {
+        $this->adressView->initForm();
+    }
+
+    public function AdressSave() {
+        $this->adressModel->getAdress();
+    }
 }

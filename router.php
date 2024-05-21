@@ -7,6 +7,7 @@ use Controllers\ProductsListByCat;
 use Controllers\CartController;
 use Controllers\CartShowController;
 use Controllers\LoginController;
+use Controllers\AdressCartController;
 use App\Database;
 $pdo = new Database;
 if (session_status() == PHP_SESSION_NONE) {
@@ -58,7 +59,8 @@ switch($_REQUEST['action'] ?? null) {
         $step = $_REQUEST['step'] ?? null;
         switch ($step) {
             case 'adresse':
-                echo 'choix de mon adresse';
+                $adressCartController = new AdressCartController();
+                $adressCartController->AdressForm();
                 break;
             case 'livraison':
                 echo 'choix du livreur';
