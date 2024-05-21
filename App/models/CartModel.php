@@ -3,7 +3,11 @@ namespace Models;
 use App\Database;
 
 class CartModel {
+<<<<<<< HEAD
     protected $db;
+=======
+    protected $db; 
+>>>>>>> origin/Samuel
     public $user = 2;
     public $amount;
     public $order = 0;
@@ -73,4 +77,8 @@ class CartModel {
 }
 
 
+<<<<<<< HEAD
 ?>
+=======
+?>
+>>>>>>> origin/Samuel

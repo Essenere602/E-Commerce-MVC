@@ -1,7 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
     const addToCartButtons = document.querySelectorAll('.add-to-cart');
 
+<<<<<<< HEAD
     addToCartButtons.forEach(button => {
+=======
+    addToCartButtons.forEach(button => { 
+>>>>>>> origin/Samuel
         button.addEventListener('click', async (event) => {
             const form = event.target.closest('.product-form');
             const product_id = form.querySelector('.product_id').value;
@@ -9,7 +13,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const quantity = form.querySelector('.qte').value;
 
             try {
+<<<<<<< HEAD
                 const response = await fetch('http://localhost/methode%20MVC/MVC%20PROJET/E-Shop/E-Commerce-MVC/E-Commerce-MVC/?action=addToCart', {
+=======
+                const response = await fetch('http://localhost:8888/ModelViewController/E-Commerce-MVC/?action=addToCart', {
+>>>>>>> origin/Samuel
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

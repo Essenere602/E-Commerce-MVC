@@ -2,7 +2,11 @@
 namespace Controllers;
 
 use Models\CartModel;
+<<<<<<< HEAD
 
+=======
+ 
+>>>>>>> origin/Samuel
 class CartController {
     public function addToCart() {
         header('Content-Type: application/json');
@@ -88,4 +92,8 @@ class CartController {
         }
     }
 
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> origin/Samuel

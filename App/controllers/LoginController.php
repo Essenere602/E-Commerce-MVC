@@ -23,7 +23,11 @@ class LoginController {
 
             $model = new LoginModel();
             $result = $model->authenticate($email, $password);
+<<<<<<< HEAD
 
+=======
+ 
+>>>>>>> origin/Samuel
             if ($result) {
                 // Connexion réussie
                 $_SESSION['user'] = $email;
@@ -43,7 +47,11 @@ class LoginController {
     public function logout() {
         session_unset();
         session_destroy();
+<<<<<<< HEAD
         header("Location: login");
+=======
+        header("Location: ?action=login");
+>>>>>>> origin/Samuel
         exit();
     }
 }

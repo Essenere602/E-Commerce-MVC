@@ -1,5 +1,9 @@
 <?php
+<<<<<<< HEAD
 namespace Views;
+=======
+namespace Views; 
+>>>>>>> origin/Samuel
 
 class CartShowView {
     public function showItems($items) {
@@ -15,7 +19,14 @@ class CartShowView {
             echo '<button type="button" class="remove-from-cart">Remove from Cart</button>';
             echo '</form>';
         }
+<<<<<<< HEAD
         echo '<script src="assets/js/updateCart.js"></script>';
     }
 }
 ?>
+=======
+        echo '<script src="./assets/js/updateCart.js"></script>';
+    }
+}
+?>
+>>>>>>> origin/Samuel

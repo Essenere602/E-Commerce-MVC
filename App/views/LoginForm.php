@@ -1,5 +1,9 @@
 <?php
+<<<<<<< HEAD
 namespace Views;
+=======
+namespace Views; 
+>>>>>>> origin/Samuel
 
 class LoginForm {
     public function render() {
@@ -12,6 +16,7 @@ class LoginForm {
         } else {
             echo '
             <h1>Connectes-toi</h1>
+<<<<<<< HEAD
             <form class="vertical" action="login" method="post">
             
             <label for="email">Email</label><input type="text" name="email" id="email">
@@ -22,3 +27,22 @@ class LoginForm {
     }
 }
 
+=======
+            <form method="POST" action="?action=login">
+                <div>
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div>
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <div>
+                    <button type="submit">Login</button>
+                </div>
+            </form>';
+        }
+    }
+}
+?>
+>>>>>>> origin/Samuel

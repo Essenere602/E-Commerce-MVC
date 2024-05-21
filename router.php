@@ -9,7 +9,11 @@ use Controllers\CartShowController;
 use Controllers\LoginController;
 use App\Database;
 $pdo = new Database;
+<<<<<<< HEAD
 if(session_status() == PHP_SESSION_NONE){
+=======
+if (session_status() == PHP_SESSION_NONE) {
+>>>>>>> origin/Samuel
     session_start();
 }
 switch($_REQUEST['action'] ?? null) {
@@ -36,7 +40,11 @@ switch($_REQUEST['action'] ?? null) {
                 $productController->listProducts();
             }
             break;
+<<<<<<< HEAD
     case 'panier':
+=======
+    case 'panier': 
+>>>>>>> origin/Samuel
         $cart_id = 14;
         $showCart = new CartShowController();
         $showCart->show($cart_id);
@@ -44,6 +52,7 @@ switch($_REQUEST['action'] ?? null) {
     case 'addToCart': // Nouveau cas pour ajouter au panier
         $cartController = new CartController();
         $cartController->addToCart();
+<<<<<<< HEAD
     break;
     case 'adjustQuantity': // Nouveau cas pour ajouter au panier
         $cartController = new CartController();
@@ -53,6 +62,17 @@ switch($_REQUEST['action'] ?? null) {
         $cartController = new CartController();
         $cartController->removeFromCart();
     break;
+=======
+    break;
+    case 'adjustQuantity': // Nouveau cas pour ajouter au panier
+        $cartController = new CartController();
+        $cartController->adjustQuantity();
+    break;
+    case 'removeFromCart': // Nouveau cas pour ajouter au panier
+        $cartController = new CartController();
+        $cartController->removeFromCart();
+    break;
+>>>>>>> origin/Samuel
 
     case 'commande':
         $step = $_REQUEST['step'] ?? null;
@@ -125,8 +145,12 @@ switch($_REQUEST['action'] ?? null) {
     case 'logout':
         $loginController = new LoginController();
         $loginController->logout();
+<<<<<<< HEAD
         break;  
     
+=======
+        break;    
+>>>>>>> origin/Samuel
     
 
 
