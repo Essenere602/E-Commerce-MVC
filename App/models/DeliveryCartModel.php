@@ -4,7 +4,7 @@ namespace Models;
 use App\Database;
 use Lib\Slug;
 
-class AddressCartModel {
+class DeliveryCartModel {
     protected $db;
     protected $slug;
 
@@ -14,10 +14,10 @@ class AddressCartModel {
     }
 
     public function getDeliver() {
-        $deliverOpt = $_POST['delivery_options'];
+        $deliverOpt = $_POST['delivery_option'];
         $deliverTime = $_POST['deliver_time'];
         try {
-            $pdo = $this->db->getConnection()->prepare("INSERT INTO delivery (delivery_options, deliver_time) VALUES (?, ?)");
+            $pdo = $this->db->getConnection()->prepare("INSERT INTO delivery (delivery_option, deliver_time) VALUES (?, ?)");
             $pdo->execute([$deliverOpt, $deliverTime]);
             header("location: validation");
         } catch (\PDOException $e) {
