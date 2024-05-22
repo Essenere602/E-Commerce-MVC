@@ -71,16 +71,14 @@ switch($action) {
         $step = $_REQUEST['step'] ?? null;
         switch ($step) {
             case 'adresse':
-                if ($user_id !== null) {
-                    $addressController = new AddressController();
-                    $addressController->show($user_id);
+                $addressController = new AddressController();
+                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                    $addressController->saveAddress($user_id);
                 } else {
-                    echo "Veuillez vous connecter pour accéder à cette page";
+                    $addressController->show($user_id);
                 }
                 break;
-
                 
-
                 
                 break;
             case 'livraison':
@@ -137,18 +135,17 @@ switch($action) {
     break;
     case 'login':
         $loginController = new LoginController();
-
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $loginController->UserSave();
+            $loginController->userSave();
         } else {
-            $loginController->LoginForm();
+            $loginController->loginForm();
         }
         break;
 
     case 'logout':
         $loginController = new LoginController();
         $loginController->logout();
-        break;    
+        break;  
     
 
 

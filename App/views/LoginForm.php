@@ -3,9 +3,8 @@ namespace Views;
 
 class LoginForm {
     public function render() {
-        if (isset($_SESSION['user'])) {
+        if (isset($_SESSION['user_id'])) {
             echo '
-            <p>Welcome, ' . htmlspecialchars($_SESSION['user']) . '!</p>
             <form method="POST" action="?action=logout">
                 <button type="submit">Logout</button>
             </form>';

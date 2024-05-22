@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const quantity = form.querySelector('.qte').value;
 
             try {
-                const response = await fetch('http://localhost:8888/mon_projet/?action=addToCart', {
+                const response = await fetch('http://localhost:8888/e_commerce_/?action=addToCart', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
