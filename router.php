@@ -7,6 +7,7 @@ use Controllers\ProductsListByCat;
 use Controllers\CartController;
 use Controllers\CartShowController;
 use Controllers\LoginController;
+use Controllers\AddressCart;
 use App\Database;
 $pdo = new Database;
 if(session_status() == PHP_SESSION_NONE){
@@ -55,13 +56,24 @@ switch($_REQUEST['action'] ?? null) {
     break;
 
     case 'commande':
-        $step = $_REQUEST['step'] ?? null;
-        switch ($step) {
+        if (!isset($_SESSION['user'])) {
+            header('Location: ../login');
+            exit();
+        } else {
+            $step = $_REQUEST['step'] ?? null;
+            switch ($step) {
             case 'adresse':
-                echo 'choix de mon adresse';
+                $addressCartController = new AddressCart();
+                    
+                if ($_SERVER['REQUEST_METHOD'] === 'POST' ) {
+                    $addressCartController->AddressSave(); 
+                } else {
+                    $addressCartController->AddressForm();
+                }
                 break;
             case 'livraison':
-                echo 'choix du livreur';
+                $delivery = new DeliveryController();
+                $delivery->deliveryForm();
                 break;
             case 'paiement':
                 echo 'choix du paiement';
@@ -69,10 +81,10 @@ switch($_REQUEST['action'] ?? null) {
             case 'validation':
                 echo 'Validation de la commande';
                 break;
+            }
         }
         break;
-        
-        
+
     case 'inscription':
     
         $userController = new UserController(); // Instanciation du contrôleur

@@ -5,11 +5,6 @@ use Models\LoginModel;
 use Views\LoginForm;
 
 class LoginController {
-    public function __construct() {
-        if (session_status() == PHP_SESSION_NONE) {
-            session_start();
-        }
-    }
 
     public function LoginForm() {
         $view = new LoginForm();
@@ -43,7 +38,7 @@ class LoginController {
     public function logout() {
         session_unset();
         session_destroy();
-        header("Location: login");
+        header("Location: ?action=login");
         exit();
     }
 }
