@@ -466,6 +466,18 @@ ALTER TABLE `user_order_detail`
   ADD CONSTRAINT `order_id` FOREIGN KEY (`order_id`) REFERENCES `user_order` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
 COMMIT;
 
+
+-- Add delivery_id column to user_order table
+ALTER TABLE `user_order`
+ADD COLUMN `delivery_id` int(11) NOT NULL AFTER `payment_id`;
+
+-- Set up the foreign key constraint
+ALTER TABLE `user_order`
+ADD CONSTRAINT `fk_user_order_delivery`
+FOREIGN KEY (`delivery_id`) REFERENCES `delivery` (`id`)
+ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- AJOUT DE FOREGN KEY POUR IDENTIFIER LA COMMANDE AVEC LA BONNE LIVRAISON
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
