@@ -17,7 +17,6 @@ class AddressController {
             return;
         }
 
-        // Afficher le formulaire d'adresse
         $view = new AddressView();
         $view->render();
     }
@@ -33,12 +32,9 @@ class AddressController {
             $success = $model->insertAddress($user_id);
 
             if ($success) {
-                // Redirection après succès
-                
                 header("Location: ?action=commande&step=livraison");
                 exit();
             } else {
-                // Afficher un message d'erreur
                 echo "Erreur lors de l'enregistrement de l'adresse.";
             }
         } else {
@@ -46,4 +42,3 @@ class AddressController {
         }
     }
 }
-?>

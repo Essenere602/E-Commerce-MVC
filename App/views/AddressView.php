@@ -3,6 +3,7 @@ namespace Views;
 
 class AddressView {
     public function render() {
+        echo '<h2>Adresse de Livraison</h2>';
         echo '<form method="POST" action="?action=commande&step=adresse">';
         echo '<label for="address_1">Adresse 1:</label>';
         echo '<input type="text" id="address_1" name="address_1" required>';
@@ -23,4 +24,3 @@ class AddressView {
         echo '</form>';
     }
 }
-?>
