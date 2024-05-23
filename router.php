@@ -39,7 +39,7 @@ switch($_REQUEST['action'] ?? null) {
             }
             break;
     case 'panier':
-        $cart_id = 14;
+        $cart_id = $_SESSION['cart_id'];
         $showCart = new CartShowController();
         $showCart->show($cart_id);
     break;

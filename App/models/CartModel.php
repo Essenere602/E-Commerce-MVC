@@ -36,6 +36,7 @@ class CartModel {
                 // Si oui, on récupère l'id du panier
                 $res = $test->fetch();
                 $this->lastId = $res['id'];
+                $res['id'] = $_SESSION['cart_id'];
             }
 
             // Vérification si le produit existe déjà dans le panier
