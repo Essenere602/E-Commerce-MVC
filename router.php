@@ -24,7 +24,7 @@ switch($_REQUEST['action'] ?? null) {
             $showItem = new ProductsListByCat;
             $showItem->show($_REQUEST['catSlug']);
         } else {
-            echo 'les catégories';
+            echo 'Les catégories';
             //Controlleur pour lister les catégories
 
         }
@@ -80,7 +80,7 @@ switch($_REQUEST['action'] ?? null) {
                 echo 'Recap';
                 break;
             case 'paiement':
-                echo 'choix du paiement';
+                echo 'Choix du paiement';
                 break;
             case 'validation':
                 echo 'Validation de la commande';
