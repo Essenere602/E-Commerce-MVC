@@ -24,6 +24,8 @@ switch($_REQUEST['action'] ?? null) {
             echo 'Catégorie : ' . $_REQUEST['catSlug'];
             $showItem = new ProductsListByCat;
             $showItem->show($_REQUEST['catSlug']);
+            echo $_SESSION['id'];
+
         } else {
             echo 'les catégories';
             //Controlleur pour lister les catégories
@@ -40,9 +42,9 @@ switch($_REQUEST['action'] ?? null) {
             }
             break;
     case 'panier':
-        $cart_id = 14;
+        $user_id = $_SESSION['id'];
         $showCart = new CartShowController();
-        $showCart->show($cart_id);
+        $showCart->show($user_id);
     break;
     case 'addToCart': // Nouveau cas pour ajouter au panier
         $cartController = new CartController();
@@ -73,14 +75,14 @@ switch($_REQUEST['action'] ?? null) {
                     $addressCartController->AddressForm();
                 }
                 break;
-                case 'livraison':
+            case 'livraison':
                     $deliveryController = new \Controllers\DeliveryController();
                     $deliveryController->showDeliveries();
-                    break;
-                case 'selectDelivery':
+                break;
+            case 'selectDelivery':
                     $deliveryController = new \Controllers\DeliveryController();
                     $deliveryController->selectDelivery();
-                    break;
+                break;
             case 'paiement':
                 echo 'choix du paiement';
                 if (isset($_SESSION['selected_delivery_id'])) {
