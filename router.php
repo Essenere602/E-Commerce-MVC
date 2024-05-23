@@ -79,9 +79,7 @@ switch($_REQUEST['action'] ?? null) {
                     }
                 } else {
                     echo "Vous devez être connecté pour accéder à cette page.";
-                    // Ajouter une URL de retour encodée
-                    $currentUrl = urlencode($_SERVER['REQUEST_URI']);
-                    echo '<a href="?action=login&return_url=' . $currentUrl . '"><button>Connectez-vous</button></a>';
+                    echo '<a href="?action=login"><button>Connectez-vous</button></a>';
                 }
                 break;
             case 'livraison':
@@ -95,7 +93,6 @@ switch($_REQUEST['action'] ?? null) {
                 break;
         }
         break;
-    
     
     
     
