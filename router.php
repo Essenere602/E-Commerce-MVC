@@ -7,9 +7,12 @@ use Controllers\ProductsListByCat;
 use Controllers\CartController;
 use Controllers\CartShowController;
 use Controllers\LoginController;
+use Controllers\AddressCart;
+use Controllers\DeliveryController;
+
 use App\Database;
 $pdo = new Database;
-if (session_status() == PHP_SESSION_NONE) {
+if(session_status() == PHP_SESSION_NONE){
     session_start();
 }
 switch($_REQUEST['action'] ?? null) {
@@ -36,7 +39,7 @@ switch($_REQUEST['action'] ?? null) {
                 $productController->listProducts();
             }
             break;
-    case 'panier': 
+    case 'panier':
         $cart_id = 14;
         $showCart = new CartShowController();
         $showCart->show($cart_id);
@@ -55,24 +58,45 @@ switch($_REQUEST['action'] ?? null) {
     break;
 
     case 'commande':
-        $step = $_REQUEST['step'] ?? null;
-        switch ($step) {
+        if (!isset($_SESSION['user'])) {
+            header('Location: ../login');
+            exit();
+        } else {
+            $step = $_REQUEST['step'] ?? null;
+            switch ($step) {
             case 'adresse':
-                echo 'choix de mon adresse';
+                $addressCartController = new AddressCart();
+                    
+                if ($_SERVER['REQUEST_METHOD'] === 'POST' ) {
+                    $addressCartController->AddressSave(); 
+                } else {
+                    $addressCartController->AddressForm();
+                }
                 break;
-            case 'livraison':
-                echo 'choix du livreur';
-                break;
+                case 'livraison':
+                    $deliveryController = new \Controllers\DeliveryController();
+                    $deliveryController->showDeliveries();
+                    break;
+                case 'selectDelivery':
+                    $deliveryController = new \Controllers\DeliveryController();
+                    $deliveryController->selectDelivery();
+                    break;
             case 'paiement':
                 echo 'choix du paiement';
+                if (isset($_SESSION['selected_delivery_id'])) {
+                    echo '<p>Selected Delivery ID: ' . htmlspecialchars($_SESSION['selected_delivery_id']) . '</p>';
+                    // Ici, vous pouvez afficher d'autres informations sur la commande et un formulaire de paiement
+                } else {
+                    echo '<p>No delivery option selected.</p>';
+                }
                 break;
             case 'validation':
                 echo 'Validation de la commande';
                 break;
+            }
         }
         break;
-        
-        
+
     case 'inscription':
     
         $userController = new UserController(); // Instanciation du contrôleur
@@ -125,7 +149,8 @@ switch($_REQUEST['action'] ?? null) {
     case 'logout':
         $loginController = new LoginController();
         $loginController->logout();
-        break;    
+        break;  
+    
     
 
 

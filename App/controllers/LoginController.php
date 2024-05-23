@@ -5,11 +5,6 @@ use Models\LoginModel;
 use Views\LoginForm;
 
 class LoginController {
-    public function __construct() {
-        if (session_status() == PHP_SESSION_NONE) {
-            session_start();
-        }
-    }
 
     public function LoginForm() {
         $view = new LoginForm();
@@ -23,7 +18,7 @@ class LoginController {
 
             $model = new LoginModel();
             $result = $model->authenticate($email, $password);
- 
+
             if ($result) {
                 // Connexion réussie
                 $_SESSION['user'] = $email;
