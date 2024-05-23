@@ -14,5 +14,10 @@ class RecapView {
             echo "<li>Product ID: " . $item['product_id'] . ", Price: " . $item['price_exc_vat'] . ", Quantity: " . $item['quantity'] . ", VAT: " . $item['vat'] . ", VAT Amount: " . $item['vat_amount'] . "</li>";
         }
         echo "</ul>";
+        // Bouton Payer
+        echo '<form method="post">
+                <input type="submit" name="pay" value="Payer">
+              </form>';
     }
 }
+?>
