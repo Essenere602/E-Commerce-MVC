@@ -27,23 +27,10 @@ class AddressModel {
             $pdo = $this->db->getConnection();
             $stmt = $pdo->prepare("INSERT INTO user_address (user_id, address_1, address_2, zip, city, country) VALUES (?, ?, ?, ?, ?, ?)");
             $stmt->execute([$userId, $address, $address2, $zipcode, $city, $country]);
+            header("location: commande/livraison");
             echo "<h1>Adresse créée avec succès</h1>";
         } catch (\PDOException $e) {
             echo "Erreur lors de la création de l'adresse : " . $e->getMessage();
         }
     }
-
-    public function getUserIdByEmail($email) {
-        try {
-            $pdo = $this->db->getConnection();
-            $stmt = $pdo->prepare("SELECT id FROM user WHERE email = ?");
-            $stmt->execute([$email]);
-            return $stmt->fetchColumn();
-        } catch (\PDOException $e) {
-            echo "Erreur lors de la récupération de l'utilisateur : " . $e->getMessage();
-            return false;
-        }
-    }
 }
-
-

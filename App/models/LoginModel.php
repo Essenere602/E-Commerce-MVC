@@ -19,7 +19,7 @@ class LoginModel {
 
         // Vérification si un utilisateur a été trouvé et si le mot de passe est correct
         if ($user && password_verify($password, $user['password'])) { //prend 2 arguments : le mdp fourni par l'utilisateur et le mdp hashé stocké dans la bdd et vérifie si le mdp fourni correspond au mdp hashé stocké dans la bdd
-            return true;
+            return $user['id'];;
         } else {
             return false;
         }

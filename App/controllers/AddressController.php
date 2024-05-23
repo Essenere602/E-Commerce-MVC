@@ -19,12 +19,14 @@ class AddressController {
     }
 
     // Méthode pour enregistrer l'adresse
-    public function addressSave($email) {
-        $userId = $this->addressModel->getUserIdByEmail($email);
-        if ($userId) {
-            $this->addressModel->createAddress($userId);
+    public function addressSave() {
+        // Vérifie si l'utilisateur est connecté en vérifiant la présence de l'ID dans la session
+        if (isset($_SESSION['user_id'])) {
+            $userId = $_SESSION['user_id']; // Récupère l'ID de l'utilisateur à partir de la session
+            $this->addressModel->createAddress($userId); // Utilise l'ID de l'utilisateur pour créer l'adresse
         } else {
-            echo "Utilisateur non trouvé.";
+            echo "Utilisateur non connecté."; // Affiche un message si l'utilisateur n'est pas connecté
         }
     }
+    
 }

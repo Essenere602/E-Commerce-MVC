@@ -14,10 +14,10 @@ class CartShowView {
             echo '<button type="button" class="change-qte">Ajuster la quantité</button>';
             echo '<button type="button" class="remove-from-cart">Remove from Cart</button>';
 
-            if (isset($_SESSION['user'])) {
-                echo '<button type="button">Passer la commande</button>';
+            if (isset($_SESSION['user_id'])) {
+                echo '<a href="commande/adresse"">Passer la commande</button>';
             } else {
-                echo '<button type="button" onclick="window.location.href=\'login.php\'">Connectez-vous pour passer la commande</button>';
+                echo '<button type="button">Connectez-vous pour passer la commande</button>';
             }
 
             echo '</form>';

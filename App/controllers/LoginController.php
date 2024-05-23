@@ -14,9 +14,12 @@ class LoginController {
 
     // Méthode pour afficher le formulaire de connexion (vue)
     public function LoginForm() {
-        $view = new LoginForm();
-        $view->render();
+   
+            // Afficher le formulaire de connexion
+            $view = new LoginForm();
+            $view->render();
     }
+    
     // Méthode pour authentifier l'utilisateur (model)
     public function UserSave() {
         // Vérifie si les données email et password sont envoyées via POST :
@@ -26,14 +29,15 @@ class LoginController {
             $password = $_POST['password'];
 
             $model = new LoginModel();
+            // Authentifie l'utilisateur en utilisant la méthode authenticate du modèle :
+            $userId = $model->authenticate($email, $password); // Authentifie l'utilisateur et récupère son ID
 
-             // Authentifie l'utilisateur en utilisant la méthode authenticate du modèle :
-            $result = $model->authenticate($email, $password);
-
+             
             // Si l'authentification réussit
-            if ($result) {
+            if ($userId) {
+                $_SESSION['user_id'] = $userId;// Stocke l'ID de l'utilisateur dans la session
                 //enregistre l'email de l'utilisateur dans la session
-                $_SESSION['user'] = $email;
+                $_SESSION['email'] = $email;
                 echo "Login successful!";
                 header("Location: ?action=dashboard");
                 exit();

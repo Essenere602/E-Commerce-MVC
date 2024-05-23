@@ -5,9 +5,9 @@ class LoginForm {
     public function render() {
         // vérifie si la variable de session user est définie, ce qui indique que l'utilisateur est déjà connecté
         // si l'utilisateur est connecté, affiche un message de bienvenue avec le nom de l'utilisateur
-        if (isset($_SESSION['user'])) {
+        if (isset($_SESSION['email'])) {
             echo '
-            <p>Welcome, ' . htmlspecialchars($_SESSION['user']) . '!</p> 
+            <p>Welcome, ' . htmlspecialchars($_SESSION['email']) . '!</p> 
             <form method="POST" action="?action=logout">
                 <button type="submit">Logout</button>
             </form>';

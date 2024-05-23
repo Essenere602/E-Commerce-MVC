@@ -65,39 +65,36 @@ switch($_REQUEST['action'] ?? null) {
     break;
     
     case 'commande':
-        $step = $_REQUEST['step'] ?? null;
-        switch ($step) {
-            case 'adresse':
-                // Vérifier si l'utilisateur est connecté
-                if (isset($_SESSION['user'])) {
+        if (!isset($_SESSION['user_id'])) {
+            header('Location: ../login');
+            exit();
+        } else {
+            $step = $_REQUEST['step'] ?? null;
+            switch ($step) {
+                case 'adresse':
                     $addressController = new AddressController();
+                        
                     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                        // Passer l'email de l'utilisateur à la méthode addressSave
-                        $addressController->addressSave($_SESSION['user']);
+                        $addressController->addressSave(); 
                     } else {
                         $addressController->addressForm();
                     }
-                } else {
-                    echo "Vous devez être connecté pour accéder à cette page.";
-                    echo '<a href="?action=login"><button>Connectez-vous</button></a>';
-                }
-                break;
-            case 'livraison':
-                echo 'choix du livreur';
-                break;
-            case 'paiement':
-                echo 'choix du paiement';
-                break;
-            case 'validation':
-                echo 'Validation de la commande';
-                break;
+                    break;
+                case 'livraison':
+                    echo 'Livraison';
+                    break;
+                case 'selectDelivery':
+                    echo 'Choix de livraison';
+                    break;
+                case 'paiement':
+                    echo 'choix du paiement';
+                    break;
+                case 'validation':
+                    echo 'Validation de la commande';
+                    break;
+            }
         }
-        break;
-    
-    
-    
-    
-    
+        break;    
 
     
         
@@ -145,7 +142,7 @@ switch($_REQUEST['action'] ?? null) {
 
     case 'login':
         $loginController = new LoginController();
-
+        echo 'User ID: ' . $_SESSION['user_id'];
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $loginController->UserSave();
         } else {
@@ -156,6 +153,6 @@ switch($_REQUEST['action'] ?? null) {
     case 'logout':
         $loginController = new LoginController();
         $loginController->logout();
-        break;    
+        break;     
 }
 ?>
