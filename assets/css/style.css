@@ -1,9 +1,70 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap");
-
+@import "https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap";
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+h1 {
+  font-weight: 100;
+  font-size: 1.75rem;
+  color: rgb(23, 25, 23);
+  text-align: center;
+  text-transform: uppercase;
+  border: 1px solid white;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
+  margin: auto;
+  padding: 0.25rem 1rem;
+  border-radius: 4px;
+  margin-top: 1rem;
+  box-shadow: 0 0 0.5rem #ddd inset, 0 0 2px rgb(74, 78, 105);
+  margin-top: 3cm;
+}
+
+body {
+  font-family: "Roboto Condensed", sans-serif;
+  font-weight: 200;
+  font-size: 1.1rem;
+  color: rgb(23, 25, 23);
+}
+
+button, .button {
+  background: rgb(74, 78, 105);
+  border-radius: 3px;
+  padding: 0.35rem 1rem;
+  color: rgb(242, 233, 228);
+  border: none;
+  font-size: 1.1rem;
+  font-weight: 200;
+  cursor: pointer;
+}
+
+input[type=text], input[type=password], input[type=datetime-local] {
+  font-size: 1.1rem;
+  font-weight: 200;
+  border-radius: 3px;
+  padding: 0.35rem 1rem;
+  border: 1px solid rgb(201, 173, 167);
+}
+/* Reset default margin and padding for list */
+/* Style for each menu item */
+/* Style for menu item links */
+/* Hover effect for menu item links */
+/* Responsive styles for smaller screens */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.error {
+  position: fixed;
+  top: 30;
+  left: 0;
+  width: 100%;
+  background-color: red;
 }
 
 form.vertical {
@@ -14,30 +75,31 @@ form.vertical {
 }
 
 form {
-  max-width: 50%; /* Increase max width for better spacing */
+  max-width: 50%;
   margin: auto;
   margin-top: 3rem;
   display: flex;
   flex-flow: column;
-  padding: 2rem; /* Increase padding for better spacing */
+  padding: 2rem;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   background-color: #f9f9f9;
 }
-
 form label {
   margin-top: 1rem;
 }
-
 form input {
   width: 100%;
-  padding: 0.7rem; /* Increase padding for input fields */
-  margin-top: 0.5rem; /* Increase margin for better spacing */
+  padding: 0.7rem;
+  margin-top: 0.5rem;
 }
-
 form button, form .button {
   margin-top: 1rem;
-  padding: 0.7rem 1rem; /* Increase padding for buttons */
+  padding: 0.7rem 1rem;
+}
+form .button {
+  margin-top: 1rem;
+  padding: 0.7rem 1rem;
 }
 
 button, .button {
@@ -46,56 +108,69 @@ button, .button {
   color: rgb(242, 233, 228);
   border: none;
   font-size: 1.1rem;
-  font-weight: 400; /* Increase font weight for better readability */
+  font-weight: 400;
   cursor: pointer;
 }
 
-input[type=text], input[type=password], input[type=datetime-local] {
+.button {
+  background: rgb(74, 78, 105);
+  border-radius: 3px;
+  color: rgb(242, 233, 228);
+  border: none;
+  font-size: 1.1rem;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+input[type=text], input[type=datetime-local], input[type=password] {
   font-size: 1.1rem;
   border-radius: 3px;
   border: 1px solid rgb(201, 173, 167);
 }
 
-/* Reset default margin and padding for list */
+input[type=password] {
+  font-size: 1.1rem;
+  border-radius: 3px;
+  border: 1px solid rgb(201, 173, 167);
+}
+
+input[type=datetime-local] {
+  font-size: 1.1rem;
+  border-radius: 3px;
+  border: 1px solid rgb(201, 173, 167);
+}
+
 #menu ul {
   margin: 0;
   padding: 0;
   list-style: none;
-  position: fixed; /* Fix the menu position */
-  top: 0; /* Align menu to the top */
-  left: 0; /* Align menu to the left */
-  width: 100%; /* Make menu full width */
-  background-color: #fff; /* Background color for the menu */
-  z-index: 9999; /* Ensure menu stays on top */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  z-index: 9999;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
-
-/* Style for each menu item */
 #menu ul li {
   display: inline-block;
 }
-
-/* Style for menu item links */
 #menu ul li a {
   display: block;
-  padding: 15px 20px; /* Add padding for better clickability */
+  padding: 15px 20px;
   text-decoration: none;
-  color: #333; /* Default link color */
-  transition: color 0.3s ease; /* Smooth transition effect */
+  color: #333;
+  transition: color 0.3s ease;
 }
-
-/* Hover effect for menu item links */
 #menu ul li a:hover {
-  color: #666; /* Darker color on hover */
+  color: #666;
 }
 
-/* Responsive styles for smaller screens */
 @media screen and (max-width: 768px) {
   #menu ul {
-      text-align: center; /* Center-align menu items */
+    text-align: center;
   }
   #menu ul li {
-      display: block;
+    display: block;
   }
-}
-/*# sourceMappingURL=style.css.map */
+}/*# sourceMappingURL=style.css.map */

@@ -9,6 +9,7 @@ use Controllers\CartShowController;
 use Controllers\LoginController;
 use Controllers\AddressCart;
 use Controllers\DeliveryCart;
+use Controllers\AccountController;
 use App\Database;
 $pdo = new Database;
 if (session_status() == PHP_SESSION_NONE) {
@@ -99,6 +100,8 @@ switch($_REQUEST['action'] ?? null) {
         }
         break;
     case 'compte':
+        $accountController = new AccountController();
+        $accountController->UpdateForm();
         $page = $_REQUEST['page'] ?? null;
         switch ($page) {
             case 'adresses':
@@ -141,9 +144,5 @@ switch($_REQUEST['action'] ?? null) {
         $loginController = new LoginController();
         $loginController->logout();
         break;    
-    
-
-
-
 }
 ?>
