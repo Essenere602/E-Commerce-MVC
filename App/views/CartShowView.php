@@ -15,9 +15,9 @@ class CartShowView {
             echo '<button type="button" class="remove-from-cart">Remove from Cart</button>';
 
             if (isset($_SESSION['user_id'])) {
-                echo '<a href="commande/adresse"">Passer la commande</button>';
+                echo '<a href="commande/adresse"">Passer la commande</a>';
             } else {
-                echo '<button type="button">Connectez-vous pour passer la commande</button>';
+                echo '<a href="login" type="button">Connectez-vous pour passer la commande</a>';
             }
 
             echo '</form>';
