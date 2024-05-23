@@ -33,7 +33,7 @@ USE eshop_mvc;
 
 CREATE TABLE `delivery` (
   `id` int(11) NOT NULL,
-  `delivery_option` varchar(100) NOT NULL,
+  `delivery_option` varchar(50) NOT NULL,
   `deliver_time` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -231,6 +231,20 @@ INSERT INTO `user_cart_detail` (`id`, `cart_id`, `product_id`, `product_option_i
 (9, 14, 1, NULL, NULL, '160.00', 2, '0.20', '32.00'),
 (10, 14, 2, NULL, NULL, '99.00', 1, '0.20', '19.80'),
 (11, 14, 5, NULL, NULL, '120.00', 2, '0.20', '24.00');
+
+-- --------------------------------------------------------
+
+
+--
+-- Déchargement des données de la table `delivery_choice`
+--
+
+INSERT INTO `delivery` (`id`, `delivery_option`, `deliver_time`) VALUES 
+(1, 'DPD', '1 semaine'), 
+(2, 'UPS', '1 semaine'), 
+(3, 'Colissimo', '1 semaine'), 
+(4, 'La Poste', '1 semaine'), 
+(5, 'Mondial Relay', '1 semaine');
 
 -- --------------------------------------------------------
 
@@ -474,8 +488,8 @@ ADD COLUMN `delivery_id` int(11) NOT NULL AFTER `payment_id`;
 -- Set up the foreign key constraint
 ALTER TABLE `user_order`
 ADD CONSTRAINT `fk_user_order_delivery`
-FOREIGN KEY (`delivery_id`) REFERENCES `delivery` (`id`)
-ON DELETE NO ACTION ON UPDATE NO ACTION;
+FOREIGN KEY (`delivery_id`) REFERENCES `delivery` (`id`);
+
 -- AJOUT DE FOREGN KEY POUR IDENTIFIER LA COMMANDE AVEC LA BONNE LIVRAISON
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

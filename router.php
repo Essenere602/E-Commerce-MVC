@@ -57,6 +57,10 @@ switch($_REQUEST['action'] ?? null) {
     break;
 
     case 'commande':
+        if (!isset($_SESSION['user'])) {
+            header('Location: ../login');
+            exit();
+        } else {
         $step = $_REQUEST['step'] ?? null;
         switch ($step) {
             case 'adresse':
@@ -70,12 +74,7 @@ switch($_REQUEST['action'] ?? null) {
                 break;
             case 'livraison':
                 $deliveryCartController = new DeliveryCart();
-                    
-                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                    $deliveryCartController->DeliverySave(); 
-                } else {
-                    $deliveryCartController->DeliveryChoice();
-                }
+                $deliveryCartController->DeliveryChoice();
                 break;
             case 'paiement':
                 echo 'choix du paiement';
@@ -83,7 +82,7 @@ switch($_REQUEST['action'] ?? null) {
             case 'validation':
                 echo 'Validation de la commande';
                 break;
-        }
+        }}
         break;
         
         

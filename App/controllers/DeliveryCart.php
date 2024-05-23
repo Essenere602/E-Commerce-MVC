@@ -14,10 +14,21 @@ class DeliveryCart {
     }
 
     public function DeliveryChoice () {
-        $this->deliveryView->initForm();
+        $deliveryOptions = $this->deliveryModel->fetchDeliveryOpt();
+        $this->deliveryView->initForm($deliveryOptions);
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $this->DeliverySave();
+        }
     }
 
     public function DeliverySave() {
-        $this->deliveryModel->getDeliver();
+        if (isset($_POST['delivery_option'])) {
+            $_SESSION['selected_delivery_option'] = $_POST['delivery_option'];
+            header('Location: paiement');
+            exit();
+        } else {
+            echo "No delivery option selected.";
+        }
     }
 }

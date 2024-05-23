@@ -13,15 +13,13 @@ class DeliveryCartModel {
         $this->slug = new Slug();
     }
 
-    public function getDeliver() {
-        $deliverOpt = $_POST['delivery_option'];
-        $deliverTime = $_POST['deliver_time'];
+    public function fetchDeliveryOpt() {
         try {
-            $pdo = $this->db->getConnection()->prepare("INSERT INTO delivery (delivery_option, deliver_time) VALUES (?, ?)");
-            $pdo->execute([$deliverOpt, $deliverTime]);
-            header("location: validation");
+            $pdo = $this->db->getConnection()->prepare("SELECT id, delivery_option, deliver_time FROM delivery");
+            $pdo->execute();
+            return $pdo->fetchAll(\PDO::FETCH_ASSOC);
         } catch (\PDOException $e) {
-            echo "Erreur lors de la recuperation du choix de livreur : " . $e->getMessage();
+            echo "Erreur lors de la recuperation des livreurs : " . $e->getMessage();
         }
     }
 }

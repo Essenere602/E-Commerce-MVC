@@ -2,19 +2,28 @@
 namespace Views;
 
 class DeliveryView {
-    public function initForm () {
-        echo '<h1>Choix du livreur</h1>
-        <form method="POST">
-        <select name="delivery_option" id="delivery_option">
-            <option value=""></option>
-            <option value="UPS">UPS</option>
-            <option value="DPD">DPD</option>
-            <option value="La Poste">La Poste</option>
-            <option value="Colissimo">Colissimo</option>
-            <option value="Mondial Relay">Mondial Relay</option>
-        </select>
-        <input type="hidden" name="deliver_time" id="deliver_time" value="1 semaine">
-        <button type="submit">Valider</button>
-        </form>';
+
+    public function initForm($deliveryOptions) {
+        echo '<h1>Choix du livreur</h1>';
+        echo '<form method="POST" id="deliveryForm">';
+        echo '<select name="delivery_option" id="deliveryOption">';
+        foreach ($deliveryOptions as $option) {
+            echo '<option value="' . $option['id'] . '">' . $option['delivery_option'] . '</option>';
+        }
+        echo '</select>';
+        echo '<div id="deliveryTimeContainer"></div>';
+        echo '<button type="submit">Valider</button>';
+        echo '</form>';
+
+        echo '<script>
+                document.getElementById("deliveryOption").addEventListener("change", function() {
+                    var selectedDeliveryId = this.value;
+                    var deliveryTime = document.getElementById("deliveryTime_" + selectedDeliveryId).innerHTML;
+                    document.getElementById("deliveryTimeContainer").innerHTML = "<p>Delivery Time: " + deliveryTime + "</p>";
+                });
+              </script>';
+        foreach ($deliveryOptions as $option) {
+            echo '<p id="deliveryTime_' . $option['id'] . '" class="delivery-time" style="display: none;">' . htmlspecialchars($option['deliver_time']) . '</p>';
+        }
     }
 }
