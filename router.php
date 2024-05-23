@@ -7,6 +7,10 @@ use Controllers\ProductsListByCat;
 use Controllers\CartController;
 use Controllers\CartShowController;
 use Controllers\LoginController;
+use Controllers\AddressController;
+
+
+
 use App\Database;
 $pdo = new Database;
 if (session_status() == PHP_SESSION_NONE) {
@@ -16,6 +20,7 @@ switch($_REQUEST['action'] ?? null) {
     default:
         echo 'Homepage';
         break;
+
     case 'categorie':
         if (isset($_REQUEST['catSlug'])) {
             echo 'Catégorie : ' . $_REQUEST['catSlug'];
@@ -27,6 +32,7 @@ switch($_REQUEST['action'] ?? null) {
 
         }
         break;
+
         case 'produit':
             if (isset($_REQUEST['prodSlug'])) {
                 $showItem = new ProductShow;
@@ -36,29 +42,47 @@ switch($_REQUEST['action'] ?? null) {
                 $productController->listProducts();
             }
             break;
+
     case 'panier':
-        $cart_id = 14;
+        $cart_id = 15;
         $showCart = new CartShowController();
         $showCart->show($cart_id);
     break;
+
     case 'addToCart': // Nouveau cas pour ajouter au panier
         $cartController = new CartController();
         $cartController->addToCart();
     break;
+
     case 'adjustQuantity': // Nouveau cas pour ajouter au panier
         $cartController = new CartController();
         $cartController->adjustQuantity();
     break;
+
     case 'removeFromCart': // Nouveau cas pour ajouter au panier
         $cartController = new CartController();
         $cartController->removeFromCart();
     break;
-
+    
     case 'commande':
         $step = $_REQUEST['step'] ?? null;
         switch ($step) {
             case 'adresse':
-                echo 'choix de mon adresse';
+                // Vérifier si l'utilisateur est connecté
+                if (isset($_SESSION['user'])) {
+                    $addressController = new AddressController();
+                    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                        // Passer l'email de l'utilisateur à la méthode addressSave
+                        $addressController->addressSave($_SESSION['user']);
+                    } else {
+                        $addressController->addressForm();
+                    }
+                } else {
+                    echo "Vous devez être connecté pour accéder à cette page.";
+                    // Ajouter une URL de retour encodée
+                    $currentUrl = urlencode($_SERVER['REQUEST_URI']);
+                    echo '<a href="?action=login&return_url=' . $currentUrl . '"><button>Connectez-vous</button></a>';
+                }
                 break;
             case 'livraison':
                 echo 'choix du livreur';
@@ -71,7 +95,14 @@ switch($_REQUEST['action'] ?? null) {
                 break;
         }
         break;
-        
+    
+    
+    
+    
+    
+    
+
+    
         
     case 'inscription':
     
@@ -83,12 +114,13 @@ switch($_REQUEST['action'] ?? null) {
             $userController->RegisterForm(); // Méthode pour afficher le formulaire d'inscription
         }
         break;
+
     case 'compte':
         $page = $_REQUEST['page'] ?? null;
         switch ($page) {
             case 'adresses':
-                echo 'Mes adresses';
-                break;
+            echo "page adresses";
+            break;
             case 'commandes':
                 echo 'Mes commandes';
                 break;
@@ -97,6 +129,7 @@ switch($_REQUEST['action'] ?? null) {
                 break;
         }
     break;
+
     case 'admin':
         $page = $_REQUEST['page'] ?? null;
         switch ($page) {
@@ -112,6 +145,7 @@ switch($_REQUEST['action'] ?? null) {
             break;
         }
     break;
+
     case 'login':
         $loginController = new LoginController();
 
@@ -126,9 +160,5 @@ switch($_REQUEST['action'] ?? null) {
         $loginController = new LoginController();
         $loginController->logout();
         break;    
-    
-
-
-
 }
 ?>

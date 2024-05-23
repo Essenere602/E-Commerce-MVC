@@ -19,6 +19,7 @@ class UserModel {
         $birthdate = $_POST['birthdate'];
         $last = date("Y-m-d H:i:s");
         $active = 1;
+        
         try {
             $pdo = $this->db->getConnection()->prepare("INSERT INTO user (lastname, firstname, email, phone, password, birthdate, last_connection, active) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
             $pdo->execute([$lastname, $firstname, $email, $phone, $password, $birthdate, $last, $active]);

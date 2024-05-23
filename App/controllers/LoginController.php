@@ -23,7 +23,7 @@ class LoginController {
 
             $model = new LoginModel();
             $result = $model->authenticate($email, $password);
-
+ 
             if ($result) {
                 // Connexion réussie
                 $_SESSION['user'] = $email;

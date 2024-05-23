@@ -4,15 +4,16 @@ use App\Database;
 
 class CartModel {
     protected $db;
+    
+    public $productId;
     public $user = 2;
-    public $amount;
     public $order = 0;
     private $lastId;
     public $prix;
     public $id;
     public $qte;
     public $quantity;
-    public $productId;
+    public $amount;
 
     public function __construct() {
         $this->db = new Database(); // Initialiser la connexion à la base de données

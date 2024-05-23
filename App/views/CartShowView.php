@@ -13,6 +13,13 @@ class CartShowView {
             echo '<p>Quantity: <input type="number" name="qte" class="qte" value="' . $item['quantity'] . '"></p>';
             echo '<button type="button" class="change-qte">Ajuster la quantité</button>';
             echo '<button type="button" class="remove-from-cart">Remove from Cart</button>';
+
+            if (isset($_SESSION['user'])) {
+                echo '<button type="button">Passer la commande</button>';
+            } else {
+                echo '<button type="button" onclick="window.location.href=\'login.php\'">Connectez-vous pour passer la commande</button>';
+            }
+
             echo '</form>';
         }
         echo '<script src="./assets/js/updateCart.js"></script>';
