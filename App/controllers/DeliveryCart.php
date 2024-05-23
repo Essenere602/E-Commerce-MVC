@@ -25,7 +25,7 @@ class DeliveryCart {
     public function DeliverySave() {
         if (isset($_POST['delivery_option'])) {
             $_SESSION['selected_delivery_option'] = $_POST['delivery_option'];
-            header('Location: paiement');
+            header('Location: recap');
             exit();
         } else {
             echo "No delivery option selected.";

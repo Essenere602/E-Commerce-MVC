@@ -17,6 +17,7 @@ if (session_status() == PHP_SESSION_NONE) {
 }
 switch($_REQUEST['action'] ?? null) {
     default:
+    echo 'Bienvenue sur notre Eshop.';
         break;
     case 'categorie':
         if (isset($_REQUEST['catSlug'])) {
@@ -58,7 +59,7 @@ switch($_REQUEST['action'] ?? null) {
 
     case 'commande':
         if (!isset($_SESSION['user'])) {
-            header('Location: login');
+            header('Location: ../login');
             exit();
         } else {
         $step = $_REQUEST['step'] ?? null;
@@ -77,7 +78,11 @@ switch($_REQUEST['action'] ?? null) {
                 $deliveryCartController->DeliveryChoice();
                 break;
             case 'recap':
-                echo 'Recap';
+                if (isset($_SESSION['selected_delivery_option'])) {
+                    echo '<p>Selected Delivery ID: ' . htmlspecialchars($_SESSION['selected_delivery_option']) . '</p>';
+                } else {
+                    echo '<p>No delivery option selected.</p>';
+                }
                 break;
             case 'paiement':
                 echo 'Choix du paiement';
