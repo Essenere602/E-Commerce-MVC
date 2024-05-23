@@ -16,7 +16,6 @@ if (session_status() == PHP_SESSION_NONE) {
 }
 switch($_REQUEST['action'] ?? null) {
     default:
-        echo 'Homepage';
         break;
     case 'categorie':
         if (isset($_REQUEST['catSlug'])) {
@@ -58,7 +57,7 @@ switch($_REQUEST['action'] ?? null) {
 
     case 'commande':
         if (!isset($_SESSION['user'])) {
-            header('Location: ../login');
+            header('Location: login');
             exit();
         } else {
         $step = $_REQUEST['step'] ?? null;
