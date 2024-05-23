@@ -76,6 +76,9 @@ switch($_REQUEST['action'] ?? null) {
                 $deliveryCartController = new DeliveryCart();
                 $deliveryCartController->DeliveryChoice();
                 break;
+            case 'recap':
+                echo 'Recap';
+                break;
             case 'paiement':
                 echo 'choix du paiement';
                 break;

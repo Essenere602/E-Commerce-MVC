@@ -4,7 +4,7 @@ namespace Models;
 use App\Database;
 use Lib\Slug;
 
-class DeliveryCartModel {
+class RecapOrderModel {
     protected $db;
     protected $slug;
 
@@ -17,7 +17,7 @@ class DeliveryCartModel {
         try {
             $pdo = $this->db->getConnection()->prepare("SELECT product_id, price_exc_vat, quantity, vat, vat_amount FROM user_cart_detail WHERE cart_id = ?");
             $pdo->execute();
-            header("location: paiement");
+            header("location: recap");
         } catch (\PDOException $e) {
             echo "Erreur lors de la recuperation du recapitulatif de commande : " . $e->getMessage();
         }
