@@ -10,6 +10,7 @@ use Controllers\LoginController;
 use Controllers\AddressCart;
 use Controllers\DeliveryCart;
 use Controllers\AccountController;
+use Controllers\RecapOrder;
 use App\Database;
 $pdo = new Database;
 if (session_status() == PHP_SESSION_NONE) {
@@ -78,12 +79,11 @@ switch($_REQUEST['action'] ?? null) {
                 $deliveryCartController->DeliveryChoice();
                 break;
             case 'recap':
-                if (isset($_SESSION['selected_delivery_option'])) {
-                    echo '<p>Selected Delivery ID: ' . htmlspecialchars($_SESSION['selected_delivery_option']) . '</p>';
-                } else {
-                    echo '<p>No delivery option selected.</p>';
-                }
-                break;
+                $recapOrder = new RecapOrder();
+                $cart_id = 16;
+                $recapOrder->RecapPlz($cart_id);
+            break;
+
             case 'paiement':
                 echo 'Choix du paiement';
                 break;

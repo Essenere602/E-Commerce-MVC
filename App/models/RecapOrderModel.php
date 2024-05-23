@@ -13,27 +13,20 @@ class RecapOrderModel {
         $this->slug = new Slug();
     }
 
-    public function displayOrder() {
+    public function displayOrder($cart_id) {
         try {
+            // Prepare the SQL statement with a placeholder for cart_id
             $pdo = $this->db->getConnection()->prepare("SELECT product_id, price_exc_vat, quantity, vat, vat_amount FROM user_cart_detail WHERE cart_id = ?");
-            $pdo->execute();
+            
+            // Execute the query with the actual cart_id
+            $pdo->execute([$cart_id]);
+            
+            // Fetch all results
             $order = $pdo->fetchAll(\PDO::FETCH_ASSOC);
+            
+            return $order;
         } catch (\PDOException $e) {
-            echo "Erreur lors de la recuperation du recapitulatif de commande : " . $e->getMessage();
+            echo "Erreur lors de la récupération du récapitulatif de commande : " . $e->getMessage();
         }
-        try {
-            $pdo = $this->db->getConnection()->prepare("SELECT address_1, address_2, zip, city, country FROM user_address WHERE user_id = ?");
-            $pdo->execute();
-            $address = $pdo->fetchAll(\PDO::FETCH_ASSOC);
-        } catch (\PDOException $e) {
-            echo "Erreur lors de la recuperation du recapitulatif de commande : " . $e->getMessage();
-        }
-        try {
-            $pdo = $this->db->getConnection()->prepare("SELECT delivery_option, deliver_time, quantity, vat, vat_amount FROM user_cart_detail WHERE cart_id = ?");
-            $pdo->execute();
-            $order = $pdo->fetchAll(\PDO::FETCH_ASSOC);
-        } catch (\PDOException $e) {
-            echo "Erreur lors de la recuperation du recapitulatif de commande : " . $e->getMessage();
-        }   
     }
 }
