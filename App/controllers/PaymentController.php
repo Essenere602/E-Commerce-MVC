@@ -2,25 +2,19 @@
 namespace Controllers;
 
 use Models\PaymentModel;
-use Views\PaymentView;
+use Views\RecapOrderView; // Importez la vue RecapOrderView
 
 class PaymentController {
-    protected $model;
+    protected $paymentModel;
 
+    // Injection de dépendance pour le modèle
     public function __construct() {
-        $this->model = new PaymentModel();
+        $this->paymentModel = new PaymentModel();
     }
 
-    public function processPayment($selectedDeliveryId, $cardNumber, $expiryDate, $cvv) {
-        $success = $this->model->processPayment($selectedDeliveryId, $cardNumber, $expiryDate, $cvv);
-        
-        if ($success) {
-            // Le paiement a réussi, afficher un message de confirmation
-            echo "Payment successful. Thank you for your order!";
-        } else {
-            // Le paiement a échoué, afficher un message d'erreur
-            echo "Payment failed. Please try again later.";
-        }
+    public function recapOrder($user_id) {
+        $orderDetails = $this->paymentModel->recapOrder($user_id);
+        $this->recapOrder($orderDetails);
     }
+
 }
-?>
