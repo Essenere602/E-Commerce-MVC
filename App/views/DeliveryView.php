@@ -1,13 +1,20 @@
-<?php 
-// namespace Views;
+<?php
+namespace Views;
 
-// class CartShowView {
-//     public function showItems($items) {
-//         foreach ($deliveries as $delivery):
-//             echo '<tr>';
-//             echo'<td>htmlspecialchars($delivery['id'])</td>';
-//             echo'<td>htmlspecialchars($delivery['delivery_option'])</td>';
-//             echo'<td>htmlspecialchars($delivery['delivery_time'])</td>';
-//             echo'</tr>';
-//         }
-// }
+class DeliveryView {
+    public function render($deliveries) {
+        echo '<form method="post" action="commande?step=selectDelivery">';
+        foreach ($deliveries as $delivery) {
+            echo '<details>
+                    <summary>
+                        <input type="radio" name="delivery_id" value="' . htmlspecialchars($delivery['id']) . '">
+                        ' . htmlspecialchars($delivery['delivery_option']) . '
+                    </summary>
+                    <p>Delivery Time: ' . htmlspecialchars($delivery['deliver_time']) . '</p>
+                </details>';
+        }
+        echo '<button type="submit">Select Delivery</button>';
+        echo '</form>';
+    }
+}
+?>

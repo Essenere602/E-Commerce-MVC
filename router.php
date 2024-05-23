@@ -8,6 +8,8 @@ use Controllers\CartController;
 use Controllers\CartShowController;
 use Controllers\LoginController;
 use Controllers\AddressCart;
+use Controllers\DeliveryController;
+
 use App\Database;
 $pdo = new Database;
 if(session_status() == PHP_SESSION_NONE){
@@ -71,12 +73,22 @@ switch($_REQUEST['action'] ?? null) {
                     $addressCartController->AddressForm();
                 }
                 break;
-            case 'livraison':
-                $delivery = new DeliveryController();
-                $delivery->deliveryForm();
-                break;
+                case 'livraison':
+                    $deliveryController = new \Controllers\DeliveryController();
+                    $deliveryController->showDeliveries();
+                    break;
+                case 'selectDelivery':
+                    $deliveryController = new \Controllers\DeliveryController();
+                    $deliveryController->selectDelivery();
+                    break;
             case 'paiement':
                 echo 'choix du paiement';
+                if (isset($_SESSION['selected_delivery_id'])) {
+                    echo '<p>Selected Delivery ID: ' . htmlspecialchars($_SESSION['selected_delivery_id']) . '</p>';
+                    // Ici, vous pouvez afficher d'autres informations sur la commande et un formulaire de paiement
+                } else {
+                    echo '<p>No delivery option selected.</p>';
+                }
                 break;
             case 'validation':
                 echo 'Validation de la commande';
