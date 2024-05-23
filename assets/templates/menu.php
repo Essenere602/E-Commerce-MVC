@@ -1,11 +1,12 @@
-<body>
 <nav id="menu">
-        <a href="accueil">Accueil</a>
-        <a href="categorie">Catégories</a>
-        <a href="panier">Mon Panier</a>
-        <a href="commande">Commander</a>
-        <a href="login">Connexion</a>
-        <a href="inscription">Inscription</a>
-        <a href="compte">Mon Compte</a>
-        <a href="admin">Admin</a>
+    <ul>
+        <li><a href="accueil">Accueil</a></li>
+        <li><a href="categorie">Catégories</a></li>
+        <li><a href="panier">Mon Panier</a></li>
+        <li><a href="commande">Commander</a></li>
+        <li><a href="login">Connexion</a></li>
+        <li><a href="inscription">Inscription</a></li>
+        <li><a href="compte">Mon Compte</a></li>
+        <li><a href="admin">Admin</a></li>
+    </ul>
 </nav>
