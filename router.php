@@ -39,9 +39,9 @@ switch($_REQUEST['action'] ?? null) {
             }
             break;
     case 'panier':
-        $cart_id = $_SESSION['cart_id'];
+        $user_id = $_SESSION['id'];
         $showCart = new CartShowController();
-        $showCart->show($cart_id);
+        $showCart->show($user_id);
     break;
     case 'addToCart': // Nouveau cas pour ajouter au panier
         $cartController = new CartController();

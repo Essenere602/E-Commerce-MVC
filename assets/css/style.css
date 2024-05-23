@@ -28,6 +28,7 @@ body {
   font-weight: 200;
   font-size: 1.1rem;
   color: rgb(23, 25, 23);
+  padding-top: 60px;
 }
 
 button, .button {
