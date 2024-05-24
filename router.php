@@ -8,6 +8,7 @@ use Controllers\CartController;
 use Controllers\CartShowController;
 use Controllers\LoginController;
 use Controllers\AddressController;
+use Controllers\DeliveryController;
 
 
 
@@ -81,7 +82,7 @@ switch($_REQUEST['action'] ?? null) {
                     }
                     break;
                 case 'livraison':
-                    echo 'Livraison';
+                    // $livraison 
                     break;
                 case 'selectDelivery':
                     echo 'Choix de livraison';
