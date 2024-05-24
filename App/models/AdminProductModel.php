@@ -12,7 +12,7 @@ class AdminProductModel {
         $this->db = new Database();
         $this->slug = new Slug();
 
-    }
+    } 
 
     public function createProduct() {
         $productName = $_POST['productName'];

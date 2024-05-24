@@ -8,7 +8,7 @@ $rose-quartz: rgb(154, 140, 152);
 $pale: rgb(201, 173, 167);
 $light: rgb(242, 233, 228);
 $orange: rgb(211, 97, 53);
-$navy: rgb(27, 38, 59);
+$navy: rgb(27, 38, 59); 
 
 @mixin flexbox($jc, $ai, $w: false, $d: false) {
     display: flex;

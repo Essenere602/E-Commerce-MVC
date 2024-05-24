@@ -13,4 +13,4 @@ class AccountView {
             <button>Envoyer</button>
         </form>';
     }
-}
+} 

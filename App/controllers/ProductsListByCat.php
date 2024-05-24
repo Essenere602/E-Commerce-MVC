@@ -14,4 +14,4 @@ class ProductsListByCat {
         $myItem = $this->itemModel->productsByCat(); // Assurez-vous que le slug est bien passé
         $this->itemView->showItems($myItem);
     }
-}
+} 

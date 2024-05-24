@@ -10,4 +10,4 @@ class ProductShowView {
             echo "Produit non trouvé.";
         }
     }
-}
+} 

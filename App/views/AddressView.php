@@ -18,5 +18,5 @@ class AddressView {
             <button type="submit">Valider</button>
         </form>';
     }
-}
+} 
 ?>

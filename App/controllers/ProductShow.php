@@ -14,4 +14,4 @@ class ProductShow {
         $myItem = $this->itemModel->itemBySlug($slug); // Assurez-vous que le slug est bien passé
         $this->itemView->showItem($myItem);
     }
-}
+} 

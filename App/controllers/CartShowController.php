@@ -2,7 +2,7 @@
 namespace Controllers;
 
 use Models\CartShowModel;
-use Views\CartShowView;
+use Views\CartShowView; 
  
 class CartShowController {
     protected $itemModel; 

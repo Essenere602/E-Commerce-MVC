@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     quantity: quantity,
                     cart_id: cart_id
                 }),
-            });
+            }); 
 
             const text = await response.text();  // Get the response as text
             console.log('Response Text:', text);

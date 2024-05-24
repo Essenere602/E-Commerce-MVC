@@ -19,5 +19,5 @@ class RecapView {
                 <input type="submit" name="pay" value="Payer">
               </form>';
     }
-}
+} 
 ?>

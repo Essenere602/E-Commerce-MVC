@@ -20,4 +20,4 @@ class RecapOrder {
         // Pass the order details to the view for rendering
         $this->recapView->initForm($orderDetails);
     }
-}
+} 

@@ -14,7 +14,7 @@ class UserController {
     public function __construct() {
         $this->userModel = new UserModel(); 
         $this->userView = new RegisterForm(); 
-    }
+    } 
 
     // Méthode pour la vue
     public function RegisterForm () {

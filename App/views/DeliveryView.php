@@ -26,4 +26,4 @@ class DeliveryView {
             echo '<p id="deliveryTime_' . $option['id'] . '" class="delivery-time" style="display: none;">' . htmlspecialchars($option['deliver_time']) . '</p>';
         }
     }
-}
+} 

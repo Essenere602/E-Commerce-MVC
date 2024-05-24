@@ -8,7 +8,7 @@ class UserModel {
 
     public function __construct() {
         $this->db = new Database();
-    } 
+    }  
 
     public function createUser() {
         $lastname = $_POST['lastname'];

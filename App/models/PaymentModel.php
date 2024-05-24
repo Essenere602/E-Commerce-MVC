@@ -13,4 +13,4 @@ class PaymentModel
     {
         return 'CMD' . date('YmdHis') . rand(1000, 9999);
     }
-}
+} 

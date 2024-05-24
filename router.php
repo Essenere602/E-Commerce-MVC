@@ -83,7 +83,7 @@ case 'commande':
                 $cart_id = 16;
                 $userDetails = $_SESSION['user']; // Assuming user details are stored in session
                 $recapOrder->RecapPlz($cart_id, $userDetails);
-                break;
+                break; 
             case 'paiement':
                 $paymentController = new PaymentController();
                 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

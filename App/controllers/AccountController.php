@@ -2,7 +2,7 @@
 namespace Controllers; // On définie la zon qui doit être identique à celle déclarée dans le composer.json
 
 // On importe les vues et modèles
-use Models\AccountModel; 
+use Models\AccountModel;  
 use Views\AccountView;
 
 class AccountController {

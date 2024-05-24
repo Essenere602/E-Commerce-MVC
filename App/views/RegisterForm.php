@@ -14,5 +14,5 @@ class RegisterForm {
             <button>Envoyer</button>
         </form>';
     }
-}
+} 
 

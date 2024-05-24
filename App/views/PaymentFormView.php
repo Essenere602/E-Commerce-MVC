@@ -20,4 +20,4 @@ class PaymentFormView
             <input type="submit" value="Payer">
         </form>';
     }
-}
+} 

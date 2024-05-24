@@ -19,4 +19,4 @@ class ProductsByCatView {
         echo '<script src="assets/js/addToCart.js"></script>';
     }
 }
-?>
+?> 

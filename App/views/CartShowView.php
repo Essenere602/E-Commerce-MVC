@@ -20,5 +20,5 @@ class CartShowView {
         echo '</form>';
         echo '<script src="./assets/js/updateCart.js"></script>';
     }
-}
+} 
 ?>

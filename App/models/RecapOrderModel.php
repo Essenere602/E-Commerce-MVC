@@ -29,4 +29,4 @@ class RecapOrderModel {
             echo "Erreur lors de la récupération du récapitulatif de commande : " . $e->getMessage();
         }
     }
-}
+} 

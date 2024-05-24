@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         quantity: quantity,
                         price: price,
                     }),
-                });
+                }); 
 
                 const text = await response.text();  // Get the response as text
                 console.log('Response Text:', text);

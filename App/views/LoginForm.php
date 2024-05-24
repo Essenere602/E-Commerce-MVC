@@ -27,5 +27,5 @@ class LoginForm {
             </form>';
         }
     }
-}
+} 
 ?>

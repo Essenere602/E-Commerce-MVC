@@ -11,7 +11,7 @@ class DeliveryCartModel {
     public function __construct() {
         $this->db = new Database();
         $this->slug = new Slug();
-    }
+    } 
 
     public function fetchDeliveryOpt() {
         try {

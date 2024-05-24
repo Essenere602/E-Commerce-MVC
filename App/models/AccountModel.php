@@ -9,7 +9,7 @@ class AccountModel {
     public function __construct() {
         $this->db = new Database();
     }
-
+ 
     public function updateUser() {
         $user_id = $_SESSION['id'];
         $lastname = $_POST['lastname'];

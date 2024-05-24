@@ -1,7 +1,7 @@
 <?php
 namespace Controllers;
 
-use Models\CartModel;
+use Models\CartModel; 
  
 class CartController {
     public function addToCart() {

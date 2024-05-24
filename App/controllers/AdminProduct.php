@@ -1,5 +1,5 @@
 <?php
-namespace Controllers; 
+namespace Controllers;  
 
 // On importe les vues et modèles
 use Models\AdminProductModel; 

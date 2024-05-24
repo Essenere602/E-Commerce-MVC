@@ -58,5 +58,5 @@ class AddressCartModel {
             echo "Erreur lors de la sauvegarde de l'adresse : " . $e->getMessage();
         }
     }
-}
+} 
 ?>
