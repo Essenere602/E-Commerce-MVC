@@ -2,7 +2,7 @@
 
 namespace Views;
 
-class PaymentFormViews
+class PaymentFormView
 {
     public function render()
     {
