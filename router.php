@@ -11,6 +11,7 @@ use Controllers\AddressCart;
 use Controllers\DeliveryCart;
 use Controllers\AccountController;
 use Controllers\RecapOrder;
+use Controllers\PaymentController;
 use App\Database;
 $pdo = new Database;
 if (session_status() == PHP_SESSION_NONE) {
@@ -58,16 +59,15 @@ switch($_REQUEST['action'] ?? null) {
         $cartController->removeFromCart();
     break;
 
-    case 'commande':
-        if (!isset($_SESSION['user'])) {
-            header('Location: ../login');
-            exit();
-        } else {
+case 'commande':
+    if (!isset($_SESSION['user'])) {
+        header('Location: ../login');
+        exit();
+    } else {
         $step = $_REQUEST['step'] ?? null;
         switch ($step) {
             case 'adresse':
                 $addressCartController = new AddressCart();
-                    
                 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $addressCartController->AddressSave(); 
                 } else {
@@ -81,17 +81,27 @@ switch($_REQUEST['action'] ?? null) {
             case 'recap':
                 $recapOrder = new RecapOrder();
                 $cart_id = 16;
-                $recapOrder->RecapPlz($cart_id);
-            break;
-
+                $userDetails = $_SESSION['user']; // Assuming user details are stored in session
+                $recapOrder->RecapPlz($cart_id, $userDetails);
+                break;
             case 'paiement':
-                echo 'Choix du paiement';
+                $paymentController = new PaymentController();
+                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                    $nom = $_POST['nom'] ?? null;
+                    $montant = $_POST['montant'] ?? null;
+                    $paymentController->processPayment($nom, $montant);
+                } else {
+                    $userName = $_POST['userName'] ?? null;
+                    $totalAmount = $_POST['totalAmount'] ?? null;
+                    $paymentController->showPaymentForm($userName, $totalAmount);
+                }
                 break;
             case 'validation':
                 echo 'Validation de la commande';
                 break;
-        }}
-        break;
+        }
+    }
+    break;
         
         
     case 'inscription':

@@ -15,7 +15,7 @@ class RecapView {
         }
         echo "</ul>";
         // Bouton Payer
-        echo '<form method="post">
+        echo '<form method="post" action="commande/paiement">
                 <input type="submit" name="pay" value="Payer">
               </form>';
     }
