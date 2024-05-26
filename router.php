@@ -12,6 +12,7 @@ use Controllers\DeliveryController;
 
 
 
+
 use App\Database;
 $pdo = new Database;
 if (session_status() == PHP_SESSION_NONE) {
@@ -19,7 +20,7 @@ if (session_status() == PHP_SESSION_NONE) {
 }
 switch($_REQUEST['action'] ?? null) {
     default:
-        echo 'Homepage';
+    echo 'Bienvenue sur notre Eshop.';
         break;
 
     case 'categorie':
@@ -28,7 +29,7 @@ switch($_REQUEST['action'] ?? null) {
             $showItem = new ProductsListByCat;
             $showItem->show($_REQUEST['catSlug']);
         } else {
-            echo 'les catégories';
+            echo 'Les catégories';
             //Controlleur pour lister les catégories
 
         }
@@ -77,15 +78,22 @@ switch($_REQUEST['action'] ?? null) {
                         
                     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         $addressController->addressSave(); 
+                    
                     } else {
                         $addressController->addressForm();
                     }
                     break;
+
                 case 'livraison':
-                    // $livraison 
+                    // $livraison = new DeliveryController();
+                    // $livraison->deliverySave();
+                    // $livraison->deliveryForm();
+
+                 
+
                     break;
                 case 'selectDelivery':
-                    echo 'Choix de livraison';
+             
                     break;
                 case 'paiement':
                     echo 'choix du paiement';
@@ -143,7 +151,7 @@ switch($_REQUEST['action'] ?? null) {
 
     case 'login':
         $loginController = new LoginController();
-        echo 'User ID: ' . $_SESSION['user_id'];
+        // echo 'User ID: ' . $_SESSION['user_id'];
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $loginController->UserSave();
         } else {

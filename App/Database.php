@@ -17,5 +17,5 @@ class Database {
     public function getConnection() {
         return $this->cnx; //retourne l'objet PDO($this->cnx) initialisé dans le constructeur, permettant à d'autres parties de l'app d'utiliser cette connexion pour interagir avec la bdd
     }
-}
+} 
 ?>

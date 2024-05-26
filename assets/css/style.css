@@ -67,6 +67,10 @@ form.vertical {
   flex-direction: column;
 }
 
+body {
+  padding-top: 70px;
+}
+
 #menu {
   display: flex;
   justify-content: space-between;
@@ -77,45 +81,30 @@ form.vertical {
   position: fixed;
   top: 0;
   width: 100%;
-  z-index: 1000; /* Assurez-vous que le menu est au-dessus des autres contenus */
+  z-index: 1000;
 }
-
-body {
-  padding-top: 70px; /* Ajustez cette valeur en fonction de la hauteur de votre menu */
-}
-
 #menu a {
   text-decoration: none;
-  color: rgb(27, 38, 59);
-}
-
-#menu > a {
   font-family: "Oswald", sans-serif;
-  font-size: 1.4rem;
   color: rgb(27, 38, 59);
   font-weight: bold;
   text-transform: uppercase;
 }
 
-#menu nav {
-  flex: 1;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+.dropdown .dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.8);
+  z-index: 1000;
+}
+.dropdown .dropdown-content a {
+  font-size: 12px;
 }
 
-.inside-menu {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  max-width: 900px;
-  margin: 0 auto 1rem auto;
-}
-
-.inside-menu a {
-  background: rgb(65, 90, 119);
-  color: white;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  text-decoration: none;
+.dropdown:hover .dropdown-content {
+  display: block;
 }/*# sourceMappingURL=style.css.map */

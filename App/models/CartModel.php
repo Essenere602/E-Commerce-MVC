@@ -7,6 +7,7 @@ class CartModel {
     
     public $productId;
     public $user = 2;
+    public $amount;
     public $order = 0;
     private $lastId;
     public $prix;
@@ -20,16 +21,17 @@ class CartModel {
     }
 
     public function addItemToCart($prix, $id, $qte, $productOptionId = null) {
+        $user = $_SESSION['id'];
         try {
             // On teste si l'utilisateur a déjà un panier
             $test = $this->db->getConnection()->prepare('SELECT * FROM user_cart WHERE user_id = ?');
-            $test->execute([$this->user]);
+            $test->execute([$user]);
 
             // Si non, on crée le panier
             if ($test->rowCount() == 0) {
                 // On enregistre l'identifiant panier
                 $pdo = $this->db->getConnection()->prepare('INSERT INTO user_cart SET user_id = ?, cart_date = ?, order_status = ?');
-                $pdo->execute([$this->user, date('Y-m-d H:i:s'), $this->order]);
+                $pdo->execute([$user, date('Y-m-d H:i:s'), $this->order]);
 
                 // On récupère l'id du panier
                 $this->lastId = $this->db->getConnection()->lastInsertId();
@@ -72,6 +74,4 @@ class CartModel {
     
     
 }
-
-
 ?>

@@ -1,15 +1,12 @@
 <?php
-namespace Views;
+namespace Views; 
 
 class LoginForm {
     public function render() {
         // si l'utilisateur est connecté, affiche un message de bienvenue avec le nom de l'utilisateur
         if (isset($_SESSION['email'])) {
             echo '
-            <p>Welcome, ' . htmlspecialchars($_SESSION['email']) . '!</p> 
-            <form method="POST" action="?action=logout">
-                <button type="submit">Logout</button>
-            </form>';
+            <p>Welcome, ' . htmlspecialchars($_SESSION['email']) . '!</p>';
         } else { //sinon, si l'utilisateur n'est pas connecté, affiche le formulaire de connexion
             echo '
             <h1>Connectes-toi</h1>

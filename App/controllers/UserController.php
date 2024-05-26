@@ -8,17 +8,17 @@ use Views\RegisterForm;
 class UserController {
     // On déclare les attributs pour nos instances, 
     protected $userModel; 
-    protected $tralala;
+    protected $userView;
     
     // On instancie les classes modèles et vues, permet à ces instances d'être disponibles pour toutes les méthodes de la classe.
     public function __construct() {
         $this->userModel = new UserModel(); 
-        $this->tralala = new RegisterForm(); 
+        $this->userView = new RegisterForm(); 
     }
 
     // Méthode pour la vue
     public function RegisterForm () {
-        $this->tralala->initForm();
+        $this->userView->initForm();
     }
 
     // Méthode pour le modèle
