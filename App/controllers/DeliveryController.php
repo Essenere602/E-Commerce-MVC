@@ -1,27 +1,33 @@
 <?php
-
 namespace Controllers;
 
-use Models\DeliveryModel;
-use Views\Delivery;
+use Models\DeliveryCartModel;
+use Views\DeliveryView;
 
-class DeliveryController  {
-
-    protected $deliveryModel;
-    protected $deliveryView;
+class DeliveryController {
+    protected $model;
 
     public function __construct() {
-        $this->deliveryModel = new DeliveryModel;
-        $this->deliveryView = new Delivery;
+        $this->model = new DeliveryCartModel();
     }
 
-    // Méthode pour le model
-    public function deliverySave() {
-        $this->deliveryModel->getDeliveryOptions();
-    }
-    // Méthode pour la vue
-    public function deliveryForm() {
-        $this->deliveryModel->formDelivery();
+    public function showDeliveries() {
+        $deliveries = $this->model->getDeliver();
+        $view = new DeliveryView();
+        $view->render($deliveries);
     }
 
+    public function selectDelivery() {
+        if (isset($_POST['delivery_id'])) {
+            $selectedDeliveryId = $_POST['delivery_id'];
+            // Stocker l'ID de livraison sélectionné dans la session
+            $_SESSION['selected_delivery_id'] = $selectedDeliveryId;
+            // Rediriger vers la page de paiement
+            header('Location: commande/paiement');
+            exit();
+        } else {
+            echo "No delivery option selected.";
+        }
+    }
 }
+?>

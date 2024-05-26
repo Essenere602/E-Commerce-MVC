@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     quantity: quantity,
                     cart_id: cart_id
                 }),
-            });
+            }); 
 
             const text = await response.text();  // Get the response as text
             console.log('Response Text:', text);
@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const cart_detail_id = form.querySelector('.cart_detail_id').value;
 
         try {
-            const response = await fetch('http://localhost:8888/ModelViewController/E-Commerce-MVC/?action=removeFromCart', {
+            const response = await fetch('http://localhost/php-cours/E-Commerce-MVC/?action=removeFromCart', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

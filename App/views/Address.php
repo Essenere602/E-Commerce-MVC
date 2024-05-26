@@ -38,12 +38,13 @@ class Address {
     }
 
     public function updateAddressForm($address) {
+        // value : pré-rempli avec address_1 de $address
         echo '
         <h1>Modifier l\'Adresse</h1>
         <form method="POST" action="?action=commande&step=adresse">
             <div>
                 <label for="address">Adresse :</label>
-                <input type="text" id="address" name="address" value="' . htmlspecialchars($address['address_1']) . '" required>
+                <input type="text" id="address" name="address" value="' . htmlspecialchars($address['address_1']) . '" required> 
             </div>
 
             <div>
@@ -68,6 +69,7 @@ class Address {
 
             <div>
                 <button type="submit">Mettre à jour</button>
+                <a href="?action=commande&step=livraison">Suivant</a>
             </div>
         </form>';
     }

@@ -8,7 +8,7 @@ class LoginController {
     
     public function __construct() {
         if (session_status() == PHP_SESSION_NONE) { //vérifie si le statut de la session est PHP_SESSION_NONE, ce qui signifie qu'aucune session n'a été démarrée. Si c'est le cas, la méthode session_start() est appelée pour démarrer la session
-            session_start();
+            // session_start();
         }
     }
 

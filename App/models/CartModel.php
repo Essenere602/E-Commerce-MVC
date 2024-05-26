@@ -14,10 +14,9 @@ class CartModel {
     public $id;
     public $qte;
     public $quantity;
-    public $amount;
 
     public function __construct() {
-        $this->db = new Database(); // Initialiser la connexion à la base de données
+        $this->db = new Database(); 
     }
 
     public function addItemToCart($prix, $id, $qte, $productOptionId = null) {

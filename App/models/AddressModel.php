@@ -51,6 +51,7 @@ class AddressModel {
             $stmt = $pdo->prepare("UPDATE user_address SET address_1 = ?, address_2 = ?, zip = ?, city = ?, country = ? WHERE user_id = ?");
             $stmt->execute([$address, $address2, $zipcode, $city, $country, $userId]);
             echo "<h1>Adresse modifiée avec succès</h1>";
+            echo'<a href="?action=commande&step=livraison">Suivant</a>';
         } catch (\PDOException $e) {
             echo "Erreur lors de la modification de l'adresse : " . $e->getMessage();
         }

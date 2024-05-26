@@ -51,17 +51,17 @@ switch($_REQUEST['action'] ?? null) {
         $showCart->show($cart_id);
     break;
 
-    case 'addToCart': // Nouveau cas pour ajouter au panier
+    case 'addToCart': //ajouter au panier
         $cartController = new CartController();
         $cartController->addToCart();
     break;
 
-    case 'adjustQuantity': // Nouveau cas pour ajouter au panier
+    case 'adjustQuantity':
         $cartController = new CartController();
         $cartController->adjustQuantity();
     break;
 
-    case 'removeFromCart': // Nouveau cas pour ajouter au panier
+    case 'removeFromCart': 
         $cartController = new CartController();
         $cartController->removeFromCart();
     break;
@@ -85,14 +85,16 @@ switch($_REQUEST['action'] ?? null) {
                     break;
 
                 case 'livraison':
-                    // $livraison = new DeliveryController();
-                    // $livraison->deliverySave();
-                    // $livraison->deliveryForm();
+                    echo "livraison";
+                    $deliveryController = new DeliveryController();
+                    $deliveryController->showDeliveries();
 
                  
 
                     break;
                 case 'selectDelivery':
+                    $deliveryController = new DeliveryController();
+                    $deliveryController->selectDelivery();
              
                     break;
                 case 'paiement':
