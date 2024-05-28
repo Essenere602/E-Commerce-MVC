@@ -7,7 +7,7 @@ class ProductShowModel {
 
     public function __construct() {
         $this->db = new Database();
-    }
+    } 
    
     public function itemBySlug () {
         $url = "SELECT * FROM product WHERE slug = ?";
@@ -21,4 +21,4 @@ class ProductShowModel {
         }
 
     }
-}
+} 

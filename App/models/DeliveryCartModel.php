@@ -11,15 +11,15 @@ class DeliveryCartModel {
     public function __construct() {
         $this->db = new Database();
         $this->slug = new Slug();
-    }
+    } 
 
-    public function getDeliver() {
+    public function fetchDeliveryOpt() {
         try {
-            $pdo = $this->db->getConnection()->prepare("SELECT * FROM delivery");
+            $pdo = $this->db->getConnection()->prepare("SELECT id, delivery_option, deliver_time FROM delivery");
             $pdo->execute();
             return $pdo->fetchAll(\PDO::FETCH_ASSOC);
         } catch (\PDOException $e) {
-            echo "Erreur lors de la récupération du choix de livreur : " . $e->getMessage();
+            echo "Erreur lors de la recuperation des livreurs : " . $e->getMessage();
         }
     }
 }

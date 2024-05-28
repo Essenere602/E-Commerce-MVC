@@ -1,10 +1,10 @@
 <?php
-namespace Controllers; 
+namespace Controllers;  
 
 // On importe les vues et modèles
 use Models\AdminProductModel; 
 use Views\AdminProductForm;
-
+ 
 class AdminProduct {
     // On déclare les attributs pour nos instances
     protected $productModel; 

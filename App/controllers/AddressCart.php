@@ -2,7 +2,7 @@
 namespace Controllers;
 
 use Models\AddressCartModel;
-use Views\AddressView;
+use Views\AddressView; 
 
 class AddressCart {
     protected $addressModel;
@@ -13,11 +13,15 @@ class AddressCart {
         $this->addressView = new AddressView();
     }
 
-    public function AddressForm () {
-        $this->addressView->initForm();
+    public function AddressForm() {
+        $address = $this->addressModel->fetchAddress();
+        $this->addressView->initForm($address);
     }
 
     public function AddressSave() {
-        $this->addressModel->getAddress();
+        $this->addressModel->saveAddress();
+        header("Location: ./livraison");
+        exit();
     }
 }
+?>

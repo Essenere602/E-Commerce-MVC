@@ -7,6 +7,8 @@ $med-gray: rgb(74, 78, 105);
 $rose-quartz: rgb(154, 140, 152);
 $pale: rgb(201, 173, 167);
 $light: rgb(242, 233, 228);
+$orange: rgb(211, 97, 53);
+$navy: rgb(27, 38, 59); 
 
 @mixin flexbox($jc, $ai, $w: false, $d: false) {
     display: flex;
@@ -38,6 +40,7 @@ h1 {
     border-radius:4px;
     margin-top:1rem;
     box-shadow: 0 0 .5rem #ddd inset, 0 0 2px $med-gray ;
+    margin-top: 3cm;
 }
 body {
     font-family: $font;

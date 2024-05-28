@@ -1,20 +1,25 @@
 <?php
-namespace Controllers;
+
+namespace Controllers; 
 
 use Models\PaymentModel;
-use Views\RecapOrderView; // Importez la vue RecapOrderView
+use Views\PaymentFormView;
 
-class PaymentController {
-    protected $paymentModel;
+class PaymentController
+{
+    public function processPayment($nom, $montant)
+{
+    $paymentModel = new PaymentModel();
+    $message = $paymentModel->processPayment($nom, $montant);
+    
+    // Afficher le message de retour
+    echo $message;
 
-    // Injection de dépendance pour le modèle
-    public function __construct() {
-        $this->paymentModel = new PaymentModel();
-    }
-
-    public function recapOrder($user_id) {
-        $orderDetails = $this->paymentModel->recapOrder($user_id);
-        $this->recapOrder($orderDetails);
-    }
+    // Instancier la vue PaymentFormView
+    $paymentFormView = new PaymentFormView();
+    
+    // Appeler la méthode render() pour afficher le formulaire de paiement
+    $paymentFormView->render();
+}
 
 }

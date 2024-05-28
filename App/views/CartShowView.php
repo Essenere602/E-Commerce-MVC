@@ -14,13 +14,11 @@ class CartShowView {
             echo '<button type="button" class="change-qte">Ajuster la quantité</button>';
             echo '<button type="button" class="remove-from-cart">Remove from Cart</button>';
             echo '</form>';
-            
         }
         echo '<form action="commande/adresse">';
-        echo '<input type="hidden" name="cart_id" value="' . $item['cart_id'] . '" class="cart_id">';
-        echo '<button type="submit" class="passer-commande">Passer la commande</button>';
+        echo '<button type="submit" class="order-now">Commander</button>';
         echo '</form>';
-        echo '<script src="assets/js/updateCart.js"></script>';
+        echo '<script src="./assets/js/updateCart.js"></script>';
     }
-}
+} 
 ?>

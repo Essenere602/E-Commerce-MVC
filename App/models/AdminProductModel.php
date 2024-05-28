@@ -2,7 +2,7 @@
 namespace Models;
 
 use App\Database;
-use Lib\Slug;
+use Lib\Slug; 
 
 class AdminProductModel {
     protected $db;
@@ -12,7 +12,7 @@ class AdminProductModel {
         $this->db = new Database();
         $this->slug = new Slug();
 
-    }
+    } 
 
     public function createProduct() {
         $productName = $_POST['productName'];
