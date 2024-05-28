@@ -1,19 +1,15 @@
 <?php
 namespace Views;
+use Models\ValidationModel;
 
 class ValidationView {
 
-    public function initForm($order) {
+    public function initForm() {
         echo 
-            '<form method="POST">
+            '<form method=POST>
             <h1>Validation de la commande ?</h1>
             <button>Valider</button>
             </form>';
-        
-        if (isset($order['vat'])) {
-            echo '<p>Bonjour je s\'appelle ' . htmlspecialchars($order['vat']) . '.</p>';
-        } else {
-            echo '<p>Les détails de la commande ne sont pas disponibles.</p>';
-        }
+        echo 'paf :' . $_SESSION['cart_id'] .'';
     }
 }
