@@ -3,20 +3,15 @@ namespace Views;
 
 class ValidationView {
 
-    public function initForm($orderDetails) {
+    public function initForm($order) {
         echo 
             '<form method="POST">
             <h1>Validation de la commande ?</h1>
             <button>Valider</button>
             </form>';
         
-        if (!empty($orderDetails)) {
-            foreach ($orderDetails as $order) {
-                echo '<p>Produit ID: ' . htmlspecialchars($order['product_id']) . '</p>';
-                echo '<p>Prix HT: ' . htmlspecialchars($order['price_exc_vat']) . '</p>';
-                echo '<p>TVA: ' . htmlspecialchars($order['vat']) . '</p>';
-                echo '<p>Montant TVA: ' . htmlspecialchars($order['vat_amount']) . '</p>';
-            }
+        if (isset($order['vat'])) {
+            echo '<p>Bonjour je s\'appelle ' . htmlspecialchars($order['vat']) . '.</p>';
         } else {
             echo '<p>Les détails de la commande ne sont pas disponibles.</p>';
         }
