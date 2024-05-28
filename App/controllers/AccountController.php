@@ -1,29 +1,39 @@
 <?php
-namespace Controllers; // On définie la zon qui doit être identique à celle déclarée dans le composer.json
+namespace Controllers;
 
-// On importe les vues et modèles
-use Models\AccountModel;  
+use Models\AccountModel;
 use Views\AccountView;
 
 class AccountController {
-    // On déclare les attributs pour nos instances
-    protected $accountModel; 
+    protected $accountModel;
     protected $accountView;
-    
-    // On instancie les classes modèles et vues
+
     public function __construct() {
-        $this->accountModel = new AccountModel(); 
-        $this->accountView = new AccountView(); 
+        $this->accountModel = new AccountModel();
+        $this->accountView = new AccountView();
     }
 
-    // Méthode pour la vue
-    public function UpdateForm () {
-        $this->accountView->initForm();
+    public function updateForm() {
+        $user_id = $_SESSION['id'];
+        $userData = $this->accountModel->getUserData($user_id);
+        $this->accountView->initForm($userData);
     }
 
-    // Méthode pour le modèle
-    public function UserSave() {// Appel de la méthode createUser du modèle
-        $this->accountModel->updateUser();
+    public function userSave() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $user_id = $_SESSION['id'];
+            $lastname = $_POST['lastname'];
+            $firstname = $_POST['firstname'];
+            $email = $_POST['email'];
+            $phone = $_POST['phone'];
+            $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
+
+            $this->accountModel->updateUser($user_id, $lastname, $firstname, $email, $phone, $password);
+
+            // Redirection ou message de succès
+            echo "<h1>Utilisateur modifié avec succès</h1>";
+        } else {
+            $this->updateForm();
+        }
     }
 }
-?>

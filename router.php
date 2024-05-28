@@ -114,9 +114,16 @@ case 'commande':
             $userController->RegisterForm(); // Méthode pour afficher le formulaire d'inscription
         }
         break;
-    case 'compte':
-        $accountController = new AccountController();
-        $accountController->UpdateForm();
+        case 'compte':
+            $accountController = new \Controllers\AccountController();
+            $accountController->updateForm();
+            break;
+    
+        case 'saveUser':
+            $accountController = new \Controllers\AccountController();
+            $accountController->userSave();
+            break;
+        
         $page = $_REQUEST['page'] ?? null;
         switch ($page) {
             case 'adresses':
