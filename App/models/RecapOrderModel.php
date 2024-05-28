@@ -18,10 +18,10 @@ class RecapOrderModel {
             $pdo = $this->db->getConnection()->prepare("SELECT product_id, price_exc_vat, quantity, vat, vat_amount FROM user_cart_detail WHERE cart_id = ?");
             $pdo->execute([$cart_id]);
             $order = $pdo->fetchAll(\PDO::FETCH_ASSOC);
-            
+            $_SESSION['cartId'] = $cart_id;
             return $order;
         } catch (\PDOException $e) {
-            echo "Erreur lors de la récupération du récapitulatif de commande : " . $e->getMessage();
+            echo "Error retrieving order details: " . $e->getMessage();
         }
     }
 

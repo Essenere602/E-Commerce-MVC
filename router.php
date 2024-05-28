@@ -78,12 +78,12 @@ switch($_REQUEST['action'] ?? null) {
                 $deliveryCartController = new DeliveryCart();
                 $deliveryCartController->DeliveryChoice();
                 break;
-            case 'recap':
-                $recapOrder = new RecapOrder();
-                $cart_id = 16;
-                $recapOrder->RecapPlz($cart_id);
-            break;
-
+                case 'recap':
+                    $recapOrder = new RecapOrder();
+                    $cart_id = $_SESSION['cart_id'];
+                    $userDetails = $_SESSION['user']; // Assuming user details are stored in session
+                    $recapOrder->RecapPlz($cart_id, $userDetails); // Assuming user details array contains user_id
+                break;                
             case 'paiement':
                 echo 'Choix du paiement';
                 break;
