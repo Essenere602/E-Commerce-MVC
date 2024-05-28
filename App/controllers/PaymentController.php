@@ -24,7 +24,7 @@ class PaymentController {
     public function PaymentSave() {
         if (isset($_POST['payment_name'])) {
             $_SESSION['selected_payment'] = $_POST['payment_name'];
-            header('Location: confirm');
+            header('Location: validation');
             exit();
         } else {
             echo "No payment option selected.";
