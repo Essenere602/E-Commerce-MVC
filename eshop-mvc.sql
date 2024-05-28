@@ -236,7 +236,7 @@ INSERT INTO `user_cart_detail` (`id`, `cart_id`, `product_id`, `product_option_i
 
 
 --
--- Déchargement des données de la table `delivery_choice`
+-- Déchargement des données de la table `delivery`
 --
 
 INSERT INTO `delivery` (`id`, `delivery_option`, `deliver_time`) VALUES 
@@ -248,7 +248,9 @@ INSERT INTO `delivery` (`id`, `delivery_option`, `deliver_time`) VALUES
 
 -- --------------------------------------------------------
 
-
+--
+-- Déchargement des données de la table `payment`
+--
 
 INSERT INTO `payment` (`id`, `payment_name`) VALUES 
 (1, 'CB'), 
@@ -256,6 +258,8 @@ INSERT INTO `payment` (`id`, `payment_name`) VALUES
 (3, 'Apple Pay'), 
 (4, 'Binance'), 
 (5, 'Forfait Telephone');
+
+-- --------------------------------------------------------
 
 --
 -- Structure de la table `user_order`
