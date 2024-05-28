@@ -248,6 +248,15 @@ INSERT INTO `delivery` (`id`, `delivery_option`, `deliver_time`) VALUES
 
 -- --------------------------------------------------------
 
+
+
+INSERT INTO `payment` (`id`, `payment_name`) VALUES 
+(1, 'CB'), 
+(2, 'Paypal'), 
+(3, 'Apple Pay'), 
+(4, 'Binance'), 
+(5, 'Forfait Telephone');
+
 --
 -- Structure de la table `user_order`
 --

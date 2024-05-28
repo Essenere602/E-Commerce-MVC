@@ -11,6 +11,7 @@ use Controllers\AddressCart;
 use Controllers\DeliveryCart;
 use Controllers\AccountController;
 use Controllers\RecapOrder;
+use Controllers\PaymentController;
 use App\Database;
 $pdo = new Database;
 if (session_status() == PHP_SESSION_NONE) {
@@ -78,14 +79,15 @@ switch($_REQUEST['action'] ?? null) {
                 $deliveryCartController = new DeliveryCart();
                 $deliveryCartController->DeliveryChoice();
                 break;
-                case 'recap':
-                    $recapOrder = new RecapOrder();
-                    $cart_id = $_SESSION['cart_id'];
-                    $userDetails = $_SESSION['user']; // Assuming user details are stored in session
-                    $recapOrder->RecapPlz($cart_id, $userDetails); // Assuming user details array contains user_id
-                break;                
+            case 'recap':
+                $recapOrder = new RecapOrder();
+                $cart_id = $_SESSION['cart_id'];
+                $userDetails = $_SESSION['user']; // Assuming user details are stored in session
+                $recapOrder->RecapPlz($cart_id, $userDetails); // Assuming user details array contains user_id
+            break;                
             case 'paiement':
-                echo 'Choix du paiement';
+                $paymentController = new PaymentController();
+                $paymentController->PaymentChoice();
                 break;
             case 'validation':
                 echo 'Validation de la commande';
