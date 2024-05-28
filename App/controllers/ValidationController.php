@@ -14,9 +14,9 @@ class ValidationController {
     }
 
     public function orderValidate() {
-        $order = $this->validationModel->prepareOrder();
-        if ($order) {
-            $this->validationView->initForm($order);
+        $orderDetails = $this->validationModel->prepareOrder();
+        if ($orderDetails) {
+            $this->validationView->initForm($orderDetails);
         } else {
             echo "Erreur lors de la récupération des détails de la commande.";
         }
