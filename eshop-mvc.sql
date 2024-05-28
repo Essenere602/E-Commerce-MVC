@@ -271,7 +271,8 @@ CREATE TABLE `user_order` (
   `order_date` datetime NOT NULL,
   `amount_exc_vat` decimal(9,2) NOT NULL,
   `order_status` tinyint(1) NOT NULL,
-  `payment_id` int(11) NOT NULL
+  `payment_id` int(11) NOT NULL,
+  `delivery_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -486,17 +487,15 @@ ALTER TABLE `user_cart_detail`
 ALTER TABLE `user_order`
   ADD CONSTRAINT `payment_id` FOREIGN KEY (`payment_id`) REFERENCES `payment` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
+ALTER TABLE `user_order`
+  ADD CONSTRAINT `delivery_id` FOREIGN KEY (`delivery_id`) REFERENCES `delivery` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
 --
 -- Contraintes pour la table `user_order_detail`
 --
 ALTER TABLE `user_order_detail`
   ADD CONSTRAINT `order_id` FOREIGN KEY (`order_id`) REFERENCES `user_order` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
 COMMIT;
-
-
--- Add delivery_id column to user_order table
-ALTER TABLE `user_order`
-ADD COLUMN `delivery_id` int(11) NOT NULL AFTER `payment_id`;
 
 -- Set up the foreign key constraint
 ALTER TABLE `user_order`

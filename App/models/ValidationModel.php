@@ -12,4 +12,8 @@ class ValidationModel {
         $this->db = new Database();
         $this->slug = new Slug();
     }
+
+    public function prepareOrder() {
+        
+    }
 }
