@@ -12,6 +12,7 @@ use Controllers\DeliveryCart;
 use Controllers\AccountController;
 use Controllers\RecapOrder;
 use Controllers\PaymentController;
+use Controllers\ValidationController;
 use App\Database;
 $pdo = new Database;
 if (session_status() == PHP_SESSION_NONE) {
@@ -90,8 +91,9 @@ switch($_REQUEST['action'] ?? null) {
                 $paymentController->PaymentChoice();
                 break;
             case 'validation':
-                echo 'Validation de la commande';
-                break;
+                $validationController = new ValidationController();
+                $validationController->orderValidate();
+            break;
         }}
         break;
         
