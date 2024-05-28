@@ -17,7 +17,6 @@ class RecapOrderModel {
         try {
             // Prepare the SQL statement with a placeholder for cart_id
             $pdo = $this->db->getConnection()->prepare("SELECT product_id, price_exc_vat, quantity, vat, vat_amount FROM user_cart_detail WHERE cart_id = ?");
-            
             // Execute the query with the actual cart_id
             $pdo->execute([$cart_id]);
             

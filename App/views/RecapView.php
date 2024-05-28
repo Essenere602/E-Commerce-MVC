@@ -7,6 +7,7 @@ class RecapView {
         echo "<ul>";
         if (isset($_SESSION['selected_delivery_option'])) {
             echo '<p>Selected Delivery ID: ' . htmlspecialchars($_SESSION['selected_delivery_option']) . '</p>';
+            echo 'cart id : ' . $_SESSION['cart_id'] . '';
         } else {
             echo '<p>No delivery option selected.</p>';
         }

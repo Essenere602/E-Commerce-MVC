@@ -44,6 +44,7 @@ class CartController {
             $productId = $data['product_id'];
             $quantity = $data['quantity'];
             $cartId = $data['cart_id'];
+            $_SESSION['cart_id'] = $cartId;
     
             // Appeler la méthode du modèle pour ajuster la quantité
             $cartModel = new \Models\CartModel();
@@ -72,6 +73,7 @@ class CartController {
         if (isset($data['product_id'])) {
             $productId = $data['product_id'];
             $cartId = $data['cart_id'];
+            $_SESSION['cart_id'] = $cartId;
     
             // Appeler la méthode du modèle pour supprimer le produit du panier
             $cartModel = new \Models\CartModel();

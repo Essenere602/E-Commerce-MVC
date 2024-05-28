@@ -80,7 +80,7 @@ case 'commande':
                 break;
             case 'recap':
                 $recapOrder = new RecapOrder();
-                $cart_id = 16;
+                $cart_id = $_SESSION['cart_id'];
                 $userDetails = $_SESSION['user']; // Assuming user details are stored in session
                 $recapOrder->RecapPlz($cart_id, $userDetails);
                 break; 

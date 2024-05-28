@@ -48,10 +48,12 @@ class AddressCartModel {
             if ($this->addressExists($userId)) {
                 $pdo = $this->db->getConnection()->prepare("UPDATE user_address SET address_1 = ?, address_2 = ?, zip = ?, city = ?, country = ? WHERE user_id = ?");
                 $pdo->execute([$addressOne, $addressTwo, $zip, $city, $country, $userId]);
+                
                 echo "<h1>Adresse mise à jour</h1>";
             } else {
                 $pdo = $this->db->getConnection()->prepare("INSERT INTO user_address (user_id, address_1, address_2, zip, city, country) VALUES (?, ?, ?, ?, ?, ?)");
                 $pdo->execute([$userId, $addressOne, $addressTwo, $zip, $city, $country]);
+
                 echo "<h1>Adresse sauvegardée</h1>";
             }
         } catch (\PDOException $e) {

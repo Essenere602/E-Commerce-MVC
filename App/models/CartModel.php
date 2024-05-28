@@ -36,11 +36,13 @@ class CartModel {
                 // Si oui, on récupère l'id du panier
                 $res = $test->fetch();
                 $this->lastId = $res['id'];
+                $_SESSION['cart_id'] = $res['id'];
             }
 
             // Vérification si le produit existe déjà dans le panier
             $test = $this->db->getConnection()->prepare('SELECT * FROM user_cart_detail WHERE cart_id = ? AND product_id = ? AND (product_option_id = ? OR (product_option_id IS NULL))');
             $test->execute([$this->lastId, $id, $productOptionId]);
+            
 
             if ($test->rowCount() == 0) {
                 // Si le produit n'existe pas, on ajoute un nouvel enregistrement
