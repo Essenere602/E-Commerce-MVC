@@ -5,38 +5,38 @@ use Models\DeliveryModel;
 use Views\DeliveryView;
 
 class DeliveryController {
-    public function showDeliveryForm() {
-        $view = new DeliveryView();
-        $view->render();
+    public function __construct() {
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
     }
 
-    public function saveDelivery() {
+    public function delivery() {
+        $deliveryModel = new DeliveryModel();
+        $deliveryOptions = $deliveryModel->getDeliveryOptions();
+
+        $view = new DeliveryView();
+        $view->render($deliveryOptions);
+    }
+
+    public function saveDeliveryOption() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // Vérifier si l'utilisateur est connecté
-            $user_id = $_SESSION['user_id'] ?? null;
-            if ($user_id === null) {
-                echo "Veuillez vous connecter pour accéder à cette page.";
+            $deliveryOptionId = $_POST['delivery_option'] ?? null;
+
+            if ($deliveryOptionId === null) {
+                echo "Veuillez sélectionner un moyen de livraison.";
                 return;
             }
 
-            // Récupérer les données du formulaire
-            $delivery_option = $_POST['delivery_option'] ?? '';
-            $deliver_time = $_POST['delivery_time'];
+            // Stocker le choix de livraison dans la session
+            $_SESSION['delivery_option'] = $deliveryOptionId;
 
-            // Valider et enregistrer le mode de livraison
-            if (!empty($delivery_option)) {
-                $model = new DeliveryModel();
-                $success = $model->saveDeliveryMethod($user_id, $delivery_option, $deliver_time);
-                if ($success) {
-                    echo "Le mode de livraison a été enregistré avec succès.";
-                } else {
-                    echo "Une erreur s'est produite lors de l'enregistrement du mode de livraison.";
-                }
-            } else {
-                echo "Veuillez sélectionner un mode de livraison.";
-            }
+            // Redirection après succès
+            header("Location: ?action=commande&step=confirmation");
+            exit();
         } else {
             echo "Méthode non autorisée.";
         }
     }
 }
+?>

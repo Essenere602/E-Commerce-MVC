@@ -2,33 +2,35 @@
 namespace Models;
 
 use App\Database;
+use \PDOException;
 
 class DeliveryModel {
     protected $db;
 
     public function __construct() {
-        $this->db = new Database();
+        $database = new Database();
+        $this->db = $database->getConnection();
     }
 
     public function getDeliveryOptions() {
         try {
-            $stmt = $this->db->getConnection()->prepare("SELECT id, delivery_option, delivery_time FROM delivery");
+            $stmt = $this->db->prepare("SELECT * FROM delivery");
             $stmt->execute();
-            return $stmt->fetchAll(\PDO::FETCH_ASSOC);
-        } catch (\PDOException $e) {
+            return $stmt->fetchAll();
+        } catch (PDOException $e) {
             echo "Erreur lors de la récupération des options de livraison : " . $e->getMessage();
             return [];
         }
     }
 
-    public function saveDeliveryMethod($user_id, $delivery_option_id) {
+    public function getDeliveryOptionById($id) {
         try {
-            $stmt = $this->db->getConnection()->prepare("INSERT INTO user_delivery (user_id, delivery_option_id) VALUES (?, ?) ON DUPLICATE KEY UPDATE delivery_option_id = VALUES(delivery_option_id)");
-            $stmt->execute([$user_id, $delivery_option_id]);
-            return true;
-        } catch (\PDOException $e) {
-            echo "Erreur lors de l'enregistrement du mode de livraison : " . $e->getMessage();
-            return false;
+            $stmt = $this->db->prepare("SELECT * FROM delivery WHERE id = ?");
+            $stmt->execute([$id]);
+            return $stmt->fetch();
+        } catch (PDOException $e) {
+            echo "Erreur lors de la récupération de l'option de livraison : " . $e->getMessage();
+            return null;
         }
     }
 }

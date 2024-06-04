@@ -22,6 +22,9 @@ RewriteRule ^commande$ index.php?action=commande [L,QSA]
 RewriteRule ^commande/adresse$ index.php?action=commande&step=adresse [L,QSA]
 # Redirection pour l'accès à 'commande/livraison'
 RewriteRule ^commande/livraison$ index.php?action=commande&step=livraison [L,QSA]
+
+RewriteRule ^commande/confirmation$ index.php?action=commande&step=confirmation [L,QSA]
+
 # Redirection pour l'accès à 'commande/paiement'
 RewriteRule ^commande/paiement$ index.php?action=commande&step=paiement [L,QSA]
 # Redirection pour l'accès à 'commande/validation'

@@ -1,14 +1,20 @@
 <?php
 require_once('vendor/autoload.php');
-use Controllers\UserController; // Déplacer l'instruction use en dehors du switch
-use Controllers\AdminProduct; // Déplacer l'instruction use en dehors du switch
+
+use Controllers\UserController;
+use Controllers\AdminProduct;
 use Controllers\ProductsListByCat;
 use Controllers\CartController;
 use Controllers\CartShowController;
 use Controllers\LoginController;
 use Controllers\AddressController;
+use Controllers\DeliveryController;
+use Controllers\ConfirmationController;
+
 use App\Database;
+
 $pdo = new Database;
+
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
@@ -35,38 +41,36 @@ switch($action) {
             $showItem->show($_REQUEST['catSlug']);
         } else {
             echo 'les catégories';
-            //Controlleur pour lister les catégories
-
+            //Contrôleur pour lister les catégories
         }
         break;
-        case 'produit':
-            // if (isset($_REQUEST['prodSlug'])) {
-            //     $showItem = new ProductShow;
-            //     $showItem->show($_REQUEST['prodSlug']);
-            // } else {
-            //     $productController = new ProductController;
-            //     $productController->listProducts();
-            // }
-            // break;
+    case 'produit':
+        // if (isset($_REQUEST['prodSlug'])) {
+        //     $showItem = new ProductShow;
+        //     $showItem->show($_REQUEST['prodSlug']);
+        // } else {
+        //     $productController = new ProductController;
+        //     $productController->listProducts();
+        // }
+        // break;
+        break;
     case 'panier': 
-        $cart_id = 14;
+        $cart_id = 16;
         $showCart = new CartShowController();
         $showCart->show($cart_id);
-      
-    break;
-    case 'addToCart': // Nouveau cas pour ajouter au panier
+        break;
+    case 'addToCart':
         $cartController = new CartController();
         $cartController->addToCart();
-    break;
-    case 'adjustQuantity': // Nouveau cas pour ajouter au panier
+        break;
+    case 'adjustQuantity':
         $cartController = new CartController();
         $cartController->adjustQuantity();
-    break;
-    case 'removeFromCart': // Nouveau cas pour ajouter au panier
+        break;
+    case 'removeFromCart':
         $cartController = new CartController();
         $cartController->removeFromCart();
-    break;
-
+        break;
     case 'commande':
         $step = $_REQUEST['step'] ?? null;
         switch ($step) {
@@ -78,11 +82,13 @@ switch($action) {
                     $addressController->show($user_id);
                 }
                 break;
-                
-                
-               
             case 'livraison':
-                
+                $deliveryController = new DeliveryController();
+                $deliveryController->delivery();
+                break;
+            case 'confirmation':
+                $confirmationController = new ConfirmationController();
+                $confirmationController->showConfirmation($user_id);
                 break;
             case 'paiement':
                 echo 'choix du paiement';
@@ -92,16 +98,12 @@ switch($action) {
                 break;
         }
         break;
-        
-        
     case 'inscription':
-    
-        $userController = new UserController(); // Instanciation du contrôleur
-    
+        $userController = new UserController();
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $userController->UserSave(); // Méthode pour traiter l'inscription
+            $userController->UserSave();
         } else {
-            $userController->RegisterForm(); // Méthode pour afficher le formulaire d'inscription
+            $userController->RegisterForm();
         }
         break;
     case 'compte':
@@ -117,22 +119,20 @@ switch($action) {
                 echo 'Mon profile';
                 break;
         }
-    break;
+        break;
     case 'admin':
         $page = $_REQUEST['page'] ?? null;
         switch ($page) {
-            
             case 'produits':
-                $adminProduct = new AdminProduct(); // Instanciation du contrôleur
-    
+                $adminProduct = new AdminProduct();
                 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                    $adminProduct->ProductSave(); 
+                    $adminProduct->ProductSave();
                 } else {
                     $adminProduct->RegisterForm();
                 }
-            break;
+                break;
         }
-    break;
+        break;
     case 'login':
         $loginController = new LoginController();
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -141,14 +141,9 @@ switch($action) {
             $loginController->loginForm();
         }
         break;
-
     case 'logout':
         $loginController = new LoginController();
         $loginController->logout();
-        break;  
-    
-
-
-
+        break;
 }
 ?>

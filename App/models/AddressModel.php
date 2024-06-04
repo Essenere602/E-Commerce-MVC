@@ -12,7 +12,8 @@ class AddressModel {
         $this->db = $database->getConnection();
     }
 
-    public function insertAddress($user_id) {
+    public function insertAddress() {
+        $user_id = $_SESSION['user_id']; 
         $address_1 = $_POST['address_1'] ?? '';
         $address_2 = $_POST['address_2'] ?? '';
         $zip = $_POST['zip'] ?? '';
@@ -27,6 +28,7 @@ class AddressModel {
         try {
             $stmt = $this->db->prepare("INSERT INTO user_address (user_id, address_1, address_2, zip, city, country) VALUES (?, ?, ?, ?, ?, ?)");
             $stmt->execute([$user_id, $address_1, $address_2, $zip, $city, $country]);
+            
             return true;
         } catch (PDOException $e) {
             echo "Erreur lors de l'enregistrement de l'adresse : " . $e->getMessage();
@@ -34,3 +36,4 @@ class AddressModel {
         }
     }
 }
+?>

@@ -17,6 +17,7 @@ class AddressController {
             return;
         }
 
+        // Afficher le formulaire d'adresse
         $view = new AddressView();
         $view->render();
     }
@@ -29,16 +30,12 @@ class AddressController {
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $model = new AddressModel();
-            $success = $model->insertAddress($user_id);
+            $model->insertAddress($user_id);
 
-            if ($success) {
-                header("Location: ?action=commande&step=livraison");
-                exit();
-            } else {
-                echo "Erreur lors de l'enregistrement de l'adresse.";
-            }
+            
         } else {
             echo "Méthode non autorisée.";
         }
     }
 }
+?>

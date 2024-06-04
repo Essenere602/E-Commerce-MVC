@@ -2,25 +2,21 @@
 namespace Views;
 
 class AddressView {
-    public function render() {
-        echo '<h2>Adresse de Livraison</h2>';
-        echo '<form method="POST" action="?action=commande&step=adresse">';
-        echo '<label for="address_1">Adresse 1:</label>';
-        echo '<input type="text" id="address_1" name="address_1" required>';
-        echo '<br>';
-        echo '<label for="address_2">Adresse 2:</label>';
-        echo '<input type="text" id="address_2" name="address_2">';
-        echo '<br>';
-        echo '<label for="zip">Code Postal:</label>';
-        echo '<input type="text" id="zip" name="zip" required>';
-        echo '<br>';
-        echo '<label for="city">Ville:</label>';
-        echo '<input type="text" id="city" name="city" required>';
-        echo '<br>';
-        echo '<label for="country">Pays:</label>';
-        echo '<input type="text" id="country" name="country" required>';
-        echo '<br>';
-        echo '<button type="submit">Enregistrer l\'adresse</button>';
-        echo '</form>';
+    public function render($address = null) {
+        $address_1 = $address['address_1'] ?? '';
+        $address_2 = $address['address_2'] ?? '';
+        $zip = $address['zip'] ?? '';
+        $city = $address['city'] ?? '';
+        $country = $address['country'] ?? '';
+        echo '<h1>Votre adresse de livraison</h1>
+        <form class="vertical" method="post" action="commande/livraison">
+            <label>Adresse 1</label><input type="text" name="address_1" id="address_1" value="'.htmlspecialchars($address_1).'">
+            <label>Adresse 2</label><input type="text" name="address_2" id="address_2" value="'.htmlspecialchars($address_2).'">
+            <label>Zipcode</label><input type="text" name="zip" id="zip" value="'.htmlspecialchars($zip).'">
+            <label>Ville</label><input type="text" name="city" id="city" value="'.htmlspecialchars($city).'">
+            <label>Pays</label><input type="text" name="country" id="country" value="'.htmlspecialchars($country).'">
+            <button type="submit">Valider</button>
+        </form>';
     }
 }
+?>

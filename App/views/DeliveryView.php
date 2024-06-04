@@ -2,24 +2,22 @@
 namespace Views;
 
 class DeliveryView {
-    public function render() {
-        echo "<h1>Choix du mode de livraison</h1>"; 
-        echo '<form method="POST" action="?action=commande&step=livraison">
-            <label for="delivery_option">Choisissez votre mode de livraison :</label>
-            <select name="delivery_option" id="delivery_option">
-                <option value="Standard Delivery">Livraison standard</option>
-                <option value="Express Delivery">Livraison express</option>
-                <option value="Overnight Delivery">Livraison le lendemain</option>
-            </select>
-            <br>
-            <label for="delivery_time">Choisissez le délai de livraison :</label>
-            <select name="delivery_time" id="delivery_time">
-                <option value="3-5 Business Days">3-5 jours ouvrables</option>
-                <option value="1-2 Business Days">1-2 jours ouvrables</option>
-                <option value="Next Business Day">Le jour ouvrable suivant</option>
-            </select>
-            <br>
-            <input type="submit" value="Enregistrer">
+    public function render($deliveryOptions = []) {
+        echo '<form method="POST" action="commande/confirmation">
+            <h3>Choisissez votre moyen de livraison</h3>';
+        
+        if (!empty($deliveryOptions)) {
+            foreach ($deliveryOptions as $option) {
+                echo '<div>
+                    <input type="radio" id="delivery_option_' . htmlspecialchars($option['id']) . '" name="delivery_option" value="' . htmlspecialchars($option['id']) . '">
+                    <label for="delivery_option_' . htmlspecialchars($option['id']) . '">' . htmlspecialchars($option['delivery_option']) . ' - ' . htmlspecialchars($option['deliver_time']) . '</label>
+                </div>';
+            }
+        } else {
+            echo '<p>Aucune option de livraison disponible.</p>';
+        }
+
+        echo '<button type="submit">Enregistrer le moyen de livraison</button>
         </form>';
     }
 }
