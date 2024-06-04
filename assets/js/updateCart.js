@@ -15,11 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const quantity = form.querySelector('.qte').value;
 
         try {
-<<<<<<< HEAD
-            const response = await fetch('http://localhost/methode%20MVC/MVC%20PROJET/E-Shop/E-Commerce-MVC/E-Commerce-MVC/?action=adjustQuantity', {
-=======
-            const response = await fetch('http://localhost:8888/ModelViewController/E-Commerce-MVC/?action=adjustQuantity', {
->>>>>>> origin/Samuel
+            const response = await fetch('http://localhost/E-Commerce-MVC/?action=adjustQuantity', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

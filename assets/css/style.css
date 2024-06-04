@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap");
+@import "https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap";
 * {
   margin: 0;
   padding: 0;
@@ -27,6 +28,7 @@ body {
   font-weight: 200;
   font-size: 1.1rem;
   color: rgb(23, 25, 23);
+  padding-top: 60px;
 }
 
 button, .button {
@@ -47,71 +49,129 @@ input[type=text], input[type=password], input[type=datetime-local] {
   padding: 0.35rem 1rem;
   border: 1px solid rgb(201, 173, 167);
 }
+/* Reset default margin and padding for list */
+/* Style for each menu item */
+/* Style for menu item links */
+/* Hover effect for menu item links */
+/* Responsive styles for smaller screens */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.error {
+  position: fixed;
+  top: 30;
+  left: 0;
+  width: 100%;
+  background-color: red;
+}
+
+form.vertical {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
 form {
-  max-width: 300px;
+  max-width: 50%;
   margin: auto;
+  margin-top: 3rem;
+  display: flex;
+  flex-flow: column;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9;
 }
 form label {
   margin-top: 1rem;
 }
 form input {
   width: 100%;
+  padding: 0.7rem;
+  margin-top: 0.5rem;
 }
 form button, form .button {
   margin-top: 1rem;
+  padding: 0.7rem 1rem;
 }
-form.vertical {
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-  flex-wrap: wrap;
-  flex-direction: column;
+form .button {
+  margin-top: 1rem;
+  padding: 0.7rem 1rem;
 }
 
-#menu {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: rgba(255, 255, 255, 0.8);
-  padding: 1rem;
-  box-shadow: 0 0 5px rgba(13, 27, 42, 0.3);
+button, .button {
+  background: rgb(74, 78, 105);
+  border-radius: 3px;
+  color: rgb(242, 233, 228);
+  border: none;
+  font-size: 1.1rem;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.button {
+  background: rgb(74, 78, 105);
+  border-radius: 3px;
+  color: rgb(242, 233, 228);
+  border: none;
+  font-size: 1.1rem;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+input[type=text], input[type=datetime-local], input[type=password] {
+  font-size: 1.1rem;
+  border-radius: 3px;
+  border: 1px solid rgb(201, 173, 167);
+}
+
+input[type=password] {
+  font-size: 1.1rem;
+  border-radius: 3px;
+  border: 1px solid rgb(201, 173, 167);
+}
+
+input[type=datetime-local] {
+  font-size: 1.1rem;
+  border-radius: 3px;
+  border: 1px solid rgb(201, 173, 167);
+}
+
+#menu ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
   position: fixed;
   top: 0;
+  left: 0;
   width: 100%;
+  background-color: #fff;
+  z-index: 9999;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
-
-#menu a {
+#menu ul li {
+  display: inline-block;
+}
+#menu ul li a {
+  display: block;
+  padding: 15px 20px;
   text-decoration: none;
-  color: rgb(27, 38, 59);
+  color: #333;
+  transition: color 0.3s ease;
+}
+#menu ul li a:hover {
+  color: #666;
 }
 
-#menu > a {
-  font-family: "Oswald", sans-serif;
-  font-size: 1.4rem;
-  color: rgb(27, 38, 59);
-  font-weight: bold;
-  text-transform: uppercase;
-}
-
-#menu nav {
-  flex: 1;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-}
-
-.inside-menu {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  max-width: 900px;
-  margin: 0 auto 1rem auto;
-}
-
-.inside-menu a {
-  background: rgb(65, 90, 119);
-  color: white;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  text-decoration: none;
+@media screen and (max-width: 768px) {
+  #menu ul {
+    text-align: center;
+  }
+  #menu ul li {
+    display: block;
+  }
 }/*# sourceMappingURL=style.css.map */

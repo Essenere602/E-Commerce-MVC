@@ -5,10 +5,6 @@ use App\Database;
 class CartModel {
 <<<<<<< HEAD
     protected $db;
-=======
-    protected $db; 
->>>>>>> origin/Samuel
-    public $user = 2;
     public $amount;
     public $order = 0;
     private $lastId;
@@ -23,16 +19,17 @@ class CartModel {
     }
 
     public function addItemToCart($prix, $id, $qte, $productOptionId = null) {
+        $user = $_SESSION['id'];
         try {
             // On teste si l'utilisateur a déjà un panier
             $test = $this->db->getConnection()->prepare('SELECT * FROM user_cart WHERE user_id = ?');
-            $test->execute([$this->user]);
+            $test->execute([$user]);
 
             // Si non, on crée le panier
             if ($test->rowCount() == 0) {
                 // On enregistre l'identifiant panier
                 $pdo = $this->db->getConnection()->prepare('INSERT INTO user_cart SET user_id = ?, cart_date = ?, order_status = ?');
-                $pdo->execute([$this->user, date('Y-m-d H:i:s'), $this->order]);
+                $pdo->execute([$user, date('Y-m-d H:i:s'), $this->order]);
 
                 // On récupère l'id du panier
                 $this->lastId = $this->db->getConnection()->lastInsertId();
@@ -40,6 +37,7 @@ class CartModel {
                 // Si oui, on récupère l'id du panier
                 $res = $test->fetch();
                 $this->lastId = $res['id'];
+                $_SESSION['cart_id'] = $res['id'];
             }
 
             // Vérification si le produit existe déjà dans le panier
@@ -75,10 +73,5 @@ class CartModel {
     
     
 }
-
-
-<<<<<<< HEAD
-?>
-=======
 ?>
 >>>>>>> origin/Samuel

@@ -6,7 +6,7 @@ class Database {
     protected $host = 'localhost';
     protected $db = 'eshop_mvc';
     protected $login = 'root';
-    protected $pw = 'root';
+    protected $pw = '2807';
     
     public function __construct() {
         $this->cnx = new \PDO("mysql:host=$this->host;dbname=$this->db", $this->login, $this->pw);

@@ -7,6 +7,12 @@ use Controllers\ProductsListByCat;
 use Controllers\CartController;
 use Controllers\CartShowController;
 use Controllers\LoginController;
+use Controllers\AddressCart;
+use Controllers\DeliveryCart;
+use Controllers\AccountController;
+use Controllers\RecapOrder;
+use Controllers\PaymentController;
+use Controllers\ValidationController;
 use App\Database;
 $pdo = new Database;
 <<<<<<< HEAD
@@ -18,7 +24,7 @@ if (session_status() == PHP_SESSION_NONE) {
 }
 switch($_REQUEST['action'] ?? null) {
     default:
-        echo 'Homepage';
+    echo 'Bienvenue sur notre Eshop.';
         break;
     case 'categorie':
         if (isset($_REQUEST['catSlug'])) {
@@ -26,7 +32,7 @@ switch($_REQUEST['action'] ?? null) {
             $showItem = new ProductsListByCat;
             $showItem->show($_REQUEST['catSlug']);
         } else {
-            echo 'les catégories';
+            echo 'Les catégories';
             //Controlleur pour lister les catégories
 
         }
@@ -42,12 +48,9 @@ switch($_REQUEST['action'] ?? null) {
             break;
 <<<<<<< HEAD
     case 'panier':
-=======
-    case 'panier': 
->>>>>>> origin/Samuel
-        $cart_id = 14;
+        $user_id = $_SESSION['id'];
         $showCart = new CartShowController();
-        $showCart->show($cart_id);
+        $showCart->show($user_id);
     break;
     case 'addToCart': // Nouveau cas pour ajouter au panier
         $cartController = new CartController();
@@ -75,21 +78,40 @@ switch($_REQUEST['action'] ?? null) {
 >>>>>>> origin/Samuel
 
     case 'commande':
+        if (!isset($_SESSION['user'])) {
+            header('Location: ../login');
+            exit();
+        } else {
         $step = $_REQUEST['step'] ?? null;
         switch ($step) {
             case 'adresse':
-                echo 'choix de mon adresse';
+                $addressCartController = new AddressCart();
+                    
+                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                    $addressCartController->AddressSave(); 
+                } else {
+                    $addressCartController->AddressForm();
+                }
                 break;
             case 'livraison':
-                echo 'choix du livreur';
+                $deliveryCartController = new DeliveryCart();
+                $deliveryCartController->DeliveryChoice();
                 break;
+            case 'recap':
+                $recapOrder = new RecapOrder();
+                $cart_id = $_SESSION['cart_id'];
+                $userDetails = $_SESSION['user']; // Assuming user details are stored in session
+                $recapOrder->RecapPlz($cart_id, $userDetails); // Assuming user details array contains user_id
+            break;                
             case 'paiement':
-                echo 'choix du paiement';
+                $paymentController = new PaymentController();
+                $paymentController->PaymentChoice();
                 break;
             case 'validation':
-                echo 'Validation de la commande';
-                break;
-        }
+                $validationController = new ValidationController();
+                $validationController->orderValidate();
+            break;
+        }}
         break;
         
         
@@ -104,6 +126,8 @@ switch($_REQUEST['action'] ?? null) {
         }
         break;
     case 'compte':
+        $accountController = new AccountController();
+        $accountController->UpdateForm();
         $page = $_REQUEST['page'] ?? null;
         switch ($page) {
             case 'adresses':
@@ -150,10 +174,5 @@ switch($_REQUEST['action'] ?? null) {
     
 =======
         break;    
->>>>>>> origin/Samuel
-    
-
-
-
 }
 ?>
