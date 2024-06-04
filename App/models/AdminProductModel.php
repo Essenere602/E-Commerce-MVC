@@ -35,30 +35,39 @@ class AdminProductModel {
                 $newFileName = $productSlug . '-' . $lastInsertId . '.webp';
                 $uploadFile = $uploadDir . $newFileName;
 
-                // Récupération des dimensions du rectangle de recadrage
-                $cropWidth = 300;
-                $cropHeight = 300;
-
-                // Récupération des dimensions de l'image téléchargée
-                list($width, $height) = getimagesize($productImage['tmp_name']);
-
-                // Calcul du point de départ du recadrage pour centrer l'image
-                $x = ($width - $cropWidth) / 2;
-                $y = ($height - $cropHeight) / 2;
-
-                // Création de l'image recadrée
+                // Création de l'image à partir du fichier téléchargé
                 $image = imagecreatefromstring(file_get_contents($productImage['tmp_name']));
-                $croppedImage = imagecrop($image, ['x' => $x, 'y' => $y, 'width' => $cropWidth, 'height' => $cropHeight]);
-                imagedestroy($image);
+                if ($image !== false) {
+                    // Récupération des dimensions de l'image téléchargée
+                    $originalWidth = imagesx($image);
+                    $originalHeight = imagesy($image);
 
-                // Conversion de l'image recadrée en WebP et déplacement
-                if ($croppedImage !== false) {
-                    imagewebp($croppedImage, $uploadFile);
-                    imagedestroy($croppedImage);
-                    
-                    echo "L'image a été téléchargée et convertie avec succès.\n";
+                    // Calcul des dimensions de recadrage
+                    $cropWidth = min($originalWidth, 300);
+                    $cropHeight = min($originalHeight, 300);
+
+                    // Calcul du point de départ du recadrage pour centrer l'image
+                    $x = ($originalWidth - $cropWidth) / 2;
+                    $y = ($originalHeight - $cropHeight) / 2;
+
+                    // Création de l'image recadrée
+                    $croppedImage = imagecrop($image, ['x' => $x, 'y' => $y, 'width' => $cropWidth, 'height' => $cropHeight]);
+                    if ($croppedImage !== false) {
+                        // Conversion de l'image recadrée en WebP et déplacement
+                        if (imagewebp($croppedImage, $uploadFile)) {
+                            echo "L'image a été téléchargée et convertie avec succès.\n";
+                        } else {
+                            echo "Erreur lors de la conversion de l'image en WebP.\n";
+                        }
+                        
+                        imagedestroy($croppedImage);
+                    } else {
+                        echo "Erreur lors du recadrage de l'image.\n";
+                    }
+
+                    imagedestroy($image);
                 } else {
-                    echo "Erreur lors du recadrage de l'image.\n";
+                    echo "Erreur lors de la création de l'image à partir du fichier.\n";
                 }
             } else {
                 echo "Aucune image téléchargée ou erreur lors de l'upload.\n";
