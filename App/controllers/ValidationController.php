@@ -14,7 +14,10 @@ class ValidationController {
     }
 
     public function orderValidate() {
-        $this->validationView->initForm();
         $this->validationModel->prepareOrder();
+    }
+    public function orderCheck() {
+        $this->validationView->initForm();
+        
     }
 }

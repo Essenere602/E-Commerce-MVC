@@ -38,8 +38,7 @@ switch($_REQUEST['action'] ?? null) {
                 $showItem = new ProductShow;
                 $showItem->show($_REQUEST['prodSlug']);
             } else {
-                $productController = new ProductController;
-                $productController->listProducts();
+                echo 'Erreur : Produit non trouvé';
             }
             break;
     case 'panier':
@@ -90,6 +89,10 @@ switch($_REQUEST['action'] ?? null) {
                 $paymentController = new PaymentController();
                 $paymentController->PaymentChoice();
                 break;
+            case 'check-validation':
+                $validationController = new ValidationController();
+                $validationController->orderCheck();
+            break;
             case 'validation':
                 $validationController = new ValidationController();
                 $validationController->orderValidate();
