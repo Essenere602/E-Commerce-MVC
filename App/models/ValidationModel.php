@@ -23,7 +23,7 @@ class ValidationModel {
             $pdo = $this->db->getConnection()->prepare("INSERT INTO user_order (user_id, order_date, order_status, payment_id, delivery_id) VALUES (?, ?, ?, ?, ?)");
             $pdo->execute([$userId, $orderDate, $orderStatus, $paymentId, $deliveryId]);
             echo "<h1>Commande passée avec succès</h1>";
-            $orderId = $this->db->getConnection()->lastInsertId() - 1;
+            $orderId = $this->db->getConnection()->lastInsertId();
 
             $cartId = $_SESSION['cart_id'];
             $pdo = $this->db->getConnection()->prepare('SELECT * FROM user_cart_detail WHERE cart_id = ?');

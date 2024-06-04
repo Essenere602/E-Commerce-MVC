@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const quantity = form.querySelector('.qte').value;
 
         try {
-            const response = await fetch('http://localhost/E-Commerce-MVC/?action=adjustQuantity', {
+            const response = await fetch('http://localhost:8888/MVC-E-COMMERCE/E-Commerce-MVC/?action=adjustQuantity', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const cart_detail_id = form.querySelector('.cart_detail_id').value;
 
         try {
-            const response = await fetch('http://localhost/methode%20MVC/MVC%20PROJET/E-Shop/E-Commerce-MVC/E-Commerce-MVC/?action=removeFromCart', {
+            const response = await fetch('http://localhost:8888/MVC-E-COMMERCE/E-Commerce-MVC/?action=removeFromCart', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
