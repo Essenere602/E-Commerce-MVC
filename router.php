@@ -38,8 +38,7 @@ switch($_REQUEST['action'] ?? null) {
                 $showItem = new ProductShow;
                 $showItem->show($_REQUEST['prodSlug']);
             } else {
-                $productController = new ProductController;
-                $productController->listProducts();
+                
             }
             break;
     case 'panier':
