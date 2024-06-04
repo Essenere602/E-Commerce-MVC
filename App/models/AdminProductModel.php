@@ -11,7 +11,6 @@ class AdminProductModel {
     public function __construct() {
         $this->db = new Database();
         $this->slug = new Slug();
-
     }
 
     public function createProduct() {
@@ -21,6 +20,8 @@ class AdminProductModel {
         $price = $_POST['price'];
         $stock = $_POST['stock'];
         $online = $_POST['online'] ?? 0;
+        //$productImage = basename($_FILES['productImage']['name']); // Nom de l'image
+
         try {
             $pdo = $this->db->getConnection()->prepare("INSERT INTO product (product_name, product_description, price, stock, slug, online) VALUES (?, ?, ?, ?, ?, ?)");
             $pdo->execute([$productName, $productDesc, $price, $stock, $productSlug, $online]);
@@ -30,4 +31,3 @@ class AdminProductModel {
         }
     }
 }
-?>
