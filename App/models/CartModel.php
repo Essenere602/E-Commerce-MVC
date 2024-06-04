@@ -3,7 +3,6 @@ namespace Models;
 use App\Database;
 
 class CartModel {
-<<<<<<< HEAD
     protected $db;
     public $amount;
     public $order = 0;
@@ -74,4 +73,3 @@ class CartModel {
     
 }
 ?>
->>>>>>> origin/Samuel

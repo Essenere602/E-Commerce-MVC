@@ -1,9 +1,5 @@
 <?php
-<<<<<<< HEAD
 namespace Views;
-=======
-namespace Views; 
->>>>>>> origin/Samuel
 
 class CartShowView {
     public function showItems($items) {
@@ -26,4 +22,3 @@ class CartShowView {
     }
 }
 ?>
->>>>>>> origin/Samuel

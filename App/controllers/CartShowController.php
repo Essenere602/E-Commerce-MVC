@@ -3,11 +3,6 @@ namespace Controllers;
 
 use Models\CartShowModel;
 use Views\CartShowView;
-<<<<<<< HEAD
-
-=======
- 
->>>>>>> origin/Samuel
 class CartShowController {
     protected $itemModel; 
     protected $itemView;
@@ -23,8 +18,4 @@ class CartShowController {
     }
     
 }
-<<<<<<< HEAD
 ?>
-=======
-?>
->>>>>>> origin/Samuel

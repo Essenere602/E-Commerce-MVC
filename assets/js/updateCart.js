@@ -3,11 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const removeFromCartButtons = document.querySelectorAll('.remove-from-cart');
 
     // Fonction pour envoyer une demande au serveur pour ajuster la quantité
-<<<<<<< HEAD
     const adjustQuantity = async (event) => {
-=======
-    const adjustQuantity = async (event) => { 
->>>>>>> origin/Samuel
         const form = event.target.closest('.product-form');
         const product_id = form.querySelector('.product_id').value;
         const cart_id = form.querySelector('.cart_id').value;
@@ -49,11 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const cart_detail_id = form.querySelector('.cart_detail_id').value;
 
         try {
-<<<<<<< HEAD
             const response = await fetch('http://localhost/methode%20MVC/MVC%20PROJET/E-Shop/E-Commerce-MVC/E-Commerce-MVC/?action=removeFromCart', {
-=======
-            const response = await fetch('http://localhost:8888/ModelViewController/E-Commerce-MVC/?action=removeFromCart', {
->>>>>>> origin/Samuel
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -86,8 +78,4 @@ document.addEventListener('DOMContentLoaded', () => {
     removeFromCartButtons.forEach(button => {
         button.addEventListener('click', removeFromCart);
     });
-<<<<<<< HEAD
 });
-=======
-});
->>>>>>> origin/Samuel

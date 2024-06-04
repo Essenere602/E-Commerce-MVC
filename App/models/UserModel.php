@@ -25,11 +25,7 @@ class UserModel {
 
         try {
             $pdo = $this->db->getConnection()->prepare("INSERT INTO user (lastname, firstname, email, phone, password, birthdate, last_connection, active) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-<<<<<<< HEAD
             $pdo->execute([$lastname, $firstname, $email, $phone, $hashedPassword, $birthdate, $last, $active]);
-=======
-            $pdo->execute([$lastname, $firstname, $email, $phone, $password, $birthdate, $last, $active]);
->>>>>>> origin/Samuel
             echo "<h1>Utilisateur créé avec succès</h1>";
         } catch (\PDOException $e) {
             echo "Erreur lors de la création de l'utilisateur : " . $e->getMessage();

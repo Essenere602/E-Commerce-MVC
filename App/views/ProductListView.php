@@ -16,8 +16,4 @@ class ProductListView {
         echo "</ul>";
         // Ajouter la pagination ici si nécessaire
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> origin/Samuel

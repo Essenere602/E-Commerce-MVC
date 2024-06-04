@@ -1,11 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const addToCartButtons = document.querySelectorAll('.add-to-cart');
 
-<<<<<<< HEAD
     addToCartButtons.forEach(button => {
-=======
-    addToCartButtons.forEach(button => { 
->>>>>>> origin/Samuel
         button.addEventListener('click', async (event) => {
             const form = event.target.closest('.product-form');
             const product_id = form.querySelector('.product_id').value;
