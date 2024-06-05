@@ -6,7 +6,7 @@ RewriteCond %{REQUEST_FILENAME} !-d
 # Redirection pour l'accès à 'categorie'
 RewriteRule ^categorie$ index.php?action=categorie [L,QSA]
 # Redirection pour l'accès à 'categorie/xxx'
-RewriteRule ^categorie/([^/]+)$ index.php?action=categorie&catSlug=$1 [L,QSA]
+RewriteRule ^categories/([^/]+)$ index.php?action=categories&slug=$1 [L,QSA]
 
 # Redirection pour l'accès à 'produits'
 RewriteRule ^categorie/produits$ index.php?action=produits [L,QSA]

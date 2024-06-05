@@ -13,8 +13,11 @@ use Controllers\AccountController;
 use Controllers\RecapOrder;
 use Controllers\PaymentController;
 use Controllers\ValidationController;
+use Controllers\CategoriesController;
+
 use App\Database;
 $pdo = new Database;
+$slug = $_REQUEST['slug'] ?? null;
 if(session_status() == PHP_SESSION_NONE){
     session_start();
 }
@@ -22,17 +25,18 @@ switch($_REQUEST['action'] ?? null) {
     default:
     echo 'Bienvenue sur notre Eshop.';
         break;
-    case 'categorie':
-        if (isset($_REQUEST['catSlug'])) {
-            echo 'Catégorie : ' . $_REQUEST['catSlug'];
-            $showItem = new ProductsListByCat;
-            $showItem->show($_REQUEST['catSlug']);
-        } else {
-            echo 'Les catégories';
-            //Controlleur pour lister les catégories
-
-        }
-        break;
+        case 'categorie':
+            if ($slug) {
+                echo 'Catégorie : ' . htmlspecialchars($slug);
+                $showItem = new ProductsListByCat();
+                $showItem->show($slug);
+            } else {
+                echo 'Les catégories';
+                $controller = new CategoriesController();
+                $controller->showCategories();
+            }
+            break;
+    
         case 'produit':
             if (isset($_REQUEST['prodSlug'])) {
                 $showItem = new ProductShow;
