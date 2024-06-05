@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     addToCartButtons.forEach(button => {
         button.addEventListener('click', async (event) => {
+            
             const form = event.target.closest('.product-form');
             const product_id = form.querySelector('.product_id').value;
             const price = form.querySelector('.price').value;

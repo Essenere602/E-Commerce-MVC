@@ -41,7 +41,7 @@ switch($_REQUEST['action'] ?? null) {
                 $showItem = new ProductShow;
                 $showItem->show($_REQUEST['slug']);
             } else {
-                
+               echo 'Erreur : Produit non trouvé';
             }
             break;
     case 'panier':
