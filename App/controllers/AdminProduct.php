@@ -1,29 +1,66 @@
 <?php
-namespace Controllers; 
+namespace Controllers;
 
-// On importe les vues et modèles
-use Models\AdminProductModel; 
+use Models\AdminProductModel;
 use Views\AdminProductForm;
 
 class AdminProduct {
-    // On déclare les attributs pour nos instances
     protected $productModel; 
     protected $productForm;
-    
-    // On instancie les classes modèles et vues
+
     public function __construct() {
         $this->productModel = new AdminProductModel(); 
         $this->productForm = new AdminProductForm(); 
     }
 
-    // Méthode pour la vue
-    public function RegisterForm () {
+    public function RegisterForm() {
         $this->productForm->initForm();
     }
 
-    // Méthode pour le modèle
-    public function ProductSave() {// Appel de la méthode createUser du modèle
-        $this->productModel->createProduct();
+    public function ProductSave() {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            // Appel de la méthode createProduct du modèle
+            $this->productModel->createProduct($_FILES['productImage']);
+        }
+    }
+    public function SelectProductForm() {
+        $products = $this->productModel->getAllProducts();
+        $this->productForm->initSelectProductForm($products);
+    }
+
+    public function ShowUpdateForm() {
+        $productId = $_POST['productId'] ?? null;
+        if ($productId) {
+            $product = $this->productModel->getProductById($productId);
+            if ($product) {
+                $this->productForm->initUpdateForm($product);
+            } else {
+                echo "Produit non trouvé.";
+            }
+        } else {
+            echo "ID de produit non fourni.";
+        }
+    }
+
+    public function ProductUpdate() {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $productId = $_POST['productId'];
+            $this->productModel->updateProduct($productId);
+            // Rediriger vers une page de confirmation ou afficher un message de succès
+        }
+    }
+    public function ShowDeleteForm() {
+        $products = $this->productModel->getAllProducts();
+        $this->productForm->DeleteForm($products);
+    }
+    
+
+    public function ProductDelete() {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $productId = $_POST['productId'];
+            $this->productModel->deleteProduct($productId);
+            // Rediriger vers une page de confirmation ou afficher un message de succès
+        }
     }
 }
 ?>

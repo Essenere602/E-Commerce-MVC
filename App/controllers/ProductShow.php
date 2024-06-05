@@ -8,10 +8,17 @@ class ProductShow {
     protected $itemModel; 
     protected $itemView;
 
-    public function show($slug) {
+    public function __construct() {
         $this->itemModel = new ProductShowModel(); 
         $this->itemView = new ProductShowView(); 
-        $myItem = $this->itemModel->itemBySlug($slug); // Assurez-vous que le slug est bien passé
+    }
+
+    public function show() {
+        
+        $myItem = $this->itemModel->itemBySlug(); // Assurez-vous que le slug est bien passé
         $this->itemView->showItem($myItem);
     }
 }
+
+
+

@@ -68,6 +68,16 @@ input[type=text], input[type=password], input[type=datetime-local] {
   background-color: red;
 }
 
+a.categorie {
+  text-decoration: none;
+  color: #333;
+  margin: 450px;
+}
+
+a.categorie:hover {
+  color: black;
+}
+
 form.vertical {
   display: flex;
   justify-content: center;

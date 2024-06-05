@@ -13,8 +13,8 @@ class ProductShowModel {
         $url = "SELECT * FROM product WHERE slug = ?";
         try {
             $pdo = $this->db->getConnection()->prepare($url);
-            $pdo->execute([$_REQUEST['prodSlug']]);
-            return $pdo->fetch();
+            $pdo->execute([$_REQUEST['Slug']]);
+            return $pdo->fetchAll();
             
         } catch (\PDOException $e) {
             echo "Erreur lors de la création du produit : " . $e->getMessage();

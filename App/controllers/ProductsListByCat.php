@@ -8,10 +8,15 @@ class ProductsListByCat {
     protected $itemModel; 
     protected $itemView;
 
+
+    public function __construct() {
+    $this->itemModel = new ProductsByCatModel(); 
+    $this->itemView = new ProductsByCatView(); 
+    }
+    
     public function show($slug) {
-        $this->itemModel = new ProductsByCatModel(); 
-        $this->itemView = new ProductsByCatView(); 
-        $myItem = $this->itemModel->productsByCat(); // Assurez-vous que le slug est bien passé
+       
+        $myItem = $this->itemModel->productsByCat($slug); // Assurez-vous que le slug est bien passé
         $this->itemView->showItems($myItem);
     }
 }

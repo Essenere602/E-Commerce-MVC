@@ -13,6 +13,7 @@ use Controllers\AccountController;
 use Controllers\RecapOrder;
 use Controllers\PaymentController;
 use Controllers\ValidationController;
+use Controllers\CategoriesController;
 use App\Database;
 $pdo = new Database;
 if (session_status() == PHP_SESSION_NONE) {
@@ -22,24 +23,25 @@ switch($_REQUEST['action'] ?? null) {
     default:
     echo 'Bienvenue sur notre Eshop.';
         break;
-    case 'categorie':
-        if (isset($_REQUEST['catSlug'])) {
-            echo 'Catégorie : ' . $_REQUEST['catSlug'];
-            $showItem = new ProductsListByCat;
-            $showItem->show($_REQUEST['catSlug']);
-        } else {
-            echo 'Les catégories';
-            //Controlleur pour lister les catégories
-
-        }
-        break;
-        case 'produit':
-            if (isset($_REQUEST['prodSlug'])) {
-                $showItem = new ProductShow;
-                $showItem->show($_REQUEST['prodSlug']);
+   
+    case 'categories':
+        if (isset($_REQUEST['slug'])) {
+                echo 'Catégorie : ' . $_REQUEST['slug'];
+        $showItem = new ProductsListByCat;
+        $showItem->show($_REQUEST['slug']);
             } else {
-                $productController = new ProductController;
-                $productController->listProducts();
+                echo 'Les catégories';      
+        $controller = new CategoriesController();
+        $controller->showCategories();
+}           break;
+
+        
+     case 'produit':
+            if (isset($_REQUEST['slug'])) {
+                $showItem = new ProductShow;
+                $showItem->show($_REQUEST['slug']);
+            } else {
+                
             }
             break;
     case 'panier':
@@ -125,6 +127,9 @@ switch($_REQUEST['action'] ?? null) {
         }
     break;
     case 'admin':
+        echo '<a href="admin/produits" class="button">Creer un produit</a>';
+        echo '<a href="admin/update" class="button">Mettre à jour un produit</a>';
+        echo '<a href="admin/delete" class="button">Supprimer un produit</a>';
         $page = $_REQUEST['page'] ?? null;
         switch ($page) {
             
@@ -137,6 +142,29 @@ switch($_REQUEST['action'] ?? null) {
                     $adminProduct->RegisterForm();
                 }
             break;
+
+        case 'update':
+            $adminProduct = new AdminProduct();
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                if (isset($_POST['selectProduct'])) {
+                    $adminProduct->ShowUpdateForm();
+                } else {
+                    $adminProduct->ProductUpdate();
+                }
+            } else {
+                $adminProduct->SelectProductForm();
+            }
+            break;
+
+            case 'delete':
+                $adminProduct = new AdminProduct();
+                if ($_SERVER['REQUEST_METHOD'] === 'POST'){
+                    $adminProduct->ProductDelete();
+                }else {
+                    $adminProduct->ShowDeleteForm();
+                }
+                break;
+   
         }
     break;
     case 'login':

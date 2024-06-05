@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const cart_detail_id = form.querySelector('.cart_detail_id').value;
 
         try {
-            const response = await fetch('http://localhost:8888/ModelViewController/E-Commerce-MVC/?action=removeFromCart', {
+            const response = await fetch('http://localhost/E-Commerce-MVC/?action=removeFromCart', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
