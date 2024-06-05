@@ -27,7 +27,7 @@ class AdminProductForm {
 
     public function initUpdateForm($product) {
         echo '<h1>Mettre à jour un produit</h1>';
-        echo '<form method="post" action="index.php?page=update" enctype="multipart/form-data">';
+        echo '<form method="post" action="admin/update" enctype="multipart/form-data">';
         echo '<input type="hidden" name="productId" value="' . $product['id'] . '">';
         echo '<input type="text" name="productName" value="' . $product['product_name'] . '">';
         echo '<textarea name="productDesc">' . $product['product_description'] . '</textarea>';
@@ -41,7 +41,7 @@ class AdminProductForm {
 
     public function DeleteForm($products) {
         echo '<h1>Supprimer un produit</h1>';
-        echo '<form method="post" action="admin">';
+        echo '<form method="post" action="admin/delete">';
         foreach ($products as $product) {
             echo '<div>';
             echo '<span>' . $product['product_name'] . '</span>';

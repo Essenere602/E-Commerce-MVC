@@ -98,8 +98,8 @@ class AdminProductModel {
         $online = isset($_POST['online']) ? 1 : 0;
     
         try {
-            $pdo = $this->db->getConnection()->prepare("UPDATE product SET product_name = ?, product_description = ?, price = ?, stock = ?, slug = ?, online = ? WHERE id = ?");
-            $pdo->execute([$productName, $productDesc, $price, $stock, $productSlug, $online, $productId]);
+            $pdo = $this->db->getConnection()->prepare("UPDATE product SET product_name = ?, product_description = ?, price = ?, slug = ?, stock = ?, online = ? WHERE id = ?");
+            $pdo->execute([$productName, $productDesc, $price, $productSlug, $stock, $online, $productId]);
             echo "<h1>Produit mis à jour avec succès</h1>";
         } catch (\PDOException $e) {
             echo "Erreur lors de la mise à jour du produit : " . $e->getMessage();
@@ -110,7 +110,6 @@ class AdminProductModel {
         try {
             $pdo = $this->db->getConnection()->prepare("DELETE FROM product WHERE id = ?");
             $pdo->execute([$productId]);
-            header("Location: admin"); // Rediriger vers la page d'accueil, par exemple
             exit();        
         } 
             catch (\PDOException $e) {
