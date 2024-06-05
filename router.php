@@ -8,6 +8,7 @@ use Controllers\CartController;
 use Controllers\CartShowController;
 use Controllers\LoginController;
 use Controllers\AddressCart;
+Use Controllers\CategoriesController;
 use Controllers\DeliveryCart;
 use Controllers\AccountController;
 use Controllers\RecapOrder;
@@ -22,14 +23,15 @@ switch($_REQUEST['action'] ?? null) {
     default:
     echo 'Bienvenue sur notre Eshop.';
         break;
-    case 'categorie':
-        if (isset($_REQUEST['catSlug'])) {
-            echo 'Catégorie : ' . $_REQUEST['catSlug'];
+    case 'categories':
+        if (isset($_REQUEST['slug'])) {
+            echo 'Catégorie : ' . $_REQUEST['slug'];
             $showItem = new ProductsListByCat;
-            $showItem->show($_REQUEST['catSlug']);
+            $showItem->show($_REQUEST['slug']);
         } else {
             echo 'Les catégories';
-            //Controlleur pour lister les catégories
+            $controller = new CategoriesController();
+            $controller->showCategories();
 
         }
         break;

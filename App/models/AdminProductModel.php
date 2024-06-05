@@ -42,27 +42,40 @@ class AdminProductModel {
                     $originalWidth = imagesx($image);
                     $originalHeight = imagesy($image);
 
-                    // Calcul des dimensions de recadrage
-                    $cropWidth = min($originalWidth, 300);
-                    $cropHeight = min($originalHeight, 300);
+                    // Définir les dimensions maximales
+                    $maxWidth = 800;
+                    $maxHeight = 800;
 
-                    // Calcul du point de départ du recadrage pour centrer l'image
-                    $x = ($originalWidth - $cropWidth) / 2;
-                    $y = ($originalHeight - $cropHeight) / 2;
+                    // Calculer les dimensions proportionnelles
+                    $aspectRatio = $originalWidth / $originalHeight;
 
-                    // Création de l'image recadrée
-                    $croppedImage = imagecrop($image, ['x' => $x, 'y' => $y, 'width' => $cropWidth, 'height' => $cropHeight]);
-                    if ($croppedImage !== false) {
-                        // Conversion de l'image recadrée en WebP et déplacement
-                        if (imagewebp($croppedImage, $uploadFile)) {
-                            echo "L'image a été téléchargée et convertie avec succès.\n";
+                    if ($originalWidth > $originalHeight) {
+                        $newWidth = $maxWidth;
+                        $newHeight = $maxWidth / $aspectRatio;
+                    } else {
+                        $newWidth = $maxHeight * $aspectRatio;
+                        $newHeight = $maxHeight;
+                    }
+
+                    // Convertir explicitement les dimensions calculées en entiers
+                    $newWidth = (int)round($newWidth);
+                    $newHeight = (int)round($newHeight);
+
+                    // Créer une nouvelle image vide avec les dimensions calculées
+                    $resizedImage = imagecreatetruecolor($newWidth, $newHeight);
+
+                    // Redimensionner l'image originale dans la nouvelle image
+                    if (imagecopyresampled($resizedImage, $image, 0, 0, 0, 0, $newWidth, $newHeight, $originalWidth, $originalHeight)) {
+                        // Conversion de l'image redimensionnée en WebP et déplacement
+                        if (imagewebp($resizedImage, $uploadFile)) {
+                            echo "L'image a été téléchargée, redimensionnée et convertie avec succès.\n";
                         } else {
                             echo "Erreur lors de la conversion de l'image en WebP.\n";
                         }
-                        
-                        imagedestroy($croppedImage);
+
+                        imagedestroy($resizedImage);
                     } else {
-                        echo "Erreur lors du recadrage de l'image.\n";
+                        echo "Erreur lors du redimensionnement de l'image.\n";
                     }
 
                     imagedestroy($image);
