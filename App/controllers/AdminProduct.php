@@ -51,9 +51,14 @@ class AdminProduct {
 
     public function ProductUpdate() {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $productId = $_POST['productId'];
-            $this->productModel->updateProduct($productId);
-            // Rediriger vers une page de confirmation ou afficher un message de succès
+            if (isset($_POST['productId']) && !empty($_POST['productId'])) {
+                $productId = $_POST['productId'];
+                // Debugging: afficher les données POST
+                echo '<h1> Produit mis à jour</h1>';
+                $this->productModel->updateProduct($productId);
+            } else {
+                echo "ID de produit non fourni.";
+            }
         }
     }
     public function ShowDeleteForm() {
@@ -67,6 +72,7 @@ class AdminProduct {
             $productId = $_POST['productId'];
             $this->productModel->deleteProduct($productId);
             // Rediriger vers une page de confirmation ou afficher un message de succès
+            echo '<h1> Produit supprimé avec succès';
         }
     }
     

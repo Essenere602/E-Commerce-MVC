@@ -156,10 +156,14 @@ switch($_REQUEST['action'] ?? null) {
 
             case 'delete':
                 $adminProduct = new AdminProduct();
-                $adminProduct->ShowDeleteForm();
+                if ($_SERVER['REQUEST_METHOD'] === 'POST'){
+                    $adminProduct->ProductDelete();
+                }else {
+                    $adminProduct->ShowDeleteForm();
+                }
+                 }
                 break;
-    }
-    break;
+                
     case 'login':
         $loginController = new LoginController();
 
@@ -173,7 +177,6 @@ switch($_REQUEST['action'] ?? null) {
     case 'logout':
         $loginController = new LoginController();
         $loginController->logout();
-        break;  
-    
-}
+        break;   
+} 
 ?>

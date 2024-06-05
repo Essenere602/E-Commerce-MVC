@@ -53,18 +53,27 @@ class AdminProductModel {
         try {
             $pdo = $this->db->getConnection()->prepare("UPDATE product SET product_name = ?, product_description = ?, price = ?, stock = ?, slug = ?, online = ? WHERE id = ?");
             $pdo->execute([$productName, $productDesc, $price, $stock, $productSlug, $online, $productId]);
-            echo "<h1>Produit mis à jour avec succès</h1>";
+    
+            // Debugging: afficher la requête SQL et les valeurs passées
+            echo '<pre>';
+            echo "Requête SQL : UPDATE product SET product_name = '$productName', product_description = '$productDesc', price = '$price', stock = '$stock', slug = '$productSlug', online = '$online' WHERE id = '$productId'";
+            echo '</pre>';
+    
+            if ($pdo->rowCount() > 0) {
+                echo "<h1>Produit mis à jour avec succès</h1>";
+            } else {
+                echo "<h1>Aucune modification détectée ou produit non trouvé</h1>";
+            }
         } catch (\PDOException $e) {
             echo "Erreur lors de la mise à jour du produit : " . $e->getMessage();
         }
     }
+    
 
     public function deleteProduct($productId) {
         try {
             $pdo = $this->db->getConnection()->prepare("DELETE FROM product WHERE id = ?");
-            $pdo->execute([$productId]);
-            header("Location: admin"); // Rediriger vers la page d'accueil, par exemple
-            exit();        
+            $pdo->execute([$productId]);       
         } 
             catch (\PDOException $e) {
             echo "Erreur lors de la suppression du produit : " . $e->getMessage();
