@@ -125,6 +125,9 @@ switch($_REQUEST['action'] ?? null) {
         }
     break;
     case 'admin':
+        echo '<a href="admin/produits" class="button">Creer un produit</a>';
+        echo '<a href="admin/update" class="button">Mettre à jour un produit</a>';
+        echo '<a href="admin/delete" class="button">Supprimer un produit</a>';
         $page = $_REQUEST['page'] ?? null;
         switch ($page) {
             
@@ -137,7 +140,25 @@ switch($_REQUEST['action'] ?? null) {
                     $adminProduct->RegisterForm();
                 }
             break;
-        }
+
+        case 'update':
+            $adminProduct = new AdminProduct();
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                if (isset($_POST['selectProduct'])) {
+                    $adminProduct->ShowUpdateForm();
+                } else {
+                    $adminProduct->ProductUpdate();
+                }
+            } else {
+                $adminProduct->SelectProductForm();
+            }
+            break;
+
+            case 'delete':
+                $adminProduct = new AdminProduct();
+                $adminProduct->ShowDeleteForm();
+                break;
+    }
     break;
     case 'login':
         $loginController = new LoginController();

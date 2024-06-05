@@ -11,7 +11,7 @@ class LoginForm {
             </form>';
         } else {
             echo '
-            <h1>Connectes-toi</h1>
+            <h1>Connecte-toi</h1>
             <form class="vertical" action="login" method="post">
             
             <label for="email">Email</label><input type="text" name="email" id="email">
