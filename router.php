@@ -29,9 +29,8 @@ switch($_REQUEST['action'] ?? null) {
             if ($slug) {
                 echo 'Catégorie : ' . htmlspecialchars($slug);
                 $showItem = new ProductsListByCat();
-                $showItem->show($slug);
+                $showItem->show($_REQUEST['slug']);
             } else {
-                echo 'Les catégories';
                 $controller = new CategoriesController();
                 $controller->showCategories();
             }

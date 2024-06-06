@@ -10,7 +10,7 @@ class CategoriesView {
         foreach ($items as $item) {
             echo '
          
-            <a class="categorie" href="categories/' . htmlspecialchars($item['slug']) . '" >';
+            <a class="categorie" href="categorie/' . htmlspecialchars($item['slug']) . '" >';
             echo htmlspecialchars($item['cat_name']);
             echo '</a><br>';
         }
