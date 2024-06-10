@@ -96,53 +96,52 @@ class AdminProductModel {
                 // Création de l'image à partir du fichier téléchargé
                 $image = imagecreatefromstring(file_get_contents($tmpName));
                 if ($image !== false) {
-                    // Dimensions souhaitées
-                    $newWidth = 600;
-                    $newHeight = 600;
-
                     // Récupération des dimensions de l'image téléchargée
                     $originalWidth = imagesx($image);
                     $originalHeight = imagesy($image);
 
-                    // Calcul du ratio de l'image
-                    $ratio = $originalWidth / $originalHeight;
-                    if ($newWidth / $newHeight > $ratio) {
-                        $resizeWidth = intval($newHeight * $ratio);
-                        $resizeHeight = $newHeight;
+                    // Définir les dimensions maximales
+                    $maxWidth = 400;
+                    $maxHeight = 400;
+
+                    // Calculer les dimensions proportionnelles
+                    $aspectRatio = $originalWidth / $originalHeight;
+
+                    if ($originalWidth > $originalHeight) {
+                        $newWidth = $maxWidth;
+                        $newHeight = $maxWidth / $aspectRatio;
                     } else {
-                        $resizeHeight = intval($newWidth / $ratio);
-                        $resizeWidth = $newWidth;
+                        $newWidth = $maxHeight * $aspectRatio;
+                        $newHeight = $maxHeight;
                     }
 
-                    // Création de l'image redimensionnée
-                    $resizedImage = imagecreatetruecolor($resizeWidth, $resizeHeight);
-                    imagecopyresampled($resizedImage, $image, 0, 0, 0, 0, $resizeWidth, $resizeHeight, $originalWidth, $originalHeight);
+                    // Convertir explicitement les dimensions calculées en entiers
+                    $newWidth = (int)round($newWidth);
+                    $newHeight = (int)round($newHeight);
 
-                    // Création de l'image finale de 600x600
-                    $finalImage = imagecreatetruecolor($newWidth, $newHeight);
-                    $white = imagecolorallocate($finalImage, 255, 255, 255); // Couleur de fond blanche
-                    imagefill($finalImage, 0, 0, $white);
+                    // Créer une nouvelle image vide avec les dimensions calculées
+                    $resizedImage = imagecreatetruecolor($newWidth, $newHeight);
 
-                    // Copie de l'image redimensionnée au centre de l'image finale
-                    $xOffset = intval(($newWidth - $resizeWidth) / 2);
-                    $yOffset = intval(($newHeight - $resizeHeight) / 2);
-                    imagecopy($finalImage, $resizedImage, $xOffset, $yOffset, 0, 0, $resizeWidth, $resizeHeight);
+                    // Redimensionner l'image originale dans la nouvelle image
+                    if (imagecopyresampled($resizedImage, $image, 0, 0, 0, 0, $newWidth, $newHeight, $originalWidth, $originalHeight)) {
+                        // Conversion de l'image redimensionnée en WebP et déplacement
+                        if (imagewebp($resizedImage, $uploadFile)) {
+                            echo "L'image a été téléchargée, redimensionnée et convertie avec succès.\n";
+                        } else {
+                            echo "Erreur lors de la conversion de l'image en WebP.\n";
+                        }
 
-                    // Conversion de l'image finale en WebP et déplacement
-                    if (imagewebp($finalImage, $uploadFile)) {
-                        echo "L'image $newFileName a été téléchargée et convertie avec succès.\n";
+                        imagedestroy($resizedImage);
                     } else {
-                        echo "Erreur lors de la conversion de l'image $newFileName en WebP.\n";
+                        echo "Erreur lors du redimensionnement de l'image.\n";
                     }
 
-                    imagedestroy($resizedImage);
-                    imagedestroy($finalImage);
                     imagedestroy($image);
                 } else {
-                    echo "Erreur lors de la création de l'image à partir du fichier $newFileName.\n";
+                    echo "Erreur lors de la création de l'image à partir du fichier.\n";
                 }
             } else {
-                echo "Erreur lors de l'upload de l'image $newFileName.\n";
+                echo "Aucune image téléchargée ou erreur lors de l'upload.\n";
             }
         }
     }
