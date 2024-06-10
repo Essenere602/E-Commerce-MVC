@@ -94,11 +94,11 @@ switch($_REQUEST['action'] ?? null) {
             case 'paiement':
                 $paymentController = new PaymentController();
                 $paymentController->PaymentChoice();
-                break;
-                case 'check-validation':
-                    $validationController = new ValidationController();
-                    $validationController->orderCheck();
-                break;
+            break;
+            case 'check-validation':
+                $validationController = new ValidationController();
+                $validationController->orderCheck();
+            break;
             case 'validation':
                 $validationController = new ValidationController();
                 $validationController->orderValidate();
@@ -117,22 +117,26 @@ switch($_REQUEST['action'] ?? null) {
             $userController->RegisterForm(); // Méthode pour afficher le formulaire d'inscription
         }
         break;
-    case 'compte':
-        $accountController = new AccountController();
-        $accountController->UpdateForm();
-        $page = $_REQUEST['page'] ?? null;
-        switch ($page) {
-            case 'adresses':
-                echo 'Mes adresses';
-                break;
-            case 'commandes':
-                echo 'Mes commandes';
-                break;
-            case 'profile':
-                echo 'Mon profil';
-                break;
-        }
-    break;
+        case 'compte':
+            $accountController = new AccountController();
+            $page = $_REQUEST['page'] ?? 'default';
+        
+            switch ($page) {
+                case 'adresses':
+                    $accountController->showAdresses();
+                    break;
+                case 'commandes':
+                    $accountController->showCommandes();
+                    break;
+                case 'profile':
+                    $accountController->showProfile();
+                    break;
+                default:
+                    $accountController->showAccountHome();
+                    break;
+            }
+            break;
+        
     case 'admin':
         echo '<a href="admin/produits" class="button">Creer un produit</a>';
         echo '<a href="admin/update" class="button">Mettre à jour un produit</a>';

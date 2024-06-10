@@ -27,5 +27,16 @@ class AccountModel {
             echo "Erreur lors de la modification de l'utilisateur : " . $e->getMessage();
         }
     }
+    public function getAddresses($userId) {
+        $query = $this->db->getConnection()->prepare("SELECT * FROM user_address WHERE user_id = :user_id");
+        $query->execute(['user_id' => $userId]);
+        return $query->fetchAll();
+    }
+
+    public function getOrders($userId) {
+        $query = $this->db->getConnection()->prepare("SELECT * FROM user_order WHERE user_id = :user_id");
+        $query->execute(['user_id' => $userId]);
+        return $query->fetchAll();
+    }
 }
 ?>

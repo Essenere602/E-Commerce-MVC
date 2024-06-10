@@ -1,29 +1,40 @@
 <?php
-namespace Controllers; // On définie la zon qui doit être identique à celle déclarée dans le composer.json
+namespace Controllers;
 
-// On importe les vues et modèles
 use Models\AccountModel; 
 use Views\AccountView;
 
 class AccountController {
-    // On déclare les attributs pour nos instances
     protected $accountModel; 
     protected $accountView;
     
-    // On instancie les classes modèles et vues
     public function __construct() {
         $this->accountModel = new AccountModel(); 
         $this->accountView = new AccountView(); 
     }
 
-    // Méthode pour la vue
-    public function UpdateForm () {
-        $this->accountView->initForm();
+    public function showAccountHome() {
+        echo '<h1>Mon Compte</h1>
+        <ul>
+            <li><a href="compte/profile">Mon profil</a></li>
+            <li><a href="compte/adresses">Mes adresses</a></li>
+            <li><a href="compte/commandes">Mes commandes</a></li>
+        </ul>';
     }
 
-    // Méthode pour le modèle
-    public function UserSave() {// Appel de la méthode createUser du modèle
-        $this->accountModel->updateUser();
+    public function showProfile() {
+        $this->accountView->showProfileForm();
+    }
+
+    public function showAdresses() {
+        $addresses = $this->accountModel->getAddresses($_SESSION['id']);
+        $this->accountView->showAddresses($addresses);
+    }
+
+    public function showCommandes() {
+        $orders = $this->accountModel->getOrders($_SESSION['id']);
+        $this->accountView->showOrders($orders);
     }
 }
+
 ?>
