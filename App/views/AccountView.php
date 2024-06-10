@@ -16,7 +16,7 @@ class AccountView {
 
     public function showAddresses($addresses) {
         echo '<h1>Mes adresses</h1>
-        <form method="post" action="/NEW-MVC/E-Commerce-MVC/compte/adresses/ajouter">
+        <form method="post" action="compte/adresses">
             <label for="address_1">Adresse 1</label><input type="text" name="address_1" id="address_1">
             <label for="address_2">Adresse 2</label><input type="text" name="address_2" id="address_2">
             <label for="zip">Code postal</label><input type="text" name="zip" id="zip">
