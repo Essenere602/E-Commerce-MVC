@@ -14,6 +14,8 @@ use Controllers\RecapOrder;
 use Controllers\PaymentController;
 use Controllers\ValidationController;
 use Controllers\CategoriesController;
+// use Controllers\ProductController;
+
 
 use App\Database;
 $pdo = new Database;
@@ -41,8 +43,8 @@ switch($_REQUEST['action'] ?? null) {
                 $showItem = new ProductShow;
                 $showItem->show($_REQUEST['prodSlug']);
             } else {
-                $productController = new ProductController;
-                $productController->listProducts();
+                // $productController = new ProductController;
+                // $productController->listProducts();
             }
             break;
     case 'panier':
@@ -65,7 +67,7 @@ switch($_REQUEST['action'] ?? null) {
 
     case 'commande':
         if (!isset($_SESSION['user'])) {
-            header('Location: ../login');
+            header('Location: ./login');
             exit();
         } else {
         $step = $_REQUEST['step'] ?? null;
