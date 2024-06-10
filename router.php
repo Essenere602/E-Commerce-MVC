@@ -14,6 +14,8 @@ use Controllers\RecapOrder;
 use Controllers\PaymentController;
 use Controllers\ValidationController;
 use Controllers\CategoriesController;
+// use Controllers\ProductController;
+
 
 use App\Database;
 $pdo = new Database;
@@ -41,8 +43,8 @@ switch($_REQUEST['action'] ?? null) {
                 $showItem = new ProductShow;
                 $showItem->show($_REQUEST['prodSlug']);
             } else {
-                $productController = new ProductController;
-                $productController->listProducts();
+                // $productController = new ProductController;
+                // $productController->listProducts();
             }
             break;
     case 'panier':
@@ -65,7 +67,7 @@ switch($_REQUEST['action'] ?? null) {
 
     case 'commande':
         if (!isset($_SESSION['user'])) {
-            header('Location: ../login');
+            header('Location: ./login');
             exit();
         } else {
         $step = $_REQUEST['step'] ?? null;
@@ -128,11 +130,9 @@ switch($_REQUEST['action'] ?? null) {
         }
     break;
     case 'admin':
-        echo '<div class="button-container">
-                <a href="admin/produits" class="buttonadmin">Créer un produit</a>
-                <a href="admin/update" class="buttonadmin">Mettre à jour un produit</a>
-                <a href="admin/delete" class="buttonadmin">Supprimer un produit</a>
-            </div>';
+        echo '<a href="admin/produits" class="buttonadmin">Creer un produit</a>';
+        echo '<a href="admin/update" class="buttonadmin">Mettre à jour un produit</a>';
+        echo '<a href="admin/delete" class="buttonadmin">Supprimer un produit</a>';
         $page = $_REQUEST['page'] ?? null;
         switch ($page) {
             
