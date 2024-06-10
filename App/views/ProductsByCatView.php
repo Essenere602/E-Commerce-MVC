@@ -1,7 +1,7 @@
 <?php
 namespace Views;
 
-class ProductsByCatView {
+class ProductByCatView {
     public function showItems($items) {
         $session_id = 2;
 
