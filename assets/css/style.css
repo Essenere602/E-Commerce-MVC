@@ -174,4 +174,8 @@ input[type=datetime-local] {
   #menu ul li {
     display: block;
   }
+}
+img {
+  -o-object-fit: cover;
+     object-fit: cover;
 }/*# sourceMappingURL=style.css.map */
