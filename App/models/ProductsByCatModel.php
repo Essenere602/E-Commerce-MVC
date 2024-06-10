@@ -2,7 +2,7 @@
 namespace Models;
 use App\Database;
 
-class ProductByCatModel {
+class ProductsByCatModel {
     protected $db;
 
     public function __construct() {

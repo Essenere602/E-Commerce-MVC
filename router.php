@@ -128,9 +128,11 @@ switch($_REQUEST['action'] ?? null) {
         }
     break;
     case 'admin':
-        echo '<a href="admin/produits" class="button">Creer un produit</a>';
-        echo '<a href="admin/update" class="button">Mettre à jour un produit</a>';
-        echo '<a href="admin/delete" class="button">Supprimer un produit</a>';
+        echo '<div class="button-container">
+                <a href="admin/produits" class="buttonadmin">Créer un produit</a>
+                <a href="admin/update" class="buttonadmin">Mettre à jour un produit</a>
+                <a href="admin/delete" class="buttonadmin">Supprimer un produit</a>
+            </div>';
         $page = $_REQUEST['page'] ?? null;
         switch ($page) {
             

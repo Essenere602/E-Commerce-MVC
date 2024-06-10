@@ -21,48 +21,30 @@ h1 {
   margin-bottom: 1rem;
 }
 
-button {
+.button, button {
+  margin-top: 1rem;
+  padding: 0.75rem 1rem;
   background-color: #6c757d;
   border-radius: 5px;
-  padding: 0.75rem 1.5rem;
   color: #f8f9fa;
+  text-decoration: none;
   border: none;
   font-size: 1rem;
   font-weight: 500;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
-button:hover {
+.button:hover, button:hover {
   background-color: #545b62;
 }
 
-input[type=text],
-input[type=password],
-input[type=datetime-local] {
+input {
   font-size: 1rem;
   border-radius: 5px;
   border: 1px solid #ced4da;
   padding: 0.5rem;
   width: 100%;
   margin-bottom: 1rem;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-.error {
-  position: fixed;
-  top: 30px;
-  left: 0;
-  width: 100%;
-  background-color: #adb5bd;
-  color: #343a40;
-  padding: 1rem;
-  text-align: center;
-  z-index: 1000;
 }
 
 form {
@@ -87,36 +69,27 @@ label {
   font-weight: 600;
 }
 
-.button, button[type=submit] {
-  margin-top: 1rem;
-  padding: 0.75rem 1rem;
-  background-color: #6c757d;
-  border-radius: 5px;
-  color: #f8f9fa;
-  text-decoration: none;
-  border: none;
-  font-size: 1rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-.button:hover, button[type=submit]:hover {
-  background-color: #545b62;
+.error {
+  position: fixed;
+  top: 30px;
+  left: 0;
+  width: 100%;
+  background-color: #adb5bd;
+  color: #343a40;
+  padding: 1rem;
+  text-align: center;
+  z-index: 1000;
 }
 
-#menu ul {
-  list-style-type: none;
+#menu {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   padding: 1rem;
-  background-color: #6c757d;
+  background-color: #343a40;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   z-index: 100;
   margin: 0;
-}
-#menu li {
-  margin-right: 1rem;
 }
 #menu a {
   color: #f8f9fa;
@@ -126,8 +99,31 @@ label {
   border-radius: 5px;
   background-color: transparent;
   transition: background-color 0.3s ease, color 0.3s ease;
+  margin-right: 1rem;
 }
 #menu a:hover {
-  color: #6c757d;
+  color: #343a40;
   background-color: #f8f9fa;
+}
+
+.button-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.buttonadmin {
+  display: inline-block;
+  width: 200px;
+  margin-right: 10px;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 5px;
+  background-color: #6c757d;
+  color: #f8f9fa;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+.buttonadmin:hover {
+  background-color: #545b62;
 }/*# sourceMappingURL=style.css.map */

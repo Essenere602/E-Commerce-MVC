@@ -1,12 +1,19 @@
 <nav id="menu">
-    <ul>
-        <li><a href="accueil">Accueil</a></li>
-        <li><a href="categorie">Catégories</a></li>
-        <li><a href="panier">Mon Panier</a></li>
-        <li><a href="commande">Commander</a></li>
-        <li><a href="login">Connexion</a></li>
-        <li><a href="inscription">Inscription</a></li>
-        <li><a href="compte">Mon Compte</a></li>
-        <li><a href="admin">Admin</a></li>
-    </ul>
+        <a href="accueil">Accueil</a>
+        <a href="categorie">Catégories</a>
+        <a href="panier">Mon Panier</a>
+        <a href="commande">Commander</a>
+        <?php 
+        // Vérifier si l'utilisateur est connecté
+        if (isset($_SESSION['id'])) {
+            // Afficher le lien de déconnexion
+            echo '<a href="compte">Welcome, ' . htmlspecialchars($_SESSION['user']) . '!</a>';
+            echo '<a href="admin">Admin</a>';
+            echo '<a href="?action=logout">Déconnexion</a>';
+        } else {
+            // Afficher le lien de connexion
+            echo '<a href="login">Connexion</a>';
+            echo '<a href="inscription">Inscription</a>';
+        }
+        ?>
 </nav>
