@@ -14,27 +14,29 @@ use Controllers\AccountController;
 use Controllers\RecapOrder;
 use Controllers\PaymentController;
 use Controllers\ValidationController;
+
+
 use App\Database;
 $pdo = new Database;
-if (session_status() == PHP_SESSION_NONE) {
+$slug = $_REQUEST['slug'] ?? null;
+if(session_status() == PHP_SESSION_NONE){
     session_start();
 }
 switch($_REQUEST['action'] ?? null) {
     default:
     echo 'Bienvenue sur notre Eshop.';
         break;
-    case 'categories':
-        if (isset($_REQUEST['slug'])) {
-            echo 'Catégorie : ' . $_REQUEST['slug'];
-            $showItem = new ProductsListByCat;
-            $showItem->show($_REQUEST['slug']);
-        } else {
-            echo 'Les catégories';
-            $controller = new CategoriesController();
-            $controller->showCategories();
-
-        }
-        break;
+        case 'categories':
+            if ($slug) {
+                echo 'Catégorie : ' . htmlspecialchars($slug);
+                $showItem = new ProductsListByCat();
+                $showItem->show($_REQUEST['slug']);
+            } else {
+                $controller = new CategoriesController();
+                $controller->showCategories();
+            }
+            break;
+    
         case 'produit':
             if (isset($_REQUEST['prodSlug'])) {
                 $showItem = new ProductShow;
@@ -166,9 +168,9 @@ switch($_REQUEST['action'] ?? null) {
                 }else {
                     $adminProduct->ShowDeleteForm();
                 }
+                 }
                 break;
-    }
-    break;
+                
     case 'login':
         $loginController = new LoginController();
 
@@ -182,6 +184,6 @@ switch($_REQUEST['action'] ?? null) {
     case 'logout':
         $loginController = new LoginController();
         $loginController->logout();
-        break;    
-}
+        break;   
+} 
 ?>

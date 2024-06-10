@@ -7,3 +7,4 @@
     <link rel="stylesheet" href="<?= CSS;?>style.css">
     <title><?= $_SERVER['REQUEST_URI'];?> - E-commerce</title>
 </head>
+<body>

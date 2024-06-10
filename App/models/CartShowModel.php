@@ -5,7 +5,6 @@ use App\Database;
 
 class CartShowModel {
     protected $db;
-
     public function __construct() {
         $this->db = new Database();
     }
@@ -25,3 +24,5 @@ class CartShowModel {
     
 
 }
+
+

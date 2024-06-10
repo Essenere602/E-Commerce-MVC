@@ -55,5 +55,6 @@ RewriteRule ^admin/update$ index.php?action=admin&page=update [L,QSA]
 # Redirection pour l'accès delete dans l'administration
 RewriteRule ^admin/delete$ index.php?action=admin&page=delete [L,QSA]
 
+
 # Redirection pour l'accès accueil
 RewriteRule ^accueil$ index.php?action=accueil [L,QSA]

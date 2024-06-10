@@ -10,7 +10,6 @@ class LoginModel {
         $database = new Database();
         $this->db = $database->getConnection();
     }
-
     public function authenticate($email, $password) {
         $stmt = $this->db->prepare("SELECT * FROM user WHERE email = :email");
         $stmt->bindParam(':email', $email);
@@ -24,5 +23,6 @@ class LoginModel {
             return false;
         }
     }
-}
+}  
+
 ?>
