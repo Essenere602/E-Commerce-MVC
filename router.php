@@ -129,8 +129,6 @@ switch($_REQUEST['action'] ?? null) {
                 echo 'Mes commandes';
                 break;
             case 'profile':
-                $accountController = new AccountController();
-                $accountController->UpdateForm();
                 echo 'Mon profil';
                 break;
         }
