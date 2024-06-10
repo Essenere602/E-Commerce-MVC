@@ -142,7 +142,7 @@ class AdminProductModel {
                     echo "Erreur lors de la création de l'image à partir du fichier $newFileName.\n";
                 }
             } else {
-                echo "Erreur lors de l'upload de l'image $newFileName.\n";
+                echo "Erreur lors de l'upload de l'image.\n";
             }
         }
     }

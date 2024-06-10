@@ -14,17 +14,22 @@ class ValidationModel {
     }
 
     public function prepareOrder() {
+        $cartId = $_SESSION['cart_id'];
+        $pdo = $this->db->getConnection()->prepare('SELECT * FROM user_cart WHERE id = ?');
+        $pdo->execute([$cartId]);
+        $pko = $pdo->fetch(\PDO::FETCH_ASSOC);
         $userId = $_SESSION['id'];
         $orderDate = date("Y-m-d H:i:s");; 
         $orderStatus = 0;
+        $amountExcVat = $pko['amount_exc_vat'];
         $paymentId = $_SESSION['selected_payment'];
         $deliveryId = $_SESSION['selected_delivery_option'];
         try {
-            $pdo = $this->db->getConnection()->prepare("INSERT INTO user_order (user_id, order_date, order_status, payment_id, delivery_id) VALUES (?, ?, ?, ?, ?)");
-            $pdo->execute([$userId, $orderDate, $orderStatus, $paymentId, $deliveryId]);
+            $pdo = $this->db->getConnection()->prepare("INSERT INTO user_order (user_id, order_date, amount_exc_vat, order_status, payment_id, delivery_id) VALUES (?, ?, ?, ?, ?, ?)");
+
+            $pdo->execute([$userId, $orderDate, $amountExcVat, $orderStatus, $paymentId, $deliveryId]);
             $orderId = $this->db->getConnection()->lastInsertId();
 
-            $cartId = $_SESSION['cart_id'];
             $pdo = $this->db->getConnection()->prepare('SELECT * FROM user_cart_detail WHERE cart_id = ?');
             $pdo->execute([$cartId]);
             var_dump($cartId);
@@ -43,7 +48,10 @@ class ValidationModel {
 
             // If success, delete cart 
             if ($success) {
-                $pdo = $this->db->getConnection()->prepare('DELETE user_cart_detail.*, user_cart.* FROM user_cart_detail JOIN user_cart ON user_cart_detail.cart_id = user_cart.id WHERE cart_id = ?');
+                $pdo = $this->db->getConnection()->prepare('DELETE user_cart_detail.* FROM user_cart_detail WHERE cart_id = ?');
+                $pdo->execute([$cartId]);
+
+                $pdo = $this->db->getConnection()->prepare('DELETE user_cart.* FROM user_cart WHERE id = ?');
                 $pdo->execute([$cartId]);
             }
 
