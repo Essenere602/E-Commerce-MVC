@@ -10,6 +10,5 @@ class ValidationView {
             <h1>Validation de la commande ?</h1>
             <button>Valider</button>
             </form>';
-        echo 'paf :' . $_SESSION['cart_id'] .'';
     }
 }

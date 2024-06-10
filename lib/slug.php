@@ -1,7 +1,7 @@
 <?php
 namespace Lib;
 
-class Slug {
+class slug {
     public $string;
     public $slug;
     public function sluguer($string) {

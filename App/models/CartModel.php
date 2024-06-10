@@ -32,6 +32,7 @@ class CartModel {
 
                 // On récupère l'id du panier
                 $this->lastId = $this->db->getConnection()->lastInsertId();
+                $_SESSION['cart_id'] = $this->lastId;
             } else {
                 // Si oui, on récupère l'id du panier
                 $res = $test->fetch();

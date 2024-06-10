@@ -15,7 +15,7 @@ class UserModel {
         $firstname = $_POST['firstname'];
         $email = $_POST['email'];
         $phone = $_POST['phone'];
-        $password = password_hash($_POST['password'], PASSWORD_BCRYPT); // Hachage du mot de passe
+        $password = $_POST['password']; // Hachage du mot de passe
         $birthdate = $_POST['birthdate'];
         $last = date("Y-m-d H:i:s");
         $active = 1;

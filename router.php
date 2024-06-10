@@ -95,6 +95,10 @@ switch($_REQUEST['action'] ?? null) {
                 $paymentController = new PaymentController();
                 $paymentController->PaymentChoice();
                 break;
+                case 'check-validation':
+                    $validationController = new ValidationController();
+                    $validationController->orderCheck();
+                break;
             case 'validation':
                 $validationController = new ValidationController();
                 $validationController->orderValidate();

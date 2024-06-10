@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:8889
--- Généré le : jeu. 16 mai 2024 à 07:28
+-- Généré le : lun. 10 juin 2024 à 12:46
 -- Version du serveur : 5.7.39
 -- Version de PHP : 8.2.0
 
@@ -21,10 +21,6 @@ SET time_zone = "+00:00";
 -- Base de données : `eshop_mvc`
 --
 
-DROP DATABASE IF EXISTS eshop_mvc;
-CREATE DATABASE eshop_mvc;
-USE eshop_mvc;
-
 -- --------------------------------------------------------
 
 --
@@ -37,6 +33,17 @@ CREATE TABLE `delivery` (
   `deliver_time` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Déchargement des données de la table `delivery`
+--
+
+INSERT INTO `delivery` (`id`, `delivery_option`, `deliver_time`) VALUES
+(1, 'DPD', '1 semaine'),
+(2, 'UPS', '1 semaine'),
+(3, 'Colissimo', '1 semaine'),
+(4, 'La Poste', '1 semaine'),
+(5, 'Mondial Relay', '1 semaine');
+
 -- --------------------------------------------------------
 
 --
@@ -47,6 +54,17 @@ CREATE TABLE `payment` (
   `id` int(11) NOT NULL,
   `payment_name` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `payment`
+--
+
+INSERT INTO `payment` (`id`, `payment_name`) VALUES
+(1, 'CB'),
+(2, 'Paypal'),
+(3, 'Apple Pay'),
+(4, 'Binance'),
+(5, 'Forfait Telephone');
 
 -- --------------------------------------------------------
 
@@ -72,9 +90,9 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`id`, `product_name`, `product_description`, `category_id`, `price`, `ean`, `manufacturer_id`, `slug`, `stock`, `online`) VALUES
-(1, 'Harden 8', 'Chaussure du looser des Clippers', 2, '160.00', NULL, NULL, 'chaussure-du-looser-des-clippers', 3, NULL),
+(1, 'Harden 8', 'Chaussure du looser des Clipperss', 2, '160.00', NULL, NULL, 'harden-8', 4, 0),
 (2, 'Charles 7', 'La chaussure qui pue des pieds', 2, '99.00', NULL, NULL, '', 6, NULL),
-(4, 'La tête à toto', 'Est moins drôle que la tête à charles', NULL, '10.00', NULL, NULL, 'la-t-ete-a-toto', 2, 1),
+(4, 'La tête à toto', 'Est moins drôle que la tête à charles', 1, '10.00', NULL, NULL, 'la-t-ete-a-toto', 2, 1),
 (5, 'A.E 1', 'La chaussure ', 2, '120.00', NULL, NULL, 'harden-8', 6, NULL);
 
 -- --------------------------------------------------------
@@ -166,7 +184,9 @@ INSERT INTO `user` (`id`, `lastname`, `firstname`, `company_name`, `company_numb
 (4, 'Brossard', 'Papi', NULL, NULL, NULL, 'piaodf@gmail.com', '0123456789', 'obiwan', '2024-05-09', '2024-05-06 20:14:23', 1),
 (5, 'Spielberg', 'Maurice', NULL, NULL, NULL, 'maurice@et.com', '0123456789', 'indiana', '1946-10-05', '2024-05-06 20:34:44', 1),
 (7, 'Tirlipinpon', 'Surle chi hua hua', NULL, NULL, NULL, 'carlos@gmail.com', '0123456789', 'obiwan', '1968-04-18', '2024-05-06 21:24:01', 1),
-(8, 'Kent', 'Clark', NULL, NULL, NULL, 'superman@jla.com', '098765432', 'bartman', '1980-02-17', '2024-05-07 07:43:42', 1);
+(8, 'Kent', 'Clark', NULL, NULL, NULL, 'superman@jla.com', '098765432', 'bartman', '1980-02-17', '2024-05-07 07:43:42', 1),
+(9, 'CUENOT', 'Antonin', NULL, NULL, NULL, 'antonin8@ilou.fr', '0652535659', '$2y$10$c.8iEUOxCjXrTwSYBpzbEeoYxF0PaC3ZB7h6oAoImCIdcEjFwLOPG', '2024-06-12', '2024-06-04 07:35:08', 1),
+(14, 'Rahamnia', 'Samuel', NULL, NULL, NULL, 'samuel.rahamnia@gmail.com', '0766437560', '$2y$10$NqeAaRbA/nP25cXWk28zWOvGlTkftcG0hEu2TuRmQJG.g9N9EIG.q', '2000-10-10', '2024-06-10 12:22:12', 1);
 
 -- --------------------------------------------------------
 
@@ -183,6 +203,14 @@ CREATE TABLE `user_address` (
   `city` text NOT NULL,
   `country` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `user_address`
+--
+
+INSERT INTO `user_address` (`id`, `user_id`, `address_1`, `address_2`, `zip`, `city`, `country`) VALUES
+(1, 9, '8 rue prout', 'les trous', '69820', 'Lyon', 'France'),
+(2, 14, 'aaaaa', '', '66700', 'Perpignan', 'France');
 
 -- --------------------------------------------------------
 
@@ -203,7 +231,9 @@ CREATE TABLE `user_cart` (
 --
 
 INSERT INTO `user_cart` (`id`, `user_id`, `cart_date`, `amount_exc_vat`, `order_status`) VALUES
-(14, 2, '2024-05-15 14:43:07', NULL, 0);
+(18, 9, '2024-06-10 11:58:23', '20.00', 0),
+(19, 11, '2024-06-10 12:00:30', '320.00', 0),
+(22, 14, '2024-06-10 12:41:53', '160.00', 0);
 
 -- --------------------------------------------------------
 
@@ -228,36 +258,49 @@ CREATE TABLE `user_cart_detail` (
 --
 
 INSERT INTO `user_cart_detail` (`id`, `cart_id`, `product_id`, `product_option_id`, `product_option_value`, `price_exc_vat`, `quantity`, `vat`, `vat_amount`) VALUES
-(9, 14, 1, NULL, NULL, '160.00', 2, '0.20', '32.00'),
-(10, 14, 2, NULL, NULL, '99.00', 1, '0.20', '19.80'),
-(11, 14, 5, NULL, NULL, '120.00', 2, '0.20', '24.00');
-
--- --------------------------------------------------------
-
+(23, 18, 4, NULL, NULL, '10.00', 2, '0.20', '2.00'),
+(24, 19, 1, NULL, NULL, '160.00', 2, '0.20', '32.00'),
+(28, 22, 1, NULL, NULL, '160.00', 1, '0.20', '32.00');
 
 --
--- Déchargement des données de la table `delivery`
+-- Déclencheurs `user_cart_detail`
 --
-
-INSERT INTO `delivery` (`id`, `delivery_option`, `deliver_time`) VALUES 
-(1, 'DPD', '1 semaine'), 
-(2, 'UPS', '1 semaine'), 
-(3, 'Colissimo', '1 semaine'), 
-(4, 'La Poste', '1 semaine'), 
-(5, 'Mondial Relay', '1 semaine');
-
--- --------------------------------------------------------
-
---
--- Déchargement des données de la table `payment`
---
-
-INSERT INTO `payment` (`id`, `payment_name`) VALUES 
-(1, 'CB'), 
-(2, 'Paypal'), 
-(3, 'Apple Pay'), 
-(4, 'Binance'), 
-(5, 'Forfait Telephone');
+DELIMITER $$
+CREATE TRIGGER `trg_update_user_cart_amount` AFTER INSERT ON `user_cart_detail` FOR EACH ROW BEGIN
+    UPDATE user_cart
+    SET amount_exc_vat = (
+        SELECT COALESCE(SUM(price_exc_vat * quantity), 0)
+        FROM user_cart_detail
+        WHERE cart_id = NEW.cart_id
+    )
+    WHERE id = NEW.cart_id;
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `trg_update_user_cart_amount_delete` AFTER DELETE ON `user_cart_detail` FOR EACH ROW BEGIN
+    UPDATE user_cart
+    SET amount_exc_vat = (
+        SELECT COALESCE(SUM(price_exc_vat * quantity), 0)
+        FROM user_cart_detail
+        WHERE cart_id = OLD.cart_id
+    )
+    WHERE id = OLD.cart_id;
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `trg_update_user_cart_amount_update` AFTER UPDATE ON `user_cart_detail` FOR EACH ROW BEGIN
+    UPDATE user_cart
+    SET amount_exc_vat = (
+        SELECT COALESCE(SUM(price_exc_vat * quantity), 0)
+        FROM user_cart_detail
+        WHERE cart_id = NEW.cart_id
+    )
+    WHERE id = NEW.cart_id;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -269,11 +312,18 @@ CREATE TABLE `user_order` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `order_date` datetime NOT NULL,
-  `amount_exc_vat` decimal(9,2) NOT NULL,
+  `amount_exc_vat` decimal(9,2) DEFAULT NULL,
   `order_status` tinyint(1) NOT NULL,
   `payment_id` int(11) NOT NULL,
   `delivery_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `user_order`
+--
+
+INSERT INTO `user_order` (`id`, `user_id`, `order_date`, `amount_exc_vat`, `order_status`, `payment_id`, `delivery_id`) VALUES
+(1, 14, '2024-06-10 12:24:12', '160.00', 0, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -285,12 +335,20 @@ CREATE TABLE `user_order_detail` (
   `id` int(11) NOT NULL,
   `order_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
-  `product_option_id` int(11) NOT NULL,
-  `product_option_value` int(11) NOT NULL,
+  `product_option_id` int(11) DEFAULT NULL,
+  `product_option_value` int(11) DEFAULT NULL,
   `price_exc_vat` decimal(9,2) NOT NULL,
+  `quantity` int(11) NOT NULL,
   `vat` decimal(3,2) NOT NULL,
   `vat_amount` decimal(9,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `user_order_detail`
+--
+
+INSERT INTO `user_order_detail` (`id`, `order_id`, `product_id`, `product_option_id`, `product_option_value`, `price_exc_vat`, `quantity`, `vat`, `vat_amount`) VALUES
+(1, 1, 1, 0, 0, '160.00', 1, '0.20', '32.00');
 
 --
 -- Index pour les tables déchargées
@@ -367,7 +425,8 @@ ALTER TABLE `user_cart_detail`
 --
 ALTER TABLE `user_order`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `payment_id` (`payment_id`);
+  ADD KEY `payment_id` (`payment_id`),
+  ADD KEY `fk_user_order_delivery` (`delivery_id`);
 
 --
 -- Index pour la table `user_order_detail`
@@ -384,19 +443,19 @@ ALTER TABLE `user_order_detail`
 -- AUTO_INCREMENT pour la table `delivery`
 --
 ALTER TABLE `delivery`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT pour la table `payment`
 --
 ALTER TABLE `payment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT pour la table `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT pour la table `product_category`
@@ -420,37 +479,37 @@ ALTER TABLE `product_option`
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT pour la table `user_address`
 --
 ALTER TABLE `user_address`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pour la table `user_cart`
 --
 ALTER TABLE `user_cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT pour la table `user_cart_detail`
 --
 ALTER TABLE `user_cart_detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT pour la table `user_order`
 --
 ALTER TABLE `user_order`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT pour la table `user_order_detail`
 --
 ALTER TABLE `user_order_detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Contraintes pour les tables déchargées
@@ -485,10 +544,9 @@ ALTER TABLE `user_cart_detail`
 -- Contraintes pour la table `user_order`
 --
 ALTER TABLE `user_order`
+  ADD CONSTRAINT `delivery_id` FOREIGN KEY (`delivery_id`) REFERENCES `delivery` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_user_order_delivery` FOREIGN KEY (`delivery_id`) REFERENCES `delivery` (`id`),
   ADD CONSTRAINT `payment_id` FOREIGN KEY (`payment_id`) REFERENCES `payment` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
-ALTER TABLE `user_order`
-  ADD CONSTRAINT `delivery_id` FOREIGN KEY (`delivery_id`) REFERENCES `delivery` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Contraintes pour la table `user_order_detail`
@@ -496,13 +554,6 @@ ALTER TABLE `user_order`
 ALTER TABLE `user_order_detail`
   ADD CONSTRAINT `order_id` FOREIGN KEY (`order_id`) REFERENCES `user_order` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
 COMMIT;
-
--- Set up the foreign key constraint
-ALTER TABLE `user_order`
-ADD CONSTRAINT `fk_user_order_delivery`
-FOREIGN KEY (`delivery_id`) REFERENCES `delivery` (`id`);
-
--- AJOUT DE FOREGN KEY POUR IDENTIFIER LA COMMANDE AVEC LA BONNE LIVRAISON
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
