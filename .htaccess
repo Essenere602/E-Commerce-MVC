@@ -48,6 +48,11 @@ RewriteRule ^compte/profile$ index.php?action=commande&page=profile [L,QSA]
 RewriteRule ^admin$ index.php?action=admin [L,QSA]
 # Redirection pour l'accès produit dans l'administration
 RewriteRule ^admin/produits$ index.php?action=admin&page=produits [L,QSA]
+# Redirection pour l'accès update dans l'administration
+RewriteRule ^admin/update$ index.php?action=admin&page=update [L,QSA]
+# Redirection pour l'accès delete dans l'administration
+RewriteRule ^admin/delete$ index.php?action=admin&page=delete [L,QSA]
+
 
 # Redirection pour l'accès accueil
 RewriteRule ^accueil$ index.php?action=accueil [L,QSA]

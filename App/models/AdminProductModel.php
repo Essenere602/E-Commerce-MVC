@@ -11,49 +11,74 @@ class AdminProductModel {
     public function __construct() {
         $this->db = new Database();
         $this->slug = new Slug();
-
     }
 
     public function createProduct() {
         $productName = $_POST['productName'];
-        $productDesc = $_POST['productDesc']; 
+        $productDesc = $_POST['productDesc'];
         $productSlug = $this->slug->sluguer($_POST['productName']);
         $price = $_POST['price'];
         $stock = $_POST['stock'];
         $online = $_POST['online'] ?? 0;
+
         try {
             $pdo = $this->db->getConnection()->prepare("INSERT INTO product (product_name, product_description, price, stock, slug, online) VALUES (?, ?, ?, ?, ?, ?)");
             $pdo->execute([$productName, $productDesc, $price, $stock, $productSlug, $online]);
-            echo "<h1>Produit créé avec succès</h1>";
+            return $this->db->getConnection()->lastInsertId();
         } catch (\PDOException $e) {
             echo "Erreur lors de la création du produit : " . $e->getMessage();
+            return false;
         }
     }
 
-
-    public function productImg() {
-        if (isset($_FILES['img'])) {
-            $total = count($_FILES['img']['name']);
-            $target_dir = "./assets/images/";    
-            $uploadOk = 1;
-            for( $i=0 ; $i < $total ; $i++ ) { 
-            $check = getimagesize($_FILES["img"]["tmp_name"][$i]);
-            if($check !== false) {
-                echo "<br>File is an image - " . $check["mime"] . ".";
-                $uploadOk = 1;
-            } else {
-                echo "<br>File is not an image.";
-                $uploadOk = 0;
-            }
-                $target_file = $target_dir . basename($_FILES["img"]["name"][$i]);
-                $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-                if (move_uploaded_file($_FILES["img"]["tmp_name"][$i], $target_file)) {
-                echo "<br>The file ". htmlspecialchars( basename( $_FILES["img"]["name"][$i])). " has been uploaded.";
-                } else {
-                echo "<br>Sorry, there was an error uploading your file.";
-                }
-                }
-            } 
+    public function getProductById($id) {
+        try {
+            $pdo = $this->db->getConnection()->prepare("SELECT * FROM product WHERE id = ?");
+            $pdo->execute([$id]);
+            return $pdo->fetch();
+        } catch (\PDOException $e) {
+            echo "Erreur lors de la récupération du produit : " . $e->getMessage();
+            return false;
         }
     }
-?>
+
+    public function updateProduct($productId) {
+        $productName = $_POST['productName'];
+        $productDesc = $_POST['productDesc'];
+        $productSlug = $this->slug->sluguer($_POST['productName']);
+        $price = $_POST['price'];
+        $stock = $_POST['stock'];
+        $online = isset($_POST['online']) ? 1 : 0;
+    
+        try {
+            $pdo = $this->db->getConnection()->prepare("UPDATE product SET product_name = ?, product_description = ?, price = ?, stock = ?, slug = ?, online = ? WHERE id = ?");
+            $pdo->execute([$productName, $productDesc, $price, $stock, $productSlug, $online, $productId]);
+            echo "<h1>Produit mis à jour avec succès</h1>";
+        } catch (\PDOException $e) {
+            echo "Erreur lors de la mise à jour du produit : " . $e->getMessage();
+        }
+    }
+
+    public function deleteProduct($productId) {
+        try {
+            $pdo = $this->db->getConnection()->prepare("DELETE FROM product WHERE id = ?");
+            $pdo->execute([$productId]);
+            header("Location: admin"); // Rediriger vers la page d'accueil, par exemple
+            exit();        
+        } 
+            catch (\PDOException $e) {
+            echo "Erreur lors de la suppression du produit : " . $e->getMessage();
+        }
+    }
+    
+
+    public function getAllProducts() {
+        try {
+            $pdo = $this->db->getConnection()->query("SELECT * FROM product");
+            return $pdo->fetchAll();
+        } catch (\PDOException $e) {
+            echo "Erreur lors de la récupération des produits : " . $e->getMessage();
+            return [];
+        }
+    }
+}
