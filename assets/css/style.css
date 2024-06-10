@@ -178,4 +178,5 @@ input[type=datetime-local] {
 img {
   -o-object-fit: cover;
      object-fit: cover;
+  margin-top: 8px;
 }/*# sourceMappingURL=style.css.map */

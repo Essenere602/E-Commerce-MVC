@@ -40,11 +40,11 @@ RewriteRule ^inscription$ index.php?action=inscription [L,QSA]
 
 # Redirection pour l'accès à 'compte'
 RewriteRule ^compte$ index.php?action=compte [L,QSA]
-# Redirection pour l'accès à 'commande/adresse'
+# Redirection pour l'accès à 'compte/adresse'
 RewriteRule ^compte/adresses$ index.php?action=commande&page=adresses [L,QSA]
-# Redirection pour l'accès à 'commande/livraison'
+# Redirection pour l'accès à 'compte/livraison'
 RewriteRule ^compte/commandes$ index.php?action=commande&page=commandes [L,QSA]
-# Redirection pour l'accès à 'commande/paiement'
+# Redirection pour l'accès à 'compte/paiement'
 RewriteRule ^compte/profile$ index.php?action=commande&page=profile [L,QSA] 
 
 # Redirection pour l'accès administration
