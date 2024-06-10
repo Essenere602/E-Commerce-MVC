@@ -1,1 +1,15 @@
-assets/images/*
+# Ignorer tous les fichiers et sous-répertoires dans assets/images
+assets/images/
+
+# Ignorer tous les fichiers se terminant par top.php
+*top.php
+
+# Ignorer le fichier Database.php
+*Database.php
+
+# Ignorer tous les fichiers JavaScript
+*.js
+
+# Ignorer le répertoire vendor (souvent utilisé pour les dépendances Composer)
+vendor/
+
