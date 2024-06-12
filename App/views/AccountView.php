@@ -1,7 +1,9 @@
 <?php
-namespace Views;
+namespace Views; // Définition du namespace pour la classe AccountView
 
-class AccountView {
+class AccountView { // Définition de la classe AccountView
+
+    // Méthode pour afficher le formulaire de modification de profil
     public function showProfileForm () {
         echo '<h1>Modifier son compte</h1>
         <form class="vertical" method="post">
@@ -14,6 +16,7 @@ class AccountView {
         </form>';
     }
 
+    // Méthode pour afficher les adresses de l'utilisateur
     public function showAddresses($addresses) {
         echo '<h1>Mes adresses</h1>
         <form method="post" action="compte/adresses">
@@ -31,11 +34,12 @@ class AccountView {
         echo '</ul>';
     }
 
+    // Méthode pour afficher les commandes de l'utilisateur
     public function showOrders($orders) {
         // Regrouper les détails des commandes par commande
         $ordersGrouped = [];
         foreach ($orders as $order) {
-            $orderId = $order['order_id']; // Utiliser 'order_id' car 'id' peut se référer à user_order_detail
+            $orderId = $order['order_id'];
             if (!isset($ordersGrouped[$orderId])) {
                 $ordersGrouped[$orderId] = [
                     'id' => $orderId,

@@ -1,13 +1,18 @@
 <?php
-namespace Views;
+namespace Views; // Définition du namespace pour la classe AddressView
 
-class AddressView {
+class AddressView { // Définition de la classe AddressView
+
+    // Méthode pour initialiser le formulaire d'adresse
     public function initForm($address = null) {
+        // Récupération des valeurs de l'adresse s'il existe, sinon initialisation à des chaînes vides
         $addressOne = $address['address_1'] ?? '';
         $addressTwo = $address['address_2'] ?? '';
         $zip = $address['zip'] ?? '';
         $city = $address['city'] ?? '';
         $country = $address['country'] ?? '';
+        
+        // Affichage du formulaire d'adresse avec les valeurs préremplies le cas échéant
         echo '<h1>Votre adresse de livraison</h1>
         <form class="vertical" method="post">
             <label>Adresse 1</label><input type="text" name="address_1" id="address_1" value="'.htmlspecialchars($addressOne).'">
@@ -19,3 +24,4 @@ class AddressView {
         </form>';
     }
 } 
+?>

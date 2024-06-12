@@ -9,11 +9,13 @@ class AdminProductModel {
     protected $slug;
 
     public function __construct() {
+        // Initialisation de la base de données et du slug
         $this->db = new Database();
         $this->slug = new Slug();
     }
 
     public function createProduct($productImages) {
+        // Récupération des données du formulaire
         $productName = $_POST['productName'];
         $productDesc = $_POST['productDesc'];
         $productSlug = $this->slug->sluguer($productName);
@@ -41,6 +43,7 @@ class AdminProductModel {
 
     public function getProductById($id) {
         try {
+            // Récupération du produit par ID
             $pdo = $this->db->getConnection()->prepare("SELECT * FROM product WHERE id = ?");
             $pdo->execute([$id]);
             return $pdo->fetch();
@@ -51,6 +54,7 @@ class AdminProductModel {
     }
 
     public function updateProduct($productId, $productImages) {
+        // Récupération des données du formulaire
         $productName = $_POST['productName'];
         $productDesc = $_POST['productDesc'];
         $productSlug = $this->slug->sluguer($_POST['productName']);
@@ -76,6 +80,7 @@ class AdminProductModel {
     }
 
     private function deleteProductImages($productSlug, $productId) {
+        // Suppression des images associées au produit
         $uploadDir = 'assets/images/';
         $pattern = $uploadDir . $productSlug . '-' . $productId . '-*.webp';
         $images = glob($pattern);
@@ -87,6 +92,7 @@ class AdminProductModel {
     }
 
     private function uploadProductImages($productSlug, $productId, $productImages) {
+        // Téléchargement et traitement des images du produit
         $uploadDir = 'assets/images/';
         foreach ($productImages['tmp_name'] as $index => $tmpName) {
             if ($productImages['error'][$index] == UPLOAD_ERR_OK) {
@@ -96,47 +102,10 @@ class AdminProductModel {
                 // Création de l'image à partir du fichier téléchargé
                 $image = imagecreatefromstring(file_get_contents($tmpName));
                 if ($image !== false) {
-                    // Récupération des dimensions de l'image téléchargée
-                    $originalWidth = imagesx($image);
-                    $originalHeight = imagesy($image);
+                    // Redimensionnement de l'image
+                    $this->resizeImage($image, $uploadFile);
 
-                    // Définir les dimensions maximales
-                    $maxWidth = 400;
-                    $maxHeight = 400;
-
-                    // Calculer les dimensions proportionnelles
-                    $aspectRatio = $originalWidth / $originalHeight;
-
-                    if ($originalWidth > $originalHeight) {
-                        $newWidth = $maxWidth;
-                        $newHeight = $maxWidth / $aspectRatio;
-                    } else {
-                        $newWidth = $maxHeight * $aspectRatio;
-                        $newHeight = $maxHeight;
-                    }
-
-                    // Convertir explicitement les dimensions calculées en entiers
-                    $newWidth = (int)round($newWidth);
-                    $newHeight = (int)round($newHeight);
-
-                    // Créer une nouvelle image vide avec les dimensions calculées
-                    $resizedImage = imagecreatetruecolor($newWidth, $newHeight);
-
-                    // Redimensionner l'image originale dans la nouvelle image
-                    if (imagecopyresampled($resizedImage, $image, 0, 0, 0, 0, $newWidth, $newHeight, $originalWidth, $originalHeight)) {
-                        // Conversion de l'image redimensionnée en WebP et déplacement
-                        if (imagewebp($resizedImage, $uploadFile)) {
-                            echo "L'image a été téléchargée, redimensionnée et convertie avec succès.\n";
-                        } else {
-                            echo "Erreur lors de la conversion de l'image en WebP.\n";
-                        }
-
-                        imagedestroy($resizedImage);
-                    } else {
-                        echo "Erreur lors du redimensionnement de l'image.\n";
-                    }
-
-                    imagedestroy($image);
+                    echo "L'image a été téléchargée, redimensionnée et convertie avec succès.\n";
                 } else {
                     echo "Erreur lors de la création de l'image à partir du fichier.\n";
                 }
@@ -146,19 +115,63 @@ class AdminProductModel {
         }
     }
 
+    private function resizeImage($image, $uploadFile) {
+        // Récupération des dimensions de l'image téléchargée
+        $originalWidth = imagesx($image);
+        $originalHeight = imagesy($image);
+
+        // Définition des dimensions maximales
+        $maxWidth = 400;
+        $maxHeight = 400;
+
+        // Calcul des dimensions proportionnelles
+        $aspectRatio = $originalWidth / $originalHeight;
+
+        if ($originalWidth > $originalHeight) {
+            $newWidth = $maxWidth;
+            $newHeight = $maxWidth / $aspectRatio;
+        } else {
+            $newWidth = $maxHeight * $aspectRatio;
+            $newHeight = $maxHeight;
+        }
+
+        // Convertir les dimensions en entiers
+        $newWidth = (int)round($newWidth);
+        $newHeight = (int)round($newHeight);
+
+        // Création d'une nouvelle image vide avec les dimensions calculées
+        $resizedImage = imagecreatetruecolor($newWidth, $newHeight);
+
+        // Redimensionnement de l'image originale dans la nouvelle image
+        if (imagecopyresampled($resizedImage, $image, 0, 0, 0, 0, $newWidth, $newHeight, $originalWidth, $originalHeight)) {
+            // Conversion de l'image redimensionnée en WebP et déplacement
+            if (imagewebp($resizedImage, $uploadFile)) {
+                echo "L'image a été téléchargée, redimensionnée et convertie avec succès.\n";
+            } else {
+                echo "Erreur lors de la conversion de l'image en WebP.\n";
+            }
+
+            imagedestroy($resizedImage);
+        } else {
+            echo "Erreur lors du redimensionnement de l'image.\n";
+        }
+
+        imagedestroy($image);
+    }
+
     public function deleteProduct($productId) {
         try {
-            // Récupérer les informations du produit avant de le supprimer
+            // Récupération des informations du produit avant suppression
             $product = $this->getProductById($productId);
             if (!$product) {
                 echo "Produit non trouvé.";
                 return;
             }
             
-            // Supprimer les images associées
+            // Suppression des images associées
             $this->deleteProductImages($product['slug'], $productId);
     
-            // Supprimer le produit de la base de données
+            // Suppression du produit de la base de données
             $pdo = $this->db->getConnection()->prepare("DELETE FROM product WHERE id = ?");
             $pdo->execute([$productId]);
     
@@ -167,10 +180,10 @@ class AdminProductModel {
             echo "Erreur lors de la suppression du produit : " . $e->getMessage();
         }
     }
-    
 
     public function getAllProducts() {
         try {
+            // Récupération de tous les produits
             $pdo = $this->db->getConnection()->query("SELECT * FROM product");
             return $pdo->fetchAll();
         } catch (\PDOException $e) {
@@ -180,3 +193,4 @@ class AdminProductModel {
     }
 }
 ?>
+

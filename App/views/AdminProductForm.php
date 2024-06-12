@@ -1,7 +1,9 @@
 <?php
-namespace Views; 
+namespace Views; // Définition du namespace pour la classe AdminProductForm
 
-class AdminProductForm {
+class AdminProductForm { // Définition de la classe AdminProductForm
+
+    // Méthode pour initialiser le formulaire de création de produit
     public function initForm($categories) {
         echo '<h1>Créer un produit</h1>
         <form class="vertical" action="admin/produits" method="post" enctype="multipart/form-data">
@@ -12,6 +14,7 @@ class AdminProductForm {
             <label for="category">Catégorie</label>
             <select name="category" id="category">';
 
+        // Boucle sur les catégories pour les options du menu déroulant
         foreach ($categories as $category) {
             echo '<option value="' . htmlspecialchars($category['id']) . '">' . htmlspecialchars($category['cat_name']) . '</option>';
         }
@@ -23,9 +26,11 @@ class AdminProductForm {
         </form>';
     }
     
+    // Méthode pour initialiser le formulaire de sélection de produit à mettre à jour
     public function initSelectProductForm($products) {
         echo '<form method="post" action="admin/update">';
         echo '<select name="productId">';
+        // Boucle sur les produits pour les options du menu déroulant
         foreach ($products as $product) {
             echo '<option value="' . htmlspecialchars($product['id']) . '">' . htmlspecialchars($product['product_name']) . '</option>';
         }
@@ -34,6 +39,7 @@ class AdminProductForm {
         echo '</form>';
     }
 
+    // Méthode pour initialiser le formulaire de mise à jour d'un produit
     public function initUpdateForm($product) {
         echo '<h1>Mettre à jour un produit</h1>';
         echo '<form method="post" action="admin/update" enctype="multipart/form-data">';
@@ -48,9 +54,11 @@ class AdminProductForm {
         echo '</form>';
     }
 
+    // Méthode pour initialiser le formulaire de suppression d'un produit
     public function DeleteForm($products) {
         echo '<h1>Supprimer un produit</h1>';
         echo '<form method="post" action="admin/delete">';
+        // Boucle sur les produits pour afficher les options de suppression
         foreach ($products as $product) {
             echo '<div>';
             echo '<span>' . htmlspecialchars($product['product_name']) . '</span>';

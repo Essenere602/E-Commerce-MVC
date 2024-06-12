@@ -3,12 +3,13 @@ namespace Views;
 use Models\ValidationModel;
 
 class ValidationView {
-
+    // Méthode pour afficher le formulaire de validation de commande
     public function initForm() {
-        echo 
-            '<form method=POST action="commande/validation">
-            <h1>Validation de la commande ?</h1>
-            <button>Valider</button>
-            </form>';
+        // Formulaire de validation de commande
+        echo '<form method="POST" action="commande/validation">';
+        echo '<h1>Validation de la commande ?</h1>';
+        echo '<button>Valider</button>';
+        echo '</form>';
     }
 }
+?>
