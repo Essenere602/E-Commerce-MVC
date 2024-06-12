@@ -41,6 +41,10 @@ button, .button {
   font-weight: 200;
   cursor: pointer;
 }
+img{
+  margin-top: 8px;
+  object-fit: contain;
+}
 
 input[type=text], input[type=password], input[type=datetime-local] {
   font-size: 1.1rem;

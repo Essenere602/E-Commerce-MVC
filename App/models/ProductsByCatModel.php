@@ -30,8 +30,7 @@ class ProductsByCatModel {
     }
 
     private function getProductImages($productId) {
-        $uploadDir = 'assets/images/';
-        $pattern = $uploadDir . '*-' . $productId . '-*.webp';
+        $pattern = IMG . '*-' . $productId . '-*.webp';
         return glob($pattern);
     }
 }

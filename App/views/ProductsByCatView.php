@@ -16,7 +16,7 @@ class ProductsByCatView {
             // Affichage des images
             if (isset($item['images']) && !empty($item['images'])) {
                 foreach ($item['images'] as $image) {
-                    echo '<img src="' . $image . '" alt="' . $item['product_name'] . '"style="width: 100px; height: 100px;">';
+                    echo '<img src="' . $image . '" alt="' . $item['product_name'] . '">';
                 }
             }
 
