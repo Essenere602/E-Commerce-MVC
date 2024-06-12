@@ -148,13 +148,26 @@ class AdminProductModel {
 
     public function deleteProduct($productId) {
         try {
+            // Récupérer les informations du produit avant de le supprimer
+            $product = $this->getProductById($productId);
+            if (!$product) {
+                echo "Produit non trouvé.";
+                return;
+            }
+            
+            // Supprimer les images associées
+            $this->deleteProductImages($product['slug'], $productId);
+    
+            // Supprimer le produit de la base de données
             $pdo = $this->db->getConnection()->prepare("DELETE FROM product WHERE id = ?");
             $pdo->execute([$productId]);
+    
             echo "<h1>Produit supprimé avec succès</h1>";
         } catch (\PDOException $e) {
             echo "Erreur lors de la suppression du produit : " . $e->getMessage();
         }
     }
+    
 
     public function getAllProducts() {
         try {
